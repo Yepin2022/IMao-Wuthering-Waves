@@ -1,0 +1,729 @@
+{
+  "Chest": {
+    "sx": {
+      "en-US": "Sonance Chest",
+      "zh-CN": "声匣"
+    },
+
+    "sx_qq": {
+      "en-US": "Sonance Chest Septimont",
+      "zh-CN": "声匣·七丘"
+    },
+    "sx_lgn": {
+      "en-US": "Sonance Chest Ragunna",
+      "zh-CN": "声匣·拉古那"
+    },
+
+    "qzx_01": {
+      "en-US": "Basic Supply Chest",
+      "zh-CN": "朴素奇藏箱"
+    },
+
+    "qzx_02": {
+      "zh-CN": "基准奇藏箱",
+      "en-US": "Standard Supply Chest"
+    },
+
+    "qzx_03": {
+      "en-US": "Advanced Supply Chest",
+      "zh-CN": "精密奇藏箱"
+    },
+
+    "qzx_04": {
+      "en-US": "Premium Supply Chest",
+      "zh-CN": "辉光奇藏箱"
+    },
+
+    "cx_01": {
+      "en-US": "Biue Hidal Heritage",
+      "zh-CN": "潮汐之遗·绿"
+    },
+
+    "cx_02": {
+      "en-US": "Purple Tidal Heritage",
+      "zh-CN": "潮汐之遗·紫"
+    },
+
+    "cx_03": {
+      "en-US": "Golden Tidal Heritage",
+      "zh-CN": "潮汐之遗·金"
+    },
+
+    "Play_12": {
+      "en-US": "定风铎",
+      "zh-CN": "定风铎"
+    },
+
+    "xsd": {
+      "en-US": "Mutterfly",
+      "zh-CN": "隙声蝶"
+    },
+
+    "fls": {
+      "en-US": "飞猎手",
+      "zh-CN": "飞猎手"
+    }
+
+  },
+  "Collection": {
+    "T_IconC_029_UI": {
+      "en-US": "雀翎果",
+      "zh-CN": "雀翎果"
+    },
+    "T_IconC_030_UI": {
+      "en-US": "龙吐珠",
+      "zh-CN": "龙吐珠"
+    },
+    "T_IconC_031_UI": {
+      "en-US": "银雪莲",
+      "zh-CN": "银雪莲"
+    },
+    "T_IconC_032_UI": {
+      "en-US": "龙萤石",
+      "zh-CN": "龙萤石"
+    },
+    "T_IconC_035_UI": {
+      "en-US": "桂实",
+      "zh-CN": "桂实"
+    },
+    "T_IconC_036_UI": {
+      "en-US": "日冕菊",
+      "zh-CN": "日冕菊"
+    },
+    "T_IconC_037_UI": {
+      "en-US": "云凝乳香",
+      "zh-CN": "云凝乳香"
+    },
+    "T_IconC_038_UI": {
+      "en-US": "青枝果",
+      "zh-CN": "青枝果"
+    },
+    "T_IconC_039_UI": {
+      "en-US": "盾金龟",
+      "zh-CN": "盾金龟"
+    },
+    "T_IconC_040_UI": {
+      "en-US": "铛铛蟹",
+      "zh-CN": "铛铛蟹"
+    },
+    "T_IconC_041_UI": {
+      "en-US": "毒莴裙藻",
+      "zh-CN": "毒莴裙藻"
+    },
+    "T_IconC_042_UI": {
+      "en-US": "垂青橄榄",
+      "zh-CN": "垂青橄榄"
+    },
+    "T_IconC_043_UI": {
+      "en-US": "礼花蒴",
+      "zh-CN": "礼花蒴"
+    },
+    "T_IconC_044_UI": {
+      "en-US": "剑菖蒲",
+      "zh-CN": "剑菖蒲"
+    },
+    "T_IconC_045_UI": {
+      "en-US": "“金羊毛”",
+      "zh-CN": "“金羊毛”"
+    },
+    "T_IconC_046_UI": {
+      "en-US": "云母釉岩",
+      "zh-CN": "云母釉岩"
+    },
+    "T_IconC_047_UI": {
+      "en-US": "愚惑金",
+      "zh-CN": "愚惑金"
+    },
+    "T_IconC_048_UI": {
+      "en-US": "桂叶",
+      "zh-CN": "桂叶"
+    },
+    "T_IconC_049_UI": {
+      "en-US": "窃金指爪",
+      "zh-CN": "窃金指爪"
+    },
+    "T_IconC_051_UI": {
+      "en-US": "海兔肉",
+      "zh-CN": "海兔肉"
+    },
+    "T_IconC_Com_004_1_UI": {
+      "en-US": "菱果",
+      "zh-CN": "菱果"
+    },
+    "T_IconC_HuiYanGu_UI": {
+      "en-US": "地涌莲",
+      "zh-CN": "地涌莲"
+    },
+    "T_IconC_SM_Gat_01A_UI": {
+      "en-US": "水灯花",
+      "zh-CN": "水灯花"
+    },
+    "T_IconC_SM_Gat_01B_UI": {
+      "en-US": "香苏",
+      "zh-CN": "香苏"
+    },
+    "T_IconC_SM_Gat_06A_UI": {
+      "en-US": "珍珠草",
+      "zh-CN": "珍珠草"
+    },
+    "T_IconC_SM_Gat_07A_UI": {
+      "en-US": "清芬草",
+      "zh-CN": "清芬草"
+    },
+    "T_IconC_SM_Gat_08A_UI": {
+      "en-US": "云露",
+      "zh-CN": "云露"
+    },
+    "T_IconC_SM_Gat_09A_UI": {
+      "en-US": "夜息香",
+      "zh-CN": "夜息香"
+    },
+    "T_IconC_SM_Gat_10A_UI": {
+      "en-US": "鸳鸯花",
+      "zh-CN": "鸳鸯花"
+    },
+    "T_IconC_SM_Gat_12A_UI": {
+      "en-US": "崖仙子",
+      "zh-CN": "崖仙子"
+    },
+    "T_IconC_SM_Gat_13A_UI": {
+      "en-US": "伞下客",
+      "zh-CN": "伞下客"
+    },
+    "T_IconC_SM_Gat_14A_UI": {
+      "en-US": "龙衔珠",
+      "zh-CN": "龙衔珠"
+    },
+    "T_IconC_SM_Gat_15A_UI": {
+      "en-US": "花蕈",
+      "zh-CN": "花蕈"
+    },
+    "T_IconC_SM_Gat_19A_UI": {
+      "en-US": "植珀",
+      "zh-CN": "植珀"
+    },
+    "T_IconC_SM_Gat_20A_UI": {
+      "en-US": "紫晶簇",
+      "zh-CN": "紫晶簇"
+    },
+    "T_IconC_SM_Gat_21A_UI": {
+      "en-US": "辉萤石",
+      "zh-CN": "辉萤石"
+    },
+    "T_IconC_SM_Gat_22A_UI": {
+      "en-US": "红针晶簇",
+      "zh-CN": "红针晶簇"
+    },
+    "T_IconC_SM_Gat_24A_UI": {
+      "en-US": "地丁堇",
+      "zh-CN": "地丁堇"
+    },
+    "T_IconC_SM_Gat_25A_UI": {
+      "en-US": "香柠草",
+      "zh-CN": "香柠草"
+    },
+    "T_IconC_SM_Gat_26A_UI": {
+      "en-US": "锦色贝",
+      "zh-CN": "锦色贝"
+    },
+    "T_IconC_SM_Gat_27A_UI": {
+      "en-US": "雨声蜗",
+      "zh-CN": "雨声蜗"
+    },
+    "T_IconC_SM_Gat_28A_UI": {
+      "en-US": "隐火蜕",
+      "zh-CN": "隐火蜕"
+    },
+    "T_IconC_Sep_021_UI": {
+      "en-US": "莲实",
+      "zh-CN": "莲实"
+    },
+    "T_IconC_Sep_061_UI": {
+      "en-US": "紫珊瑚",
+      "zh-CN": "紫珊瑚"
+    },
+    "T_IconC_bianzhuhua_UI": {
+      "en-US": "扁竹花",
+      "zh-CN": "扁竹花"
+    },
+    "T_IconC_denglongguo_UI": {
+      "en-US": "灯笼果",
+      "zh-CN": "灯笼果"
+    },
+    "T_IconC_fuguyoulan_UI": {
+      "en-US": "蚀夜幽兰",
+      "zh-CN": "蚀夜幽兰"
+    },
+    "T_IconC_limuguo_UI": {
+      "en-US": "栎木果",
+      "zh-CN": "栎木果"
+    },
+    "T_IconC_xueyejiami_UI": {
+      "en-US": "血叶荚蒾",
+      "zh-CN": "血叶荚蒾"
+    },
+    "T_IconC_yuezao_UI": {
+      "en-US": "月藻",
+      "zh-CN": "月藻"
+    },
+    "T_IconRup_SM_Gat_18A_UI": {
+      "en-US": "金阳凤",
+      "zh-CN": "金阳凤"
+    },
+    "T_IconRup_SM_Gat_23A_UI": {
+      "en-US": "木莲",
+      "zh-CN": "木莲"
+    },
+    "T_IconRup_SM_Gat_29A_UI": {
+      "en-US": "妙弋花",
+      "zh-CN": "妙弋花"
+    },
+    "T_IconRup_SM_Gat_30A_UI": {
+      "en-US": "云芝",
+      "zh-CN": "云芝"
+    },
+    "T_IconRup_SM_Gat_31A_UI": {
+      "en-US": "傲寒钟",
+      "zh-CN": "傲寒钟"
+    },
+    "T_IconRup_SM_Gat_32A_UI": {
+      "en-US": "金铃子",
+      "zh-CN": "金铃子"
+    },
+    "T_IconRup_SM_Gat_33A_UI": {
+      "en-US": "鸢尾花",
+      "zh-CN": "鸢尾花"
+    },
+    "T_IconTask_Task_084_UI": {
+      "en-US": "暂星",
+      "zh-CN": "暂星"
+    },
+    "T_IconTask_Task_085_UI": {
+      "en-US": "伪贝母",
+      "zh-CN": "伪贝母"
+    },
+    "T_IconC_054_UI": {
+      "en-US": "“来生”",
+      "zh-CN": "“来生”"
+    },
+    "T_IconC_053_UI": {
+      "en-US": "暗渊引灯",
+      "zh-CN": "暗渊引灯"
+    }
+  },
+
+  "Enemy": {
+    "SP_IconMonsterHead_015_UI": {
+      "en-US": "先锋幼岩",
+      "zh-CN": "先锋幼岩"
+    },
+    "SP_IconMonsterHead_025_UI": {
+      "en-US": "裂变幼岩",
+      "zh-CN": "裂变幼岩"
+    },
+    "SP_IconMonsterHead_035_UI": {
+      "en-US": "惊蛰猎手",
+      "zh-CN": "惊蛰猎手"
+    },
+    "SP_IconMonsterHead_045_UI": {
+      "en-US": "鸣泣战士",
+      "zh-CN": "鸣泣战士"
+    },
+    "SP_IconMonsterHead_055_UI": {
+      "en-US": "审判战士",
+      "zh-CN": "审判战士"
+    },
+    "SP_IconMonsterHead_065_UI": {
+      "en-US": "咔嚓嚓",
+      "zh-CN": "咔嚓嚓"
+    },
+    "SP_IconMonsterHead_075_UI": {
+      "en-US": "阿嗞嗞",
+      "zh-CN": "阿嗞嗞"
+    },
+    "SP_IconMonsterHead_085_UI": {
+      "en-US": "呼咻咻",
+      "zh-CN": "呼咻咻"
+    },
+    "SP_IconMonsterHead_095_UI": {
+      "en-US": "呜咔咔",
+      "zh-CN": "呜咔咔"
+    },
+    "SP_IconMonsterHead_1000_UI": {
+      "en-US": "通行灯偶",
+      "zh-CN": "通行灯偶"
+    },
+    "SP_IconMonsterHead_1001_UI": {
+      "en-US": "叮咚咚",
+      "zh-CN": "叮咚咚"
+    },
+    "SP_IconMonsterHead_1003_UI": {
+      "en-US": "巡哨机傀",
+      "zh-CN": "巡哨机傀"
+    },
+    "SP_IconMonsterHead_1005_UI": {
+      "en-US": "躁乱戏猿",
+      "zh-CN": "躁乱戏猿"
+    },
+    "SP_IconMonsterHead_1005_UI_1": {
+      "en-US": "锐爪幼猿",
+      "zh-CN": "锐爪幼猿"
+    },
+    "SP_IconMonsterHead_105_UI": {
+      "en-US": "破霜猎手",
+      "zh-CN": "破霜猎手"
+    },
+    "SP_IconMonsterHead_115_UI": {
+      "en-US": "咕咕河豚",
+      "zh-CN": "咕咕河豚"
+    },
+    "SP_IconMonsterHead_125_UI": {
+      "en-US": "紫羽鹭",
+      "zh-CN": "紫羽鹭"
+    },
+    "SP_IconMonsterHead_135_UI": {
+      "en-US": "青羽鹭",
+      "zh-CN": "青羽鹭"
+    },
+    "SP_IconMonsterHead_145_UI": {
+      "en-US": "冷凝棱镜",
+      "zh-CN": "冷凝棱镜"
+    },
+    "SP_IconMonsterHead_155_UI": {
+      "en-US": "热熔棱镜",
+      "zh-CN": "热熔棱镜"
+    },
+    "SP_IconMonsterHead_165_UI": {
+      "en-US": "衍射棱镜",
+      "zh-CN": "衍射棱镜"
+    },
+    "SP_IconMonsterHead_175_UI": {
+      "en-US": "湮灭棱镜",
+      "zh-CN": "湮灭棱镜"
+    },
+    "SP_IconMonsterHead_185_UI": {
+      "en-US": "坚岩斗士",
+      "zh-CN": "坚岩斗士"
+    },
+    "SP_IconMonsterHead_195_UI": {
+      "en-US": "奏谕乐师",
+      "zh-CN": "奏谕乐师"
+    },
+    "SP_IconMonsterHead_205_UI": {
+      "en-US": "振铎乐师",
+      "zh-CN": "振铎乐师"
+    },
+    "SP_IconMonsterHead_215_UI": {
+      "en-US": "冥渊守卫",
+      "zh-CN": "冥渊守卫"
+    },
+    "SP_IconMonsterHead_235_UI": {
+      "en-US": "巡徊猎手",
+      "zh-CN": "巡徊猎手"
+    },
+    "SP_IconMonsterHead_245_UI": {
+      "en-US": "磐石守卫",
+      "zh-CN": "磐石守卫"
+    },
+    "SP_IconMonsterHead_255_UI": {
+      "en-US": "游弋蝶",
+      "zh-CN": "游弋蝶"
+    },
+    "SP_IconMonsterHead_265_UI": {
+      "en-US": "碎獠猪",
+      "zh-CN": "碎獠猪"
+    },
+    "SP_IconMonsterHead_275_UI": {
+      "en-US": "遁地鼠",
+      "zh-CN": "遁地鼠"
+    },
+    "SP_IconMonsterHead_285_UI": {
+      "en-US": "绿熔蜥（稚形）",
+      "zh-CN": "绿熔蜥（稚形）"
+    },
+    "SP_IconMonsterHead_295_UI": {
+      "en-US": "绿熔蜥",
+      "zh-CN": "绿熔蜥"
+    },
+    "SP_IconMonsterHead_305_UI": {
+      "en-US": "刺玫菇（稚形）",
+      "zh-CN": "刺玫菇（稚形）"
+    },
+    "SP_IconMonsterHead_31037_UI": {
+      "en-US": "风鬃狼",
+      "zh-CN": "风鬃狼"
+    },
+    "SP_IconMonsterHead_31038_UI": {
+      "en-US": "雷鬃狼",
+      "zh-CN": "雷鬃狼"
+    },
+    "SP_IconMonsterHead_31039_UI": {
+      "en-US": "霜鬃狼",
+      "zh-CN": "霜鬃狼"
+    },
+    "SP_IconMonsterHead_31040_UI": {
+      "en-US": "浮灵偶·海德",
+      "zh-CN": "浮灵偶·海德"
+    },
+    "SP_IconMonsterHead_31041_UI": {
+      "en-US": "浮灵偶·蕾弗",
+      "zh-CN": "浮灵偶·蕾弗"
+    },
+    "SP_IconMonsterHead_31042_UI": {
+      "en-US": "浮灵偶·莱特",
+      "zh-CN": "浮灵偶·莱特"
+    },
+    "SP_IconMonsterHead_31043_UI": {
+      "en-US": "幽翎火",
+      "zh-CN": "幽翎火"
+    },
+    "SP_IconMonsterHead_31044_UI": {
+      "en-US": "云海妖精",
+      "zh-CN": "云海妖精"
+    },
+    "SP_IconMonsterHead_31045_UI": {
+      "en-US": "魔术先生",
+      "zh-CN": "魔术先生"
+    },
+    "SP_IconMonsterHead_31046_UI": {
+      "en-US": "寂寞小姐",
+      "zh-CN": "寂寞小姐"
+    },
+    "SP_IconMonsterHead_31047_UI": {
+      "en-US": "工头布偶",
+      "zh-CN": "工头布偶"
+    },
+    "SP_IconMonsterHead_31048_UI": {
+      "en-US": "欺诈奇藏",
+      "zh-CN": "欺诈奇藏"
+    },
+    "SP_IconMonsterHead_31049_UI": {
+      "en-US": "愚金幼岩",
+      "zh-CN": "愚金幼岩"
+    },
+    "SP_IconMonsterHead_31050_UI": {
+      "en-US": "釉变幼岩",
+      "zh-CN": "釉变幼岩"
+    },
+    "SP_IconMonsterHead_31051_UI": {
+      "en-US": "气动棱镜",
+      "zh-CN": "气动棱镜"
+    },
+    "SP_IconMonsterHead_31055_UI": {
+      "en-US": "小翼龙·气动",
+      "zh-CN": "小翼龙·气动"
+    },
+    "SP_IconMonsterHead_31056_UI": {
+      "en-US": "小翼龙·导电",
+      "zh-CN": "小翼龙·导电"
+    },
+    "SP_IconMonsterHead_31057_UI": {
+      "en-US": "小翼龙·冷凝",
+      "zh-CN": "小翼龙·冷凝"
+    },
+    "SP_IconMonsterHead_31058_UI": {
+      "en-US": "小翼龙·热熔",
+      "zh-CN": "小翼龙·热熔"
+    },
+    "SP_IconMonsterHead_31059_UI": {
+      "en-US": "小翼龙·衍射",
+      "zh-CN": "小翼龙·衍射"
+    },
+    "SP_IconMonsterHead_31060_UI": {
+      "en-US": "小翼龙·湮灭",
+      "zh-CN": "小翼龙·湮灭"
+    },
+    "SP_IconMonsterHead_31061_UI": {
+      "en-US": "苦信者的作俑",
+      "zh-CN": "苦信者的作俑"
+    },
+    "SP_IconMonsterHead_31062_UI": {
+      "en-US": "角鳄",
+      "zh-CN": "角鳄"
+    },
+    "SP_IconMonsterHead_315_UI": {
+      "en-US": "刺玫菇",
+      "zh-CN": "刺玫菇"
+    },
+    "SP_IconMonsterHead_32022_UI": {
+      "en-US": "巡游骑士",
+      "zh-CN": "巡游骑士"
+    },
+    "SP_IconMonsterHead_32023_UI": {
+      "en-US": "幻昼骑士",
+      "zh-CN": "幻昼骑士"
+    },
+    "SP_IconMonsterHead_32024_UI": {
+      "en-US": "暗夜骑士",
+      "zh-CN": "暗夜骑士"
+    },
+    "SP_IconMonsterHead_32025_UI": {
+      "en-US": "毒冠贵族",
+      "zh-CN": "毒冠贵族"
+    },
+    "SP_IconMonsterHead_32026_UI": {
+      "en-US": "持刃贵族",
+      "zh-CN": "持刃贵族"
+    },
+    "SP_IconMonsterHead_32027_UI": {
+      "en-US": "凝水贵族",
+      "zh-CN": "凝水贵族"
+    },
+    "SP_IconMonsterHead_32028_UI": {
+      "en-US": "浮灵偶",
+      "zh-CN": "浮灵偶"
+    },
+    "SP_IconMonsterHead_32029_UI": {
+      "en-US": "琉璃刀伶",
+      "zh-CN": "琉璃刀伶"
+    },
+    "SP_IconMonsterHead_32030_UI": {
+      "en-US": "巨布偶",
+      "zh-CN": "巨布偶"
+    },
+    "SP_IconMonsterHead_32031_UI": {
+      "en-US": "重塑雕像的拳砾",
+      "zh-CN": "重塑雕像的拳砾"
+    },
+    "SP_IconMonsterHead_32032_UI": {
+      "en-US": "飓力熊",
+      "zh-CN": "飓力熊"
+    },
+    "SP_IconMonsterHead_32034_UI": {
+      "en-US": "传道者的遗形",
+      "zh-CN": "传道者的遗形"
+    },
+    "SP_IconMonsterHead_326_UI": {
+      "en-US": "融火虫",
+      "zh-CN": "融火虫"
+    },
+    "SP_IconMonsterHead_329_UI": {
+      "en-US": "踏光兽",
+      "zh-CN": "踏光兽"
+    },
+    "SP_IconMonsterHead_33021_UI": {
+      "en-US": "梦魇·凯尔匹",
+      "zh-CN": "梦魇·凯尔匹"
+    },
+    "SP_IconMonsterHead_330_UI": {
+      "en-US": "游鳞机枢",
+      "zh-CN": "游鳞机枢"
+    },
+    "SP_IconMonsterHead_331_UI": {
+      "en-US": "侏侏鸵",
+      "zh-CN": "侏侏鸵"
+    },
+    "SP_IconMonsterHead_34013_UI": {
+      "en-US": "梦魇·辉萤军势",
+      "zh-CN": "梦魇·辉萤军势"
+    },
+    "SP_IconMonsterHead_969_UI": {
+      "en-US": "寒霜陆龟",
+      "zh-CN": "寒霜陆龟"
+    },
+    "SP_IconMonsterHead_970_UI": {
+      "en-US": "车刃镰",
+      "zh-CN": "车刃镰"
+    },
+    "SP_IconMonsterHead_971_UI": {
+      "en-US": "啾啾河豚",
+      "zh-CN": "啾啾河豚"
+    },
+    "SP_IconMonsterHead_972_UI": {
+      "en-US": "残星·重锤造匠",
+      "zh-CN": "残星·重锤造匠"
+    },
+    "SP_IconMonsterHead_973_UI": {
+      "en-US": "残星·枪肢造匠",
+      "zh-CN": "残星·枪肢造匠"
+    },
+    "SP_IconMonsterHead_974_UI": {
+      "en-US": "残星·枭面造匠",
+      "zh-CN": "残星·枭面造匠"
+    },
+    "SP_IconMonsterHead_975_UI": {
+      "en-US": "处刑人",
+      "zh-CN": "处刑人"
+    },
+    "SP_IconMonsterHead_976_UI": {
+      "en-US": "流放者",
+      "zh-CN": "流放者"
+    },
+    "SP_IconMonsterHead_977_UI": {
+      "en-US": "流放者",
+      "zh-CN": "流放者"
+    },
+    "SP_IconMonsterHead_978_UI": {
+      "en-US": "流放者工匠",
+      "zh-CN": "流放者工匠"
+    },
+    "SP_IconMonsterHead_979_UI": {
+      "en-US": "流放者首领",
+      "zh-CN": "流放者首领"
+    },
+    "SP_IconMonsterHead_980_UI": {
+      "en-US": "火鬃狼",
+      "zh-CN": "火鬃狼"
+    },
+    "SP_IconMonsterHead_984_UI": {
+      "en-US": "暗鬃狼",
+      "zh-CN": "暗鬃狼"
+    },
+    "SP_IconMonsterHead_985_UI": {
+      "en-US": "雪鬃狼",
+      "zh-CN": "雪鬃狼"
+    },
+    "SP_IconMonsterHead_986_UI": {
+      "en-US": "箭簇熊",
+      "zh-CN": "箭簇熊"
+    },
+    "SP_IconMonsterHead_987_UI": {
+      "en-US": "晶螯蝎",
+      "zh-CN": "晶螯蝎"
+    },
+    "SP_IconMonsterHead_988_UI": {
+      "en-US": "抛石幼猿",
+      "zh-CN": "抛石幼猿"
+    },
+    "SP_IconMonsterHead_989_UI": {
+      "en-US": "嚣风戏猿",
+      "zh-CN": "嚣风戏猿"
+    },
+    "SP_IconMonsterHead_YZ_33014_UI": {
+      "en-US": "梦魇·飞廉之猩",
+      "zh-CN": "梦魇·飞廉之猩"
+    },
+    "SP_IconMonsterHead_YZ_33015_UI": {
+      "en-US": "梦魇·无常凶鹭",
+      "zh-CN": "梦魇·无常凶鹭"
+    },
+    "SP_IconMonsterHead_YZ_33016_UI": {
+      "en-US": "梦魇·云闪之鳞",
+      "zh-CN": "梦魇·云闪之鳞"
+    },
+    "SP_IconMonsterHead_YZ_33017_UI": {
+      "en-US": "梦魇·朔雷之鳞",
+      "zh-CN": "梦魇·朔雷之鳞"
+    },
+    "SP_IconMonsterHead_YZ_33018_UI": {
+      "en-US": "梦魇·无冠者",
+      "zh-CN": "梦魇·无冠者"
+    },
+    "SP_IconMonsterHead_YZ_33019_UI": {
+      "en-US": "梦魇·燎照之骑",
+      "zh-CN": "梦魇·燎照之骑"
+    },
+    "SP_IconMonsterHead_YZ_33020_UI": {
+      "en-US": "梦魇·哀声鸷",
+      "zh-CN": "梦魇·哀声鸷"
+    },
+    "390058": {
+      "en-US": "残星·深海造匠",
+      "zh-CN": "残星·深海造匠"
+    },
+    "320000420": {
+      "en-US": "裁夺者",
+      "zh-CN": "裁夺者"
+    }
+  }
+}

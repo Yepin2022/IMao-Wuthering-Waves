@@ -1,0 +1,22 @@
+﻿<Page
+    x:Class="IMao_WinUI.Views.FilterPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:CommunityToolkit.WinUI.Controls"
+    NavigationCacheMode="Enabled"
+    mc:Ignorable="d">
+
+    <StackPanel Orientation="Vertical">
+        <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
+            <TextBlock x:Uid="Filter_Page_Title" FontWeight="Bold" FontSize="16"/>
+            <TextBlock Name="language" Visibility="Collapsed" x:Uid="language" FontSize="18" Margin="20,0,0,0"/>
+        </StackPanel>
+
+        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+            <controls:WrapPanel x:Name="CheckBoxContainer" Orientation="Horizontal"/>
+        </ScrollViewer>
+        
+    </StackPanel>
+</Page>
