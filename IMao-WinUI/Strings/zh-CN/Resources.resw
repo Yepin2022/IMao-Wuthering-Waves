@@ -1,0 +1,260 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AppDisplayName" xml:space="preserve">
+    <value>IMao-Wuthering-Waves v0.9.3</value>
+  </data>
+  <data name="AppDescription" xml:space="preserve">
+    <value>IMao-Wuthering-Waves</value>
+  </data>
+  <data name="Shell_Start.Content" xml:space="preserve">
+    <value>开始</value>
+  </data>
+  <data name="Shell_Function.Content" xml:space="preserve">
+    <value>功能</value>
+  </data>
+  <data name="Shell_Filter.Content" xml:space="preserve">
+    <value>过滤器</value>
+  </data>
+  <data name="Settings_Theme.Text" xml:space="preserve">
+    <value>主题</value>
+  </data>
+  <data name="Settings_Theme_Light.Content" xml:space="preserve">
+    <value>亮色</value>
+  </data>
+  <data name="Settings_Theme_Dark.Content" xml:space="preserve">
+    <value>深色</value>
+  </data>
+  <data name="Settings_Theme_Default.Content" xml:space="preserve">
+    <value>系统默认</value>
+  </data>
+  <data name="Settings_About.Text" xml:space="preserve">
+    <value>关于</value>
+  </data>
+  <data name="SettingsPage_ProjectIntroduction.Text" xml:space="preserve">
+    <value>项目介绍：IMao-Wuthering-Waves 是一款叠加在游戏窗口上的交互地图，借助图像识别技术，实时同步玩家/地图位置，减少玩家在探索过程中来回切换游戏与地图工具的操作次数。</value>
+  </data>
+  <data name="AppNotificationSamplePayload" xml:space="preserve">
+    <value>&lt;toast launch="action=ToastClick"&gt;
+  &lt;visual&gt;
+    &lt;binding template="ToastGeneric"&gt;
+      &lt;text&gt;App Notification&lt;/text&gt;
+      &lt;text&gt;&lt;/text&gt;
+      &lt;image placement="appLogoOverride" hint-crop="circle" src="{0}Assets/WindowIcon.ico"/&gt;
+    &lt;/binding&gt;
+  &lt;/visual&gt;
+  &lt;actions&gt;
+    &lt;action content="Settings" arguments="action=Settings"/&gt;
+  &lt;/actions&gt;
+&lt;/toast&gt;</value>
+  </data>
+  <data name="Start_Card_CaptureMethod.Header" xml:space="preserve">
+    <value>截图方式</value>
+  </data>
+  <data name="Start_Card_CaptureMethod_Description.Text" xml:space="preserve">
+    <value>WindowsGraphicsCaptur仅支持Windows10 1803及以后版本。</value>
+  </data>
+  <data name="Start_Expander_Start_Description.Text" xml:space="preserve">
+    <value>启动前，请确保Wuthering-Waves左下角的坐标清晰显示。</value>
+  </data>
+  <data name="Start_Expander_Start.Header" xml:space="preserve">
+    <value>启动 IMao </value>
+  </data>
+  <data name="Start_Card_GameServer.Header" xml:space="preserve">
+    <value>目标进程</value>
+  </data>
+  <data name="Start_Card_WindowOptimization.Header" xml:space="preserve">
+    <value>自动关闭Windows11窗口优化以支持BitBlt</value>
+  </data>
+  <data name="Start_Card_WindowOptimization_Description.Text" xml:space="preserve">
+    <value>修改设置后重启游戏生效。</value>
+  </data>
+  <data name="Function_Expander_MinMapShowItem.Header" xml:space="preserve">
+    <value>小地图导航</value>
+  </data>
+  <data name="Function_Expander_MinMapShowItem_Description.Text" xml:space="preserve">
+    <value>指定物品会覆盖游戏小地图的对应位置上。</value>
+  </data>
+  <data name="Function_Card_UpdateMinMapItemDataCycle.Header" xml:space="preserve">
+    <value>处理间隔（ms）</value>
+  </data>
+  <data name="Function_Card_UpdateMinMapItemDataCycle_Description.Text" xml:space="preserve">
+    <value>间隔越小识别出错概率越小，需要的性能开销也就越大。</value>
+  </data>
+  <data name="Function_Expander_MapShowItem.Header" xml:space="preserve">
+    <value>交互式大地图</value>
+  </data>
+  <data name="Function_Expander_MapShowItem_Description.Text" xml:space="preserve">
+    <value>指定物品会覆盖游戏大地图的对应位置上，性能开销相对较大。</value>
+  </data>
+  <data name="Function_Card_UpdateMapItemDataCycle.Header" xml:space="preserve">
+    <value>处理间隔（ms）</value>
+  </data>
+  <data name="Function_Card_UpdateMapItemDataCycle_Description.Text" xml:space="preserve">
+    <value>间隔越小越丝滑，需要的性能开销也就越大。</value>
+  </data>
+  <data name="language.Text" xml:space="preserve">
+    <value>zh-CN</value>
+  </data>
+  <data name="Filter_Page_Title.Text" xml:space="preserve">
+    <value>过滤器</value>
+  </data>
+  <data name="Function_Card_SetVisibleSavedPoints.Header" xml:space="preserve">
+    <value>显示完成</value>
+  </data>
+  <data name="Function_Card_SetVisibleSavedPoints_Description.Text" xml:space="preserve">
+    <value>右键物品可以设置完成状态。</value>
+  </data>
+  <data name="Start_Card_SwitchAccount.Header" xml:space="preserve">
+    <value>切换账号（开发中）</value>
+  </data>
+  <data name="Start_Card_SwitchAccount_Description.Text" xml:space="preserve">
+    <value>请到SavedPoints文件夹里手动修改。</value>
+  </data>
+  <data name="Start_InfoBar_FindNotTargetProcess.Message" xml:space="preserve">
+    <value>找不到目标进程或操作频繁。</value>
+  </data>
+  <data name="Function_InfoBar_Statement.Title" xml:space="preserve">
+    <value>声明</value>
+  </data>
+  <data name="Function_InfoBar_Statement.Message" xml:space="preserve">
+    <value>本软件使用的物品图片资源和物品点位数据均来自库街区。</value>
+  </data>
+  <data name="SettingsPage_ProjectInspiration.Text" xml:space="preserve">
+    <value>项目启发：Akebi-GC、空荧酒馆</value>
+  </data>
+  <data name="SettingsPage_ProjectDependencies.Text" xml:space="preserve">
+    <value>项目依赖：</value>
+  </data>
+  <data name="SettingsPage_Warning.Text" xml:space="preserve">
+    <value>它是公开的、免费的。如果你是付钱买来的，你已经被骗了。</value>
+  </data>
+  <data name="SettingsPage_Expander_About_Description.Text" xml:space="preserve">
+    <value>查看项目介绍、项目启发等</value>
+  </data>
+  <data name="Start_InfoBar_NotLatestVersion.Message" xml:space="preserve">
+    <value>当前不是最新版本。</value>
+  </data>
+  <data name="Function_Card_SavePointKey_Description.Text" xml:space="preserve">
+    <value>按键盘X可以直接将玩家附近的点位设置为完成状态。</value>
+  </data>
+  <data name="Function_Card_SavePointKey.Header" xml:space="preserve">
+    <value>快捷键</value>
+  </data>
+</root>

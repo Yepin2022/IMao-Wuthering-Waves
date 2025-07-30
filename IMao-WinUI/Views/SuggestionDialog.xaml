@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="IMao_WinUI.Views.SuggestionDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:IMao_WinUI.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <RichTextBlock>
+        <Paragraph>IMao目前仅支持70%的地图区域，且没有图片/文字引导。若你想有更好的体验，建议与
+            <Hyperlink NavigateUri="https://www.kurobbs.com/mc/map/">库街区</Hyperlink> 一起使用。
+        </Paragraph>
+    </RichTextBlock>
+</Page>

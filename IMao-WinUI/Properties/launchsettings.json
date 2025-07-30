@@ -1,0 +1,10 @@
+﻿{
+    "profiles": {
+      "IMao-WinUI (Package)": {
+        "commandName": "MsixPackage"
+      },
+      "IMao-WinUI (Unpackaged)": {
+        "commandName": "Project"
+      }
+    }
+}

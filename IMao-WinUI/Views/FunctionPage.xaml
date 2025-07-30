@@ -1,0 +1,82 @@
+﻿<Page
+    x:Class="IMao_WinUI.Views.FunctionPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:toolkit="using:CommunityToolkit.WinUI.Controls"
+    NavigationCacheMode="Enabled"
+    mc:Ignorable="d">
+
+    <StackPanel x:Name="ContentArea">
+        <InfoBar x:Uid="Function_InfoBar_Statement" CornerRadius="8" IsOpen="True" IsIconVisible="True" IsClosable="False" Margin="{StaticResource InfoBarMargin}" />
+        <toolkit:SettingsExpander CornerRadius="8" Margin="{StaticResource ExpanderMargin}" x:Uid="Function_Expander_MinMapShowItem" >
+            <toolkit:SettingsExpander.HeaderIcon>
+                <FontIcon Glyph="&#xECAF;" />
+            </toolkit:SettingsExpander.HeaderIcon>
+
+            <toolkit:SettingsExpander.Description>
+                <TextBlock x:Uid="Function_Expander_MinMapShowItem_Description"/>
+            </toolkit:SettingsExpander.Description>
+
+            <ToggleSwitch AutomationProperties.Name="ToggleSwitch_MinMapShowItem" IsOn="True" Toggled="ToggleSwitch_MinMapShowItem"/>
+
+            <toolkit:SettingsExpander.Items>
+                <toolkit:SettingsCard
+                          x:Name="Function_Card_UpdateMinMapItemDataCycle"
+                          x:Uid="Function_Card_UpdateMinMapItemDataCycle">
+                    <toolkit:SettingsCard.Description>
+                        <TextBlock x:Uid="Function_Card_UpdateMinMapItemDataCycle_Description" />
+                    </toolkit:SettingsCard.Description>
+                    <Slider Width="120" Minimum="50" Maximum="120" StepFrequency="5"
+ SmallChange="10" Value="100" Name="UpdateMinMapItemDataCycle" ValueChanged="UpdateMinMapItemDataCycle_ValueChanged"/>
+                </toolkit:SettingsCard>
+
+                <toolkit:SettingsCard
+                          x:Name="Function_Card_SavePointKey"
+                          x:Uid="Function_Card_SavePointKey">
+                    <toolkit:SettingsCard.Description>
+                        <TextBlock x:Uid="Function_Card_SavePointKey_Description" />
+                    </toolkit:SettingsCard.Description>
+                    <TextBox AutomationProperties.Name="simple TextBox" Text="X" IsEnabled="False" TextAlignment="Center"/>
+                </toolkit:SettingsCard>
+            </toolkit:SettingsExpander.Items>
+        </toolkit:SettingsExpander>
+
+
+        <toolkit:SettingsExpander CornerRadius="8" Margin="{StaticResource ExpanderMargin}" x:Uid="Function_Expander_MapShowItem">
+            <toolkit:SettingsExpander.HeaderIcon>
+                <FontIcon Glyph="&#xECAF;" />
+            </toolkit:SettingsExpander.HeaderIcon>
+
+            <toolkit:SettingsExpander.Description>
+                <TextBlock x:Uid="Function_Expander_MapShowItem_Description"/>
+            </toolkit:SettingsExpander.Description>
+
+            <ToggleSwitch AutomationProperties.Name="ToggleSwitch_MapShowItem" Toggled="ToggleSwitch_MapShowItem"/>
+
+            <toolkit:SettingsExpander.Items>
+                <toolkit:SettingsCard
+                        x:Uid="Function_Card_UpdateMapItemDataCycle"
+                        x:Name="Function_Card_UpdateMapItemDataCycle"
+                        IsEnabled="True">
+                    <toolkit:SettingsCard.Description>
+                        <TextBlock x:Uid="Function_Card_UpdateMapItemDataCycle_Description"/>
+                    </toolkit:SettingsCard.Description>
+                    <Slider Width="120" Minimum="10" Maximum="100" StepFrequency="5"
+SmallChange="5" Value="60" Name="UpdateMapItemDataCycle" ValueChanged="UpdateMapItemDataCycle_ValueChanged" />
+                </toolkit:SettingsCard>
+
+                <toolkit:SettingsCard
+                    x:Uid="Function_Card_SetVisibleSavedPoints"
+                    x:Name="Function_Card_SetVisibleSavedPoints">
+                    <toolkit:SettingsCard.Description>
+                        <TextBlock x:Uid="Function_Card_SetVisibleSavedPoints_Description"/>
+                    </toolkit:SettingsCard.Description>
+                    <ToggleSwitch AutomationProperties.Name="ToggleSwitch_SetVisibleSavedPoints" Toggled="ToggleSwitch_SetVisibleSavedPoints" IsOn="True"/>
+                </toolkit:SettingsCard>
+            </toolkit:SettingsExpander.Items>
+        </toolkit:SettingsExpander>
+    </StackPanel>
+</Page>
+

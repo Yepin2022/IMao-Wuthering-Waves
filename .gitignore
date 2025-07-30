@@ -1,0 +1,6 @@
+*build*/
+x64/
+bin/
+IMao-WinUI/obj
+IMao-WinUI.Core/obj
+CMakeFiles/
