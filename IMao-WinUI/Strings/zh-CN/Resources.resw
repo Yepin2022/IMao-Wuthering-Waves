@@ -148,7 +148,7 @@
     <value>关于</value>
   </data>
   <data name="SettingsPage_ProjectIntroduction.Text" xml:space="preserve">
-    <value>项目介绍：IMao-Wuthering-Waves 是一款叠加在游戏窗口上的交互地图，借助图像识别技术，实时同步玩家/地图位置，减少玩家在探索过程中来回切换游戏与地图工具的操作次数。</value>
+    <value>项目介绍：IMao-Wuthering-Waves 是一款叠加在游戏窗口上的交互地图，借助图像匹配技术，实时同步玩家位置，减少玩家在探索过程中来回切换游戏与地图工具的操作次数。</value>
   </data>
   <data name="AppNotificationSamplePayload" xml:space="preserve">
     <value>&lt;toast launch="action=ToastClick"&gt;

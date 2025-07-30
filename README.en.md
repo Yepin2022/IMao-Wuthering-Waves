@@ -1,7 +1,7 @@
 # IMao-Wuthering-Waves
 
 #### Introduction
-An interactive overlay map that sits right on top of your game window. Using real-time image recognition, it keeps the player’s position and the map perfectly in sync, eliminating the need to alt-tab between the game and external map tools.
+An interactive map overlaying the game window that uses image matching technology to synchronize player locations in real-time, reducing the frequency with which players switch back and forth between the game and map tools during exploration.
 
 #### Function Demonstration
 <details>
