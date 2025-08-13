@@ -5,6 +5,7 @@
 constexpr auto ITEMSJSON_World = 1;
 constexpr auto ITEMSJSON_Tethys = 2;
 constexpr auto ITEMSJSON_Fabricatorium = 3;
+constexpr auto ITEMSJSON_Avinoleum = 4;
 
 constexpr auto IDB_PNG_5021 = 102;
 constexpr auto IDB_PNG_5022 = 103;
@@ -310,7 +311,11 @@ constexpr auto IDB_PNG_T_IconC_054_UI = 400;
 constexpr auto IDB_PNG_T_IconC_053_UI = 401;
 constexpr auto IDB_PNG_310000620 = 402;
 constexpr auto IDB_PNG_320000420 = 403;
-
+//2.2
+constexpr auto SP_IconMonsterHead_32033_UI = 404;
+constexpr auto SP_IconMonsterHead_31053_UI = 405;
+constexpr auto SP_IconMonsterHead_31052_UI = 406;
+constexpr auto T_IconTask_Task_144_UI = 407;
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED

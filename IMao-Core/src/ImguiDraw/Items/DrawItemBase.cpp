@@ -13,10 +13,13 @@ namespace fs = filesystem;
 json DrawItemBase::itemsJsonData_World;
 json DrawItemBase::itemsJsonData_Tethys;
 json DrawItemBase::itemsJsonData_Fabricatorium;
+json DrawItemBase::itemsJsonData_Avinoleum;
+
 vector<ItemTextureData> DrawItemBase::itemsTextureData;
 vector<ItemsDatas> DrawItemBase::itemsDatas_World_Storage;
 vector<ItemsDatas> DrawItemBase::itemsDatas_Tethys_Storage;
 vector<ItemsDatas> DrawItemBase::itemsDatas_Fabricatorium_Storage;
+vector<ItemsDatas> DrawItemBase::itemsDatas_Avinoleum_Storage;
 thread DrawItemBase::thread_ReadSavedPointsJson;
 string DrawItemBase::savedJosnPath;
 
@@ -63,6 +66,7 @@ void DrawItemBase::LoadItemsjson() {
     LoadJson(itemsJsonData_Tethys, L"ITEMSJSON_Tethys");
     LoadJson(itemsJsonData_World, L"ITEMSJSON_World");
     LoadJson(itemsJsonData_Fabricatorium, L"ITEMSJSON_Fabricatorium");
+    LoadJson(itemsJsonData_Avinoleum, L"ITEMSJSON_Avinoleum");
 }
 
 bool DrawItemBase::IsValidItemNameId(string itemNameId) {
@@ -79,6 +83,12 @@ bool DrawItemBase::IsValidItemNameId(string itemNameId) {
     }
 
     for (const auto& itemsDatas : itemsDatas_Fabricatorium_Storage) {
+        if (itemsDatas.nameId == itemNameId) {
+            return true;
+        }
+    }
+
+    for (const auto& itemsDatas : itemsDatas_Avinoleum_Storage) {
         if (itemsDatas.nameId == itemNameId) {
             return true;
         }
@@ -105,6 +115,11 @@ bool DrawItemBase::FindItemJsonData(int sceneId, json*& itemJsonData, vector<Ite
         return true;
     }
 
+    if (sceneId == 4) {
+        itemJsonData = &itemsJsonData_Avinoleum;
+        itemsDatas_Storage = &itemsDatas_Avinoleum_Storage;
+        return true;
+    }
     return false;
 }
 
@@ -125,10 +140,10 @@ void DrawItemBase::AddItemDataFromJson(string itemId) {
                     for (const auto& location : item_info["location"]) {
                         double IdentifyCoord_x = location["x"] / 100;
                         double IdentifyCoord_y = location["y"] / 100;
-                        Coordinate itemMapRC = RelativeCoordinates::IdentifyCoordToRC(Coordinate(IdentifyCoord_x, IdentifyCoord_y),sceneId);
+                        Coordinate itemMapROC = RelativeCoordinates::IdentifyCoordToROC(Coordinate(IdentifyCoord_x, IdentifyCoord_y),sceneId);
    
                         string s = location["id"].get<string>();
-                        ItemDatas tempItemDatas = { s ,nameId,Coordinate(0,0),itemMapRC ,false };
+                        ItemDatas tempItemDatas = { s ,nameId,Coordinate(0,0),itemMapROC ,false };
                         itemsDatas.push_back(tempItemDatas);
                     }
                    (*itemsDatas_StoragePtr).push_back(ItemsDatas(nameId, itemsDatas));
@@ -158,9 +173,9 @@ void DrawItemBase::ClearItemData(string itemId) {
         }
     }
 
-    for (int i = 0; i < itemsDatas_Fabricatorium_Storage.size(); i++) {
-        if (itemsDatas_Fabricatorium_Storage[i].nameId == itemId) {
-            itemsDatas_Fabricatorium_Storage.erase(itemsDatas_Fabricatorium_Storage.begin() + i);
+    for (int i = 0; i < itemsDatas_Avinoleum_Storage.size(); i++) {
+        if (itemsDatas_Avinoleum_Storage[i].nameId == itemId) {
+            itemsDatas_Avinoleum_Storage.erase(itemsDatas_Avinoleum_Storage.begin() + i);
             break;
         }
     }

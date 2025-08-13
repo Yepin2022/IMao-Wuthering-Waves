@@ -6,16 +6,16 @@ Coordinate minMapCenterPoint;
 string DrawItemOnMinMap::senceName = "World";
 vector<ItemsDatas>* DrawItemOnMinMap::itemsDatas_StoragePtr = nullptr;
 
-void DrawItemOnMinMap::UpdatePlayerNearItemsData(HWND &hwnd,Coordinate & playerRC, float minMapRadius,int SceneId) {
+void DrawItemOnMinMap::UpdatePlayerNearItemsData(HWND &hwnd,Coordinate & playerROC, float minMapRadius,int SceneId) {
 	RECT w_Rect;
 	GetClientRect(hwnd, &w_Rect);
     if(GetBasicDataBySenceId(SceneId))
-        nearItemsDatas = GetAndFilterItemsData(w_Rect, playerRC,minMapRadius);
+        nearItemsDatas = GetAndFilterItemsData(w_Rect, playerROC,minMapRadius);
 }
 
-void DrawItemOnMinMap::UpdatePlayerNearItemsData(RECT &w_Rect, Coordinate & playerRC,float minMapRadius, int SceneId) {
+void DrawItemOnMinMap::UpdatePlayerNearItemsData(RECT &w_Rect, Coordinate & playerROC,float minMapRadius, int SceneId) {
     if(GetBasicDataBySenceId(SceneId))
-        nearItemsDatas = GetAndFilterItemsData(w_Rect, playerRC, minMapRadius);
+        nearItemsDatas = GetAndFilterItemsData(w_Rect, playerROC, minMapRadius);
 }
 
 bool DrawItemOnMinMap::GetBasicDataBySenceId(int senceId) {
@@ -37,16 +37,22 @@ bool DrawItemOnMinMap::GetBasicDataBySenceId(int senceId) {
         return true;
     }
 
+    if (senceId == 4) {
+        senceName = "Avinoleum";
+        itemsDatas_StoragePtr = &DrawItemBase::itemsDatas_Avinoleum_Storage;
+        return true;
+    }
+
     return false;
 }
 
-vector<ItemDatas> DrawItemOnMinMap::GetAndFilterItemsData(const RECT& rect, const Coordinate& playerRC, float minMapRadius) {
+vector<ItemDatas> DrawItemOnMinMap::GetAndFilterItemsData(const RECT& rect, const Coordinate& playerROC, float minMapRadius) {
     vector<ItemDatas> nearFilterItemsData;
     for (const auto& itemsData : *itemsDatas_StoragePtr) {
         vector<string> filteredPoints = DrawItemBase::GetFilteredPoints(senceName, itemsData.nameId);
         for (const auto& itemDatas : itemsData.itemsDatas) {
-            if (abs(playerRC.x - itemDatas.itemMapRC.x) < 100 && abs(playerRC.y - itemDatas.itemMapRC.y) < 100) {
-                Coordinate itemScreen = ScreenCoordinate::ItemScreenCoordinateOnMinMap(rect, itemDatas.itemMapRC, playerRC);
+            if (abs(playerROC.x - itemDatas.itemMapROC.x) < 100 && abs(playerROC.y - itemDatas.itemMapROC.y) < 100) {
+                Coordinate itemScreen = ScreenCoordinate::ItemScreenCoordinateOnMinMap(rect, itemDatas.itemMapROC, playerROC);
                 minMapCenterPoint = ScreenCoordinate::MinMapCircleCenterScreenCoordinate(rect);
                 float twoPointDistance = CalculatePointDistance(itemScreen, minMapCenterPoint);
                 if (twoPointDistance <= minMapRadius) {
@@ -57,7 +63,7 @@ vector<ItemDatas> DrawItemOnMinMap::GetAndFilterItemsData(const RECT& rect, cons
                             break;
                         }
                     }
-                    ItemDatas tempItemData = { itemDatas.itemId ,itemDatas.nameId ,itemScreen,itemDatas.itemMapRC,isSaved };
+                    ItemDatas tempItemData = { itemDatas.itemId ,itemDatas.nameId ,itemScreen,itemDatas.itemMapROC,isSaved };
                     nearFilterItemsData.push_back(tempItemData);
                 }
             }

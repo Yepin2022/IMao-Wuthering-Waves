@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AppDisplayName" xml:space="preserve">
-    <value>IMao-Wuthering-Waves v0.9.3</value>
+    <value>IMao-Wuthering-Waves v0.9.4</value>
   </data>
   <data name="AppDescription" xml:space="preserve">
     <value>IMao-Wuthering-Waves</value>
@@ -252,7 +252,7 @@
     <value>当前不是最新版本。</value>
   </data>
   <data name="Function_Card_SavePointKey_Description.Text" xml:space="preserve">
-    <value>按键盘X可以直接将玩家附近的点位设置为完成状态。</value>
+    <value>按键盘Z可以直接将玩家附近的点位设置为完成状态。</value>
   </data>
   <data name="Function_Card_SavePointKey.Header" xml:space="preserve">
     <value>快捷键</value>

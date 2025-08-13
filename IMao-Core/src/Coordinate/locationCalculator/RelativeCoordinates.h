@@ -3,14 +3,16 @@
 class RelativeCoordinates
 {
 public:
-	static Coordinate ImgMapCoordToRWOC(const Coordinate& imgMapCoordinate);
+	static Coordinate ImgMapCoordToROC_World(const Coordinate& imgMapCoordinate);
 	static Coordinate GetRelativeCoordinates(const Coordinate& coordinate,const Coordinate& originCoordinate);
-	static Coordinate ImgMapCoordToRC(const Coordinate& imgMapCoordinate, int SceneId);
-	static Coordinate IdentifyCoordToRC(const Coordinate& identifyCoordinate, int SceneId);
-	static Coordinate WorldCoordToRWOC(const Coordinate& worldCoordinate);
-	static Coordinate ImgMapCoordToRTOC(const Coordinate& imgMapCoordinate);
-	static Coordinate TethysCoordToRTOC(const Coordinate& TethysCoordinate);
-	static Coordinate ImgMapCoordToRFOC(const Coordinate& imgMapCoordinate);
-	static Coordinate FabricatoriumCoordToRFOC(const Coordinate& TethysCoordinate);
+	static Coordinate ImgMapCoordToROC(const Coordinate& imgMapCoordinate, int SceneId);
+	static Coordinate IdentifyCoordToROC(const Coordinate& identifyCoordinate, int SceneId);
+	static Coordinate WorldCoordToROC_World(const Coordinate& worldCoordinate);
+	static Coordinate ImgMapCoordToROC_Tethys(const Coordinate& imgMapCoordinate);
+	static Coordinate TethysCoordToROC_Tethys(const Coordinate& TethysCoordinate);
+	static Coordinate ImgMapCoordToROC_Fabricatorium(const Coordinate& imgMapCoordinate);
+	static Coordinate FabricatoriumCoordToROC_Fabricatorium(const Coordinate& TethysCoordinate);
+	static Coordinate ImgMapCoordToROC_Avinoleum(const Coordinate& imgMapCoordinate);
+	static Coordinate AvinoleumCoordToROC_Avinoleum(const Coordinate& AvinoleumCoordinate);
 };
 

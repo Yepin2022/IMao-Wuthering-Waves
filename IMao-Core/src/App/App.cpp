@@ -231,8 +231,10 @@ winrt::IAsyncAction App::UpdateItemMinMapScreenCoordinate(const Mat& snapshot) {
 
 	ImageFeatureData MapFeatureData(nearPlayerMapKeypoints, nearPlayerMapDescriptors);
 	ImageFeatureData minMapFeatureData = FeatureMatch::ExtractSurfFeatures(surf, minMapImg);
+
 	if (minMapFeatureData.imgDescriptors.empty())
 		co_return;
+
 	vector<DMatch> goodMatch = FeatureMatch::FindGoodMatchesBetweenMapAndMinMap(minMapFeatureData, MapFeatureData);
 
 	Coordinate PlayerImageMapCoordinate;
@@ -257,7 +259,7 @@ winrt::IAsyncAction App::UpdateItemMinMapScreenCoordinate(const Mat& snapshot) {
 		co_return;
 	}
 
-	Coordinate playerRC = RelativeCoordinates::ImgMapCoordToRC(lastPlayerImgMapCoordinate, PlayerCurrentSceneId);
+	Coordinate playerRC = RelativeCoordinates::ImgMapCoordToROC(lastPlayerImgMapCoordinate, PlayerCurrentSceneId);
 	if (enabledMinMapShowItem) {
 		DrawItemOnMinMap::UpdatePlayerNearItemsData(rect, playerRC, minMapImg.rows / 2, PlayerCurrentSceneId);
 	}
@@ -268,58 +270,52 @@ winrt::IAsyncAction App::UpdateItemMinMapScreenCoordinate(const Mat& snapshot) {
 }
 
 void App::UpdateItemMapScreenCoordinateByMatch(const Mat& snapshot) {
-	try {
-		Mat mapCenterAreaImgae = ImageProcessing::CropToMapCenterArea(snapshot, rect);
-		Ptr<xfeatures2d::SURF> surt = xfeatures2d::SURF::create(100, 4, 3, true, true);
-		ImageFeatureData mapCenterAreaFeatureData = FeatureMatch::ExtractSurfFeatures(surt, mapCenterAreaImgae);
+	Mat mapCenterAreaImgae = ImageProcessing::CropToMapCenterArea(snapshot, rect);
+	Ptr<xfeatures2d::SURF> surt = xfeatures2d::SURF::create(100, 4, 3, true, true);
+	ImageFeatureData mapCenterAreaFeatureData = FeatureMatch::ExtractSurfFeatures(surt, mapCenterAreaImgae);
 
-		if (!mapCenterAreaFeatureData.imgDescriptors.empty()) {
-			vector<vector<DMatch>> knnMatches;
-			vector<KeyPoint> mapCenterPointNearKeypoints;
-			Mat mapCenterPointNearDescriptors;
+	if (!mapCenterAreaFeatureData.imgDescriptors.empty()) {
+		vector<vector<DMatch>> knnMatches;
+		vector<KeyPoint> mapCenterPointNearKeypoints;
+		Mat mapCenterPointNearDescriptors;
 
-			if (existMapCenterPointCoordinate) {
-				//true 小范围搜索featurePoint并给通过鼠标监视算的中心坐标赋正确的值（最后） 
-				const Point2f ImgMapCoord_gameMapCenterPoint(App::gameMapCenterPointImgMapCoord.x, App::gameMapCenterPointImgMapCoord.y);
-				FeatureFilter::FilterNearGoodKeypoints(App::FeatureData_map.imgKeypoints, App::FeatureData_map.imgDescriptors, ImgMapCoord_gameMapCenterPoint, 400, 16, mapCenterPointNearKeypoints, mapCenterPointNearDescriptors);
-			}
-			else {
-				//通过鼠标监视算出的中心坐标有一定偏差
-				//false 获取通过鼠标监视算的中心坐标 大范围搜索featurePoint
-				const Point2f ImgMapCoord_gameMapCenterPoint(App::gameMapCenterCoordinateByMouseMonitoring.x, App::gameMapCenterCoordinateByMouseMonitoring.y);
-				FeatureFilter::FilterNearGoodKeypoints(App::FeatureData_map.imgKeypoints, App::FeatureData_map.imgDescriptors, ImgMapCoord_gameMapCenterPoint, 2200, 22, mapCenterPointNearKeypoints, mapCenterPointNearDescriptors);
-			}
-
-			if (mapCenterPointNearDescriptors.empty()) {
-				existMapCenterPointCoordinate = false;
-				return;
-			}
-
-			ImageFeatureData centerMapNearFeatureData(mapCenterPointNearKeypoints, mapCenterPointNearDescriptors);
-			auto goodMatchs = FeatureMatch::FindGoodMatchesFLANN(mapCenterAreaFeatureData, centerMapNearFeatureData, 0.62f, 0.50f);
-			Coordinate centerMapCoordinate;
-			vector<Point2f> captrueCorners_temp;
-			existMapCenterPointCoordinate = MapCoordinate::GetMapCoordinateOfCenterGameMapPos(centerMapNearFeatureData, mapCenterAreaFeatureData, goodMatchs, mapCenterAreaImgae, centerMapCoordinate, captrueCorners_temp);
-
-			if (existMapCenterPointCoordinate) {
-				Coordinate gameMapCenterPointRwoc = RelativeCoordinates::ImgMapCoordToRC(centerMapCoordinate, PlayerCurrentSceneId);
-				Coordinate lastGameMapCenterPointRwoc = RelativeCoordinates::ImgMapCoordToRC(App::gameMapCenterPointImgMapCoord, PlayerCurrentSceneId);
-				if (abs((captrueCorners[2].x - captrueCorners[0].x) - (captrueCorners_temp[2].x - captrueCorners_temp[0].x)) > 10)
-					captrueCorners = captrueCorners_temp;
-
-				if (mapNotMoving)//mapNotMoved通过鼠标监视判断是不准确的 需要在UpdateCenterPointNearItemsData里进一步处理
-					DrawItemOnGameMap::UpdateCenterPointNearItemsData(gameMapCenterPointRwoc, lastGameMapCenterPointRwoc, captrueCorners, rect ,PlayerCurrentSceneId);
-
-				App::gameMapCenterCoordinateByMouseMonitoring = App::gameMapCenterPointImgMapCoord = centerMapCoordinate;
-
-				map_ConsecutiveFailuresCount = 0;
-				return;
-			}
+		if (existMapCenterPointCoordinate) {
+			//true 小范围搜索featurePoint并给通过鼠标监视算的中心坐标赋正确的值（最后） 
+			const Point2f ImgMapCoord_gameMapCenterPoint(App::gameMapCenterPointImgMapCoord.x, App::gameMapCenterPointImgMapCoord.y);
+			FeatureFilter::FilterNearGoodKeypoints(App::FeatureData_map.imgKeypoints, App::FeatureData_map.imgDescriptors, ImgMapCoord_gameMapCenterPoint, 400, 16, mapCenterPointNearKeypoints, mapCenterPointNearDescriptors);
 		}
-	}
-	catch (const exception& e) {
-		cerr << "报错 " << e.what() << endl;
-		return;
+		else {
+			//通过鼠标监视算出的中心坐标有一定偏差
+			//false 获取通过鼠标监视算的中心坐标 大范围搜索featurePoint
+			const Point2f ImgMapCoord_gameMapCenterPoint(App::gameMapCenterCoordinateByMouseMonitoring.x, App::gameMapCenterCoordinateByMouseMonitoring.y);
+			FeatureFilter::FilterNearGoodKeypoints(App::FeatureData_map.imgKeypoints, App::FeatureData_map.imgDescriptors, ImgMapCoord_gameMapCenterPoint, 2200, 22, mapCenterPointNearKeypoints, mapCenterPointNearDescriptors);
+		}
+
+		if (mapCenterPointNearDescriptors.empty()) {
+			existMapCenterPointCoordinate = false;
+			return;
+		}
+
+		ImageFeatureData centerMapNearFeatureData(mapCenterPointNearKeypoints, mapCenterPointNearDescriptors);
+		auto goodMatchs = FeatureMatch::FindGoodMatchesFLANN(mapCenterAreaFeatureData, centerMapNearFeatureData, 0.62f, 0.50f);
+
+		Coordinate centerMapCoordinate;vector<Point2f> captrueCorners_temp;
+		existMapCenterPointCoordinate = MapCoordinate::GetMapCoordinateOfCenterGameMapPos(centerMapNearFeatureData, mapCenterAreaFeatureData, goodMatchs, mapCenterAreaImgae, centerMapCoordinate, captrueCorners_temp);
+
+		if (existMapCenterPointCoordinate) {
+			Coordinate gameMapCenterPointROC = RelativeCoordinates::ImgMapCoordToROC(centerMapCoordinate, PlayerCurrentSceneId);
+			Coordinate lastGameMapCenterPointROC = RelativeCoordinates::ImgMapCoordToROC(App::gameMapCenterPointImgMapCoord, PlayerCurrentSceneId);
+			if (abs((captrueCorners[2].x - captrueCorners[0].x) - (captrueCorners_temp[2].x - captrueCorners_temp[0].x)) > 10)
+				captrueCorners = captrueCorners_temp;
+
+			if (mapNotMoving)//mapNotMoved通过鼠标监视判断是不准确的 需要在UpdateCenterPointNearItemsData里进一步处理
+				DrawItemOnGameMap::UpdateCenterPointNearItemsData(gameMapCenterPointROC, lastGameMapCenterPointROC, captrueCorners, rect, PlayerCurrentSceneId);
+
+			App::gameMapCenterCoordinateByMouseMonitoring = App::gameMapCenterPointImgMapCoord = centerMapCoordinate;
+
+			map_ConsecutiveFailuresCount = 0;
+			return;
+		}
 	}
 
 	map_ConsecutiveFailuresCount++;
@@ -380,8 +376,9 @@ void App::Thread_GetItemMapScreenCoordinateByMouseMonitoring() {
 	}
 }
 
+//TODO:需用户可自定义快捷键
 void App::Thread_KeyMonitoring_SavePlayerNearItemPoint() {
-	const int monitoredKey = 0x58;
+	const int monitoredKey = 0x5A; //Z
 	bool keyWasPressed = false; 
 	while (true) {
 		bool keyIsPressed = isKeyPressed(monitoredKey);

@@ -2,28 +2,28 @@
 using namespace cv;
 using namespace std;
 vector<ItemDatas> DrawItemOnGameMap::centerPointNearItemsData;
-Coordinate DrawItemOnGameMap::validGameMapcenterPointRwoc;
+Coordinate DrawItemOnGameMap::validGameMapcenterPointROC;
 bool DrawItemOnGameMap::visibleSavedPoints = true;
 
 string DrawItemOnGameMap::senceName = "World";
 vector<ItemsDatas>* DrawItemOnGameMap::itemsDatas_StoragePtr = nullptr;
 
-void DrawItemOnGameMap::UpdateCenterPointNearItemsData(const Coordinate& gameMapcenterPointRwoc, const Coordinate& lastGameMapcenterPointRwoc, const vector<Point2f>& captureCorners, const RECT& rect, int senceId) {
-	if (!IsMapMoving(gameMapcenterPointRwoc)) {
+void DrawItemOnGameMap::UpdateCenterPointNearItemsData(const Coordinate& gameMapcenterPointROC, const Coordinate& lastGameMapcenterPointROC, const vector<Point2f>& captureCorners, const RECT& rect, int senceId) {
+	if (!IsMapMoving(gameMapcenterPointROC)) {
 		if(GetBasicDataBySenceId(senceId))
-			centerPointNearItemsData = GetAndFilterItemsData(validGameMapcenterPointRwoc, captureCorners, rect);
+			centerPointNearItemsData = GetAndFilterItemsData(validGameMapcenterPointROC, captureCorners, rect);
 	}
 	else {
-		if (abs(gameMapcenterPointRwoc.x - lastGameMapcenterPointRwoc.x) > 15 or abs(gameMapcenterPointRwoc.y - lastGameMapcenterPointRwoc.y) > 15) {
+		if (abs(gameMapcenterPointROC.x - lastGameMapcenterPointROC.x) > 15 or abs(gameMapcenterPointROC.y - lastGameMapcenterPointROC.y) > 15) {
 			DrawItemOnGameMap::ClearNearItemsData();
 		}
 	}
 }
 
-bool DrawItemOnGameMap::IsMapMoving(const Coordinate& gameMapcenterPointRwoc) {
+bool DrawItemOnGameMap::IsMapMoving(const Coordinate& gameMapcenterPointROC) {
 	//位移小于2视为识别误差，不为此更新Items数据
-	if (abs(validGameMapcenterPointRwoc.x - gameMapcenterPointRwoc.x) > 2 or abs(validGameMapcenterPointRwoc.y - gameMapcenterPointRwoc.y) > 2) {
-		validGameMapcenterPointRwoc.x = gameMapcenterPointRwoc.x; validGameMapcenterPointRwoc.y = gameMapcenterPointRwoc.y;
+	if (abs(validGameMapcenterPointROC.x - gameMapcenterPointROC.x) > 2 or abs(validGameMapcenterPointROC.y - gameMapcenterPointROC.y) > 2) {
+		validGameMapcenterPointROC.x = gameMapcenterPointROC.x; validGameMapcenterPointROC.y = gameMapcenterPointROC.y;
 		return true;
 	}
 	return false;
@@ -48,6 +48,12 @@ bool DrawItemOnGameMap::GetBasicDataBySenceId(int senceId) {
 		return true;
 	}
 
+	if (senceId == 4) {
+		senceName = "Avinoleum";
+		itemsDatas_StoragePtr = &DrawItemBase::itemsDatas_Avinoleum_Storage;
+		return true;
+	}
+
 	return false;
 }
 
@@ -56,7 +62,7 @@ vector<ItemDatas> DrawItemOnGameMap::GetAndFilterItemsData(const Coordinate& gam
 	for (const auto& itemsDatas : *itemsDatas_StoragePtr) {
 		vector<string> filteredPoints = DrawItemBase::GetFilteredPoints(senceName, itemsDatas.nameId);
 		for (const auto& itemDatas : itemsDatas.itemsDatas) {
-			Coordinate itemScreen = ScreenCoordinate::ItemScreenCoordinateOnMap(gameMapcenterPointRC, itemDatas.itemMapRC, captureCorners, rect);
+			Coordinate itemScreen = ScreenCoordinate::ItemScreenCoordinateOnMap(gameMapcenterPointRC, itemDatas.itemMapROC, captureCorners, rect);
 			if (itemScreen.x < rect.right && itemScreen.x >= 0 && itemScreen.y < rect.bottom && itemScreen.y >= 0) {
 				bool isSaved = false;
 				for (const auto& filteredPoint : filteredPoints) {
@@ -65,7 +71,7 @@ vector<ItemDatas> DrawItemOnGameMap::GetAndFilterItemsData(const Coordinate& gam
 						break;
 					}
 				}
-				ItemDatas tempItemData = { itemDatas.itemId,itemDatas.nameId, itemScreen, itemDatas.itemMapRC, isSaved };
+				ItemDatas tempItemData = { itemDatas.itemId,itemDatas.nameId, itemScreen, itemDatas.itemMapROC, isSaved };
 				filterItemsData.push_back(tempItemData);
 			}
 		}

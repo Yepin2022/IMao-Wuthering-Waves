@@ -258,7 +258,7 @@ int ImGuiOverWindows::start()
             DrawItemOnMinMap::DrawItemsOnMinMap(GameRect);
             DrawItemOnGameMap::DrawItemsOnGameMap(GameRect, h_window);
             Notification::DrawInfo();
-           // Debug::DebugWindow(io,app);
+            //Debug::DebugWindow(io,app);
             LONG exStyle = GetWindowLong(overWindowsHwnd, GWL_EXSTYLE);
             SetWindowLong(overWindowsHwnd, GWL_EXSTYLE, exStyle | WS_EX_TRANSPARENT);
         }

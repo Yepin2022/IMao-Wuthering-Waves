@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AppDisplayName" xml:space="preserve">
-    <value>IMao-Wuthering-Waves v0.9.3</value>
+    <value>IMao-Wuthering-Waves v0.9.4</value>
   </data>
   <data name="AppDescription" xml:space="preserve">
     <value>IMao-Wuthering-Waves</value>
@@ -252,7 +252,7 @@
     <value>The current version is not up to date.</value>
   </data>
   <data name="Function_Card_SavePointKey_Description.Text" xml:space="preserve">
-    <value>Pressing the X key on the keyboard can directly set the points near the player to the completed state.</value>
+    <value>Pressing the Z key on the keyboard can directly set the points near the player to the completed state.</value>
   </data>
   <data name="Function_Card_SavePointKey.Header" xml:space="preserve">
     <value>Shortcut key</value>

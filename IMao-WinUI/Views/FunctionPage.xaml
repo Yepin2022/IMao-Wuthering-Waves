@@ -28,8 +28,8 @@
                     <toolkit:SettingsCard.Description>
                         <TextBlock x:Uid="Function_Card_UpdateMinMapItemDataCycle_Description" />
                     </toolkit:SettingsCard.Description>
-                    <Slider Width="120" Minimum="50" Maximum="120" StepFrequency="5"
- SmallChange="10" Value="100" Name="UpdateMinMapItemDataCycle" ValueChanged="UpdateMinMapItemDataCycle_ValueChanged"/>
+                    <Slider Width="120" Minimum="40" Maximum="120" StepFrequency="5"
+ SmallChange="10" Value="80" Name="UpdateMinMapItemDataCycle" ValueChanged="UpdateMinMapItemDataCycle_ValueChanged"/>
                 </toolkit:SettingsCard>
 
                 <toolkit:SettingsCard
@@ -38,7 +38,7 @@
                     <toolkit:SettingsCard.Description>
                         <TextBlock x:Uid="Function_Card_SavePointKey_Description" />
                     </toolkit:SettingsCard.Description>
-                    <TextBox AutomationProperties.Name="simple TextBox" Text="X" IsEnabled="False" TextAlignment="Center"/>
+                    <TextBox AutomationProperties.Name="simple TextBox" Text="Z" IsEnabled="False" TextAlignment="Center"/>
                 </toolkit:SettingsCard>
             </toolkit:SettingsExpander.Items>
         </toolkit:SettingsExpander>

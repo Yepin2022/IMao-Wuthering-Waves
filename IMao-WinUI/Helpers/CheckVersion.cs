@@ -9,7 +9,7 @@ namespace IMao_WinUI.Helpers;
 
 class CheckVersion
 {
-    private static readonly String CurrentVersion = "0.9.3";
+    private static readonly String CurrentVersion = "0.9.4";
     public static async Task<bool> IsLatest()
     {
         String tagName = await GetLatestTagName();
