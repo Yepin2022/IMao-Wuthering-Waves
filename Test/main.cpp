@@ -12,6 +12,15 @@ using namespace cv::xfeatures2d;
 using namespace cv;
 using namespace std;
 
+void saveFeatures(const string& filename, const vector<KeyPoint>& keypoints, const Mat& descriptors) {
+    FileStorage fs(filename, FileStorage::WRITE);
+    if (fs.isOpened()) {
+        fs << "keypoints" << keypoints;
+        fs << "descriptors" << descriptors;
+        fs.release();
+    }
+}
+
 int main_1() {
     //Image resource download address：https://github.com/Yepin2022/IMao-WW-Resources
     cv::Mat img = cv::imread("C:\\Map.png", cv::IMREAD_GRAYSCALE);
@@ -69,12 +78,6 @@ int main_1() {
 
     std::vector<cv::KeyPoint> loadedKeypoints;
     cv::Mat loadedDescriptors;
-    if (loadFeatures(featureFilePath, loadedKeypoints, loadedDescriptors)) {
-        std::cout << "成功读取特征点和描述符" << std::endl;
-    }
-    else {
-        std::cerr << "读取特征点和描述符失败" << std::endl;
-    }
 
     return 0;
 }

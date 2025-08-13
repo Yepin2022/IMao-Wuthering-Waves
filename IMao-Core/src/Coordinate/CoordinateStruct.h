@@ -24,9 +24,14 @@ struct FabricatoriumOriginCoordinates {
     inline static double y = 13982;
 };
 
+struct AvinoleumOriginCoordinates {
+    inline static double x = 15779;
+    inline static double y = 3141;
+};
+
 //TODO:需要适配更多地图
 struct Scene {
-    inline static std::vector<int> sceneIds = { 1,2 ,3};
+    inline static std::vector<int> sceneIds = { 1,2 ,3,4};
 };
 
 struct GameWindowsScreenData {

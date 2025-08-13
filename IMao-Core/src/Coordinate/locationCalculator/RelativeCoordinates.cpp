@@ -6,72 +6,94 @@ Coordinate RelativeCoordinates::GetRelativeCoordinates(const Coordinate& coordin
 	return relativeCoordinates;
 }
 
-Coordinate RelativeCoordinates::ImgMapCoordToRC(const Coordinate& imgMapCoordinate,int SceneId) {
+Coordinate RelativeCoordinates::ImgMapCoordToROC(const Coordinate& imgMapCoordinate,int SceneId) {
 	if (SceneId == 1) {
-		return ImgMapCoordToRWOC(imgMapCoordinate);
+		return ImgMapCoordToROC_World(imgMapCoordinate);
 	}
 
 	if (SceneId == 2) {
-		return ImgMapCoordToRTOC(imgMapCoordinate);
+		return ImgMapCoordToROC_Tethys(imgMapCoordinate);
 	}
 
 	if (SceneId == 3) {
-		return ImgMapCoordToRFOC(imgMapCoordinate);
+		return ImgMapCoordToROC_Fabricatorium(imgMapCoordinate);
+	}
+
+	if (SceneId == 4) {
+		return ImgMapCoordToROC_Avinoleum(imgMapCoordinate);
 	}
 
 	return Coordinate(0, 0);
 }
 
-
-Coordinate RelativeCoordinates::IdentifyCoordToRC(const Coordinate& identifyCoordinate, int SceneId) {
+Coordinate RelativeCoordinates::IdentifyCoordToROC(const Coordinate& identifyCoordinate, int SceneId) {
 	if (SceneId == 1) {
-		return WorldCoordToRWOC(identifyCoordinate);
+		return WorldCoordToROC_World(identifyCoordinate);
 	}
 
 	if (SceneId == 2) {
-		return TethysCoordToRTOC(identifyCoordinate);
+		return TethysCoordToROC_Tethys(identifyCoordinate);
 	}
 
 	if (SceneId == 3) {
-		return FabricatoriumCoordToRFOC(identifyCoordinate);
+		return FabricatoriumCoordToROC_Fabricatorium(identifyCoordinate);
+	}
+
+	if (SceneId == 4) {
+		return AvinoleumCoordToROC_Avinoleum(identifyCoordinate);
 	}
 
 	return Coordinate(0, 0);
 }
 
-//RWOC:Relative coordinates to the iamge map world origin.
-Coordinate RelativeCoordinates::ImgMapCoordToRWOC(const Coordinate& imgMapCoordinate) {
+//ROC:Relative coordinates to the iamge map xxx origin.
+Coordinate RelativeCoordinates::ImgMapCoordToROC_World(const Coordinate& imgMapCoordinate) {
 	Coordinate relativeCoordinates(imgMapCoordinate.x - WorldOriginCoordinates::x, WorldOriginCoordinates::y- imgMapCoordinate.y);
 	return relativeCoordinates;
 }
 
-Coordinate RelativeCoordinates::WorldCoordToRWOC(const Coordinate& worldCoordinate) {
+Coordinate RelativeCoordinates::WorldCoordToROC_World(const Coordinate& worldCoordinate) {
 	Coordinate mapCoord = MapCoordinate::PlayerWorldCoordToImgMapCoord(worldCoordinate);
-	Coordinate relativeCoordinates = ImgMapCoordToRWOC(mapCoord);
+	Coordinate relativeCoordinates = ImgMapCoordToROC_World(mapCoord);
 	return relativeCoordinates;
 }
 
-//RTOC:Relative coordinates to the image map Tethys origin.
-Coordinate RelativeCoordinates::ImgMapCoordToRTOC(const Coordinate& imgMapCoordinate) {
+
+
+Coordinate RelativeCoordinates::ImgMapCoordToROC_Tethys(const Coordinate& imgMapCoordinate) {
 	Coordinate relativeCoordinates(imgMapCoordinate.x - TethysOriginCoordinates::x, TethysOriginCoordinates::y - imgMapCoordinate.y);
 	return relativeCoordinates;
 }
 
-Coordinate RelativeCoordinates::TethysCoordToRTOC(const Coordinate& TethysCoordinate) {
+Coordinate RelativeCoordinates::TethysCoordToROC_Tethys(const Coordinate& TethysCoordinate) {
 	Coordinate mapCoord = MapCoordinate::PlayerTethysCoordToImgMapCoord(TethysCoordinate);
-	Coordinate relativeCoordinates = ImgMapCoordToRTOC(mapCoord);
+	Coordinate relativeCoordinates = ImgMapCoordToROC_Tethys(mapCoord);
 	return relativeCoordinates;
 }
 
-//RTOC:Relative coordinates to the image map Fabricatorium origin.
-Coordinate RelativeCoordinates::ImgMapCoordToRFOC(const Coordinate& imgMapCoordinate) {
+
+
+Coordinate RelativeCoordinates::ImgMapCoordToROC_Fabricatorium(const Coordinate& imgMapCoordinate) {
 	Coordinate relativeCoordinates(imgMapCoordinate.x - FabricatoriumOriginCoordinates::x, FabricatoriumOriginCoordinates::y - imgMapCoordinate.y);
 	return relativeCoordinates;
 }
 
-
-Coordinate RelativeCoordinates::FabricatoriumCoordToRFOC(const Coordinate& TethysCoordinate) {
+Coordinate RelativeCoordinates::FabricatoriumCoordToROC_Fabricatorium(const Coordinate& TethysCoordinate) {
 	Coordinate mapCoord = MapCoordinate::PlayerFabricatoriumCoordToImgMapCoord(TethysCoordinate);
-	Coordinate relativeCoordinates = ImgMapCoordToRFOC(mapCoord);
+	Coordinate relativeCoordinates = ImgMapCoordToROC_Fabricatorium(mapCoord);
+	return relativeCoordinates;
+}
+
+
+
+
+Coordinate RelativeCoordinates::ImgMapCoordToROC_Avinoleum(const Coordinate& imgMapCoordinate) {
+	Coordinate relativeCoordinates(imgMapCoordinate.x - AvinoleumOriginCoordinates::x, AvinoleumOriginCoordinates::y - imgMapCoordinate.y);
+	return relativeCoordinates;
+}
+
+Coordinate RelativeCoordinates::AvinoleumCoordToROC_Avinoleum(const Coordinate& AvinoleumCoordinate) {
+	Coordinate mapCoord = MapCoordinate::PlayerAvinoleumCoordToImgMapCoord(AvinoleumCoordinate);
+	Coordinate relativeCoordinates = ImgMapCoordToROC_Avinoleum(mapCoord);
 	return relativeCoordinates;
 }

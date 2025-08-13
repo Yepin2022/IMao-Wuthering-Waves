@@ -90,6 +90,12 @@ Coordinate MapCoordinate::PlayerFabricatoriumCoordToImgMapCoord(Coordinate Fabri
     return PlayerMapCoor;
 }
 
+Coordinate MapCoordinate::PlayerAvinoleumCoordToImgMapCoord(Coordinate AvinoleumCoordinate) {
+    Coordinate PlayerMapCoor(AvinoleumCoordinate.x * 1.205 + AvinoleumOriginCoordinates::x, AvinoleumCoordinate.y * 1.205 + AvinoleumOriginCoordinates::y);
+    return PlayerMapCoor;
+}
+
+
 Coordinate MapCoordinate::IdentifyCoorToImgMapCoord(Coordinate identifyCoordinate,int sceneId) {
     if (sceneId == 1) {
        return PlayerWorldCoordToImgMapCoord(identifyCoordinate);
@@ -101,6 +107,10 @@ Coordinate MapCoordinate::IdentifyCoorToImgMapCoord(Coordinate identifyCoordinat
 
     if (sceneId == 3) {
         return PlayerFabricatoriumCoordToImgMapCoord(identifyCoordinate);
+    }
+
+    if (sceneId == 4) {
+        return PlayerAvinoleumCoordToImgMapCoord(identifyCoordinate);
     }
 
     return Coordinate(0, 0);

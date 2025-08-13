@@ -1,4 +1,4 @@
-{
+﻿{
   "Chest": {
     "sx": {
       "en-US": "Sonance Chest",
@@ -309,6 +309,11 @@
     "T_IconC_053_UI": {
       "en-US": "暗渊引灯",
       "zh-CN": "暗渊引灯"
+    },
+
+    "T_IconTask_Task_144_UI": {
+      "en-US": "海浮棘",
+      "zh-CN": "海浮棘"
     }
   },
 
@@ -724,6 +729,19 @@
     "320000420": {
       "en-US": "裁夺者",
       "zh-CN": "裁夺者"
+    },
+    "SP_IconMonsterHead_31052_UI": {
+      "en-US": "卫冕节使",
+      "zh-CN": "卫冕节使"
+    },
+    "SP_IconMonsterHead_31053_UI": {
+      "en-US": "赦罪节使",
+      "zh-CN": "赦罪节使"
+    },
+
+    "SP_IconMonsterHead_32033_UI": {
+      "en-US": "荣光节使",
+      "zh-CN": "荣光节使"
     }
   }
 }

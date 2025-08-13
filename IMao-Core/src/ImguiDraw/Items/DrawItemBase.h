@@ -12,7 +12,7 @@ struct ItemDatas {
 	std::string itemId; 
 	std::string nameId;
 	Coordinate screenCoordiante;
-	Coordinate itemMapRC;
+	Coordinate itemMapROC;
 	bool isSaved = false;
 };
 
@@ -50,9 +50,11 @@ public:
 	static std::vector<ItemsDatas> itemsDatas_World_Storage;
 	static std::vector<ItemsDatas> itemsDatas_Tethys_Storage;
 	static std::vector<ItemsDatas> itemsDatas_Fabricatorium_Storage;
+	static std::vector<ItemsDatas> itemsDatas_Avinoleum_Storage;
 	static json itemsJsonData_World;
 	static json itemsJsonData_Tethys;
 	static json itemsJsonData_Fabricatorium;
+	static json itemsJsonData_Avinoleum;
 private:
 	static json& SavedItemPoints();
 	static void LoadItemsjson();

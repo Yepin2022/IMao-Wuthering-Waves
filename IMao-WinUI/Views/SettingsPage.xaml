@@ -24,7 +24,7 @@
                 <TextBlock x:Uid="SettingsPage_Expander_About_Description"/>
             </toolkit:SettingsExpander.Description>
 
-            <TextBlock>0.9.3</TextBlock>
+            <TextBlock>0.9.4</TextBlock>
 
             <toolkit:SettingsExpander.Items>
                 <toolkit:SettingsCard>
@@ -68,7 +68,7 @@
                     <toolkit:SettingsCard.Description>
                         <RichTextBlock FontSize="14">
                             <Paragraph>
-                                <Hyperlink NavigateUri="https://github.com/Yepin2022/IMao-Wuthering-Waves">GitHub</Hyperlink>
+                                <Hyperlink NavigateUri="https://github.com/Yepin2022/IMao-Wuthering-Waves">https://github.com/Yepin2022/IMao-Wuthering-Waves</Hyperlink>
                             </Paragraph>
                         </RichTextBlock>
                     </toolkit:SettingsCard.Description>
