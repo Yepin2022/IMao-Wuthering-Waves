@@ -48,6 +48,13 @@ WindowCorners GetWindowClientCorners(HWND hwnd);
 float CalculatePointDistance(Coordinate a, Coordinate b);
 
 std::string GetCurrentPath();
+
 std::string ReplaceSlashes(const std::string& input);
+
 HWND GetWindowHandleByProcessName(const wchar_t* processName);
+
 bool isKeyPressed(int keyCode);
+
+double DistanceBetweenPoints(const Coordinate& p1, const Coordinate& p2);
+
+std::vector<Coordinate> GenerateEquidistantPoints(const Coordinate& start, const Coordinate& end, double step);

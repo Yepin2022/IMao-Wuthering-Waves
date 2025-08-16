@@ -23,7 +23,7 @@ public:
 	static RectangularAreaScreenLocation SpecifyScreenCoordinate(const HWND& hwnd, std::vector<Coordinate> specifyAreaScreenData);
 	static Coordinate ItemScreenCoordinateOnMinMap(const HWND& hwnd, const Coordinate& itemRC, const Coordinate& playerRC);
 	static Coordinate ItemScreenCoordinateOnMinMap(const RECT& rect, const Coordinate& itemRC, const Coordinate& playerRC);
-	static Coordinate ItemScreenCoordinateOnMap(const Coordinate& gameMapCenterPointImgMapRC, const Coordinate& itemRC, const std::vector<cv::Point2f>& captureCorners, const RECT& w_rect);
+	static Coordinate ItemScreenCoordinateOnMap(const Coordinate& gameMapCenterPointImgMapROC, const Coordinate& itemROC, const std::vector<cv::Point2f>& captureCorners, const RECT& w_rect);
 };
 
 

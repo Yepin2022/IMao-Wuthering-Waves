@@ -181,3 +181,54 @@ HWND GetWindowHandleByProcessName(const wchar_t* processName) {
 bool isKeyPressed(int keyCode) {
     return (GetAsyncKeyState(keyCode) & 0x8000) != 0;
 }
+
+
+//计算两点间距离
+double DistanceBetweenPoints(const Coordinate& p1, const Coordinate& p2) {
+    double dx = p2.x - p1.x;
+    double dy = p2.y - p1.y;
+    return sqrt(dx * dx + dy * dy);
+}
+
+
+// 在两点之间按距离间隔为step生成坐标点
+vector<Coordinate> GenerateEquidistantPoints(const Coordinate& start,const Coordinate& end,double step) {
+
+    vector<Coordinate> points;
+
+    double totalDistance = DistanceBetweenPoints(start, end);
+
+    if (totalDistance < step - 1e-9) {
+        points.push_back(start);
+        return points;
+    }
+
+    double dx = end.x - start.x;
+    double dy = end.y - start.y;
+
+    double unitDx = dx / totalDistance;
+    double unitDy = dy / totalDistance;
+
+    points.push_back(start);
+
+    double currentDistance = 0;
+    while (true) {
+        currentDistance += step;
+
+        // 如果超过总距离，则退出循环
+        if (currentDistance > totalDistance + 1e-9) {
+            break;
+        }
+
+        double x = start.x + unitDx * currentDistance;
+        double y = start.y + unitDy * currentDistance;
+        points.emplace_back(x, y);
+    }
+
+    // 确保终点被包含（如果最后一个点不是终点）
+    if (points.back().x != end.x || points.back().y != end.y) {
+        points.push_back(end);
+    }
+
+    return points;
+}

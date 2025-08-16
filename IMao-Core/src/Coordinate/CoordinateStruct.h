@@ -5,6 +5,13 @@ struct Coordinate {
     double x;
     double y;
     Coordinate(double x = 0, double y = 0) : x(x), y(y) {}
+
+    bool IsValid() {
+        if (x == 0 and y == 0) {
+            return true;
+        }
+        return false;
+    }
 };
 
 //大世界坐标(0,0)在图片地图上对应的坐标

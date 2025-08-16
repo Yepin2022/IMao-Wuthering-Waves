@@ -8,6 +8,7 @@
 #include "InteractiveInterface\Debug.h"
 #include "InteractiveInterface/Notification.h"
 #include "../DLL_API.h"
+#include "Routes/DrawRouteOnMap.h"
 
 HWND ImGuiOverWindows::overWindowsHwnd;
 // Data
@@ -257,6 +258,7 @@ int ImGuiOverWindows::start()
         {
             DrawItemOnMinMap::DrawItemsOnMinMap(GameRect);
             DrawItemOnGameMap::DrawItemsOnGameMap(GameRect, h_window);
+            DrawRouteOnMap::DrawRoute();
             Notification::DrawInfo();
             //Debug::DebugWindow(io,app);
             LONG exStyle = GetWindowLong(overWindowsHwnd, GWL_EXSTYLE);

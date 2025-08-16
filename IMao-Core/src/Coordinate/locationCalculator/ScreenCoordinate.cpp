@@ -73,6 +73,7 @@ RectangularAreaScreenLocation ScreenCoordinate::SpecifyScreenCoordinate(const HW
 //item相对玩家的坐标.x * 小地图相对地图的缩放比例 + 小地图中心点在屏幕的坐标.x
 //小地图中心点在屏幕的坐标.y - item相对玩家的坐标.y * 小地图相对地图的缩放比例
 //小地图相对地图的缩放比例 =  1 - (1.25 - (w / 1600))
+
 Coordinate ScreenCoordinate::ItemScreenCoordinateOnMinMap(const HWND& hwnd,const Coordinate& itemRC,const Coordinate& playerRC) {
     double HorizontalFactor = 0;//水平缩放因子
     double VerticaFactor = 0;//垂直缩放因子
@@ -95,7 +96,7 @@ Coordinate ScreenCoordinate::ItemScreenCoordinateOnMinMap(const HWND& hwnd,const
 }
 
 
-Coordinate ScreenCoordinate::ItemScreenCoordinateOnMinMap(const RECT& rect, const Coordinate& itemRC, const Coordinate& playerRC) {
+Coordinate ScreenCoordinate::ItemScreenCoordinateOnMinMap(const RECT& rect, const Coordinate& itemROC, const Coordinate& playerROC) {
     double HorizontalFactor = 0;//水平缩放因子
     double VerticaFactor = 0;//垂直缩放因子
     CalculateWindowScalingFactors(rect, HorizontalFactor, VerticaFactor);
@@ -103,7 +104,7 @@ Coordinate ScreenCoordinate::ItemScreenCoordinateOnMinMap(const RECT& rect, cons
 
     double scaleFactorFromMapToMinMap = 1 - (GameWindowsScreenData::ScaleFactorFromMinMapToMap - (rect.right / 1600.0f));
 
-    Coordinate itemRelativeCoordinateToPlayerRwoc = RelativeCoordinates::GetRelativeCoordinates(itemRC, playerRC);
+    Coordinate itemRelativeCoordinateToPlayerRwoc = RelativeCoordinates::GetRelativeCoordinates(itemROC, playerROC);
 
 
     Coordinate itemScreenCoordianteOnMinMap(itemRelativeCoordinateToPlayerRwoc.x * scaleFactorFromMapToMinMap + MinMapCenterScreen.x, MinMapCenterScreen.y - itemRelativeCoordinateToPlayerRwoc.y * scaleFactorFromMapToMinMap);
@@ -113,7 +114,7 @@ Coordinate ScreenCoordinate::ItemScreenCoordinateOnMinMap(const RECT& rect, cons
 }
 
 
-Coordinate ScreenCoordinate::ItemScreenCoordinateOnMap(const Coordinate &gameMapCenterPointImgMapRC,const Coordinate &itemRC,const vector<Point2f> &captureCorners,const RECT &w_rect) {
+Coordinate ScreenCoordinate::ItemScreenCoordinateOnMap(const Coordinate &gameMapCenterPointImgMapROC,const Coordinate &itemROC,const vector<Point2f> &captureCorners,const RECT &w_rect) {
     if (captureCorners.empty()) {
         return Coordinate(-1, -1);
     }
@@ -125,8 +126,8 @@ Coordinate ScreenCoordinate::ItemScreenCoordinateOnMap(const Coordinate &gameMap
    // Coordinate gameMapCenterPointRWOC = RelativeCoordinates::ImgMapCoordToRWOC(gameMapCenter);
     Coordinate ScreenCenter(w_rect.right / 2, w_rect.bottom / 2);
 
-   float itemScreenCoordinateOnMap_x = ScreenCenter.x + (itemRC.x - gameMapCenterPointImgMapRC.x) * scalingFactor;
-   float itemScreenCoordinateOnMap_y = ScreenCenter.y - (itemRC.y - gameMapCenterPointImgMapRC.y) * scalingFactor;
+   float itemScreenCoordinateOnMap_x = ScreenCenter.x + (itemROC.x - gameMapCenterPointImgMapROC.x) * scalingFactor;
+   float itemScreenCoordinateOnMap_y = ScreenCenter.y - (itemROC.y - gameMapCenterPointImgMapROC.y) * scalingFactor;
 
    return Coordinate(itemScreenCoordinateOnMap_x, itemScreenCoordinateOnMap_y);
 }

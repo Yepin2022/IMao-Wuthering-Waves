@@ -7,6 +7,7 @@
 #include "WindowsCapture/BitBltCapture/BitBltCapture.h"
 #include "ImguiDraw/InteractiveInterface/Notification.h"
 #include "ImguiDraw/Items/DrawItemOnGameMap.h"
+#include "ImguiDraw/Routes/LoadEditRouteData.h"
 #pragma comment(lib, "dwmapi.lib")
 using namespace std;
 
@@ -79,7 +80,7 @@ void MainThread() {
 	App::SetEnabledMinMapShowItem(enabledMinMapShowItem);
 
 	app->StartTasks();
-
+    LoadEditRouteData::Initi(app.get());
 	while (clickedStartButton) {
 		std::this_thread::sleep_for(std::chrono::seconds(10));
 	}
