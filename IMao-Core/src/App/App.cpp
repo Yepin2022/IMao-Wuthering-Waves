@@ -6,6 +6,7 @@
 #include "..\Feature\Processing\FeatureProcessing.h"
 #include "..\WindowsCapture\WindowsGraphicsCapture\SimpleCapture.h"
 #include "..\ImguiDraw\InteractiveInterface\Notification.h"
+#include "../ImguiDraw/Routes/DrawRouteOnMap.h"
 
 using namespace std;
 using namespace cv;
@@ -14,6 +15,7 @@ int	App::updateMapDataCycleTime;
 int App::updateMinMapDataCycleTime;
 bool App::enabledMapShowItem;
 bool App::enabledMinMapShowItem;
+Coordinate validGameMapcenterPointROC;
 
 bool App::Init() {
 	Notification::AddInfo(NotificationDatas("这是一款免费使用的软件，如果你是付钱买来的，你已经被骗了。", 20));
@@ -55,23 +57,45 @@ winrt::IAsyncAction App::Start() {
 
 		co_await GetMatSnapshot(false, gameSnapshot);
 
+		//GameMap
 		if (isOpenMap and enabledMapShowItem and !gameSnapshot.empty() and isWindowFocused) {
-			UpdateItemMapScreenCoordinateByMatch(gameSnapshot);
+			Coordinate gameMapCenterPointROC; Coordinate lastGameMapCenterPointROC;
+
+			if (GetGameMapCenterPointROC(gameSnapshot, gameMapCenterPointROC, lastGameMapCenterPointROC) and mapNotMoving) {
+				if (!IsMapMoving(gameMapCenterPointROC, lastGameMapCenterPointROC)) {
+					DrawItemOnGameMap::UpdateCenterPointNearItemsData(validGameMapcenterPointROC,captrueCorners,rect,PlayerCurrentSceneId);
+					DrawRouteOnMap::GetRoutePointsScreen(validGameMapcenterPointROC, captrueCorners, rect, PlayerCurrentSceneId);
+				}
+			}
+
 			cycleTime = App::updateMapDataCycleTime;
 		}else {
 			DrawItemOnGameMap::ClearNearItemsData();
+			DrawRouteOnMap::ClearRountsData();
 		}
 
+
+		//MinMap
 		if (isExistMinMap and !gameSnapshot.empty()) {
-			co_await UpdateItemMinMapScreenCoordinate(gameSnapshot);
+			Coordinate playerROC;
+			float minMapRadius;
+			if (co_await GetMinMapPlayerROC(gameSnapshot, playerROC, minMapRadius)) {
+				if (enabledMinMapShowItem) {
+					DrawItemOnMinMap::UpdatePlayerNearItemsData(rect, playerROC, minMapRadius, PlayerCurrentSceneId);
+				}
+				else {
+					DrawItemOnMinMap::ClearNearItemsData();
+				}
+			}
+
 			cycleTime = App::updateMinMapDataCycleTime;
 		}else{
 			DrawItemOnMinMap::ClearNearItemsData();
 		}
 
+
 		auto endTime = std::chrono::high_resolution_clock::now();
 		auto elapsedTime = std::chrono::duration_cast<std::chrono::milliseconds>(endTime - startTime).count();
-		//cout << "elapsedTime:" << elapsedTime << endl;
 		if (elapsedTime < cycleTime) {
 			std::this_thread::sleep_for(std::chrono::milliseconds(cycleTime - elapsedTime));
 		}
@@ -122,7 +146,7 @@ void App::Thread_DetectGameState() {
 			isOpenMap = isExistMinMap = false;
 		}
 
-	   isWindowFocused = IsWindowFocused(hwnd) || IsWindowFocused(ImGuiOverWindows::overWindowsHwnd);
+	    isWindowFocused = IsWindowFocused(hwnd) || IsWindowFocused(ImGuiOverWindows::overWindowsHwnd);
 		auto end = std::chrono::high_resolution_clock::now();
 		auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();
 		if (elapsed < cycleTime) {
@@ -171,6 +195,19 @@ bool App::IsOpenMap(const Mat& snapshot, int* goodMatchSize) {
 	return false;
 }
 
+bool App::IsMapMoving(const Coordinate& gameMapcenterPointROC, const Coordinate& lastGameMapCenterPointROC) {
+	if (abs(validGameMapcenterPointROC.x - gameMapcenterPointROC.x) > 3 or abs(validGameMapcenterPointROC.y - gameMapcenterPointROC.y) > 3) {
+		validGameMapcenterPointROC.x = gameMapcenterPointROC.x; validGameMapcenterPointROC.y = gameMapcenterPointROC.y;
+
+		if (abs(gameMapcenterPointROC.x - lastGameMapCenterPointROC.x) > 15 or abs(gameMapcenterPointROC.y - lastGameMapCenterPointROC.y) > 15) {
+			DrawItemOnGameMap::ClearNearItemsData();
+			DrawRouteOnMap::ClearRountsData();
+		}
+		return true;
+	}
+	return false;
+}
+
 int App::GetCurrentSceneId(const Coordinate& identifyCoordinate, const Mat& minMapImg) {
 	Ptr<xfeatures2d::SURF> surf = xfeatures2d::SURF::create(10, 8, 4, true, true);
 	vector<KeyPoint> playerMapKeypoints;
@@ -204,12 +241,12 @@ int App::GetCurrentSceneId(const Coordinate& identifyCoordinate, const Mat& minM
 	return 0;
 }
 
-winrt::IAsyncAction App::UpdateItemMinMapScreenCoordinate(const Mat& snapshot) {
+winrt::IAsyncOperation<bool> App::GetMinMapPlayerROC(const Mat& snapshot,Coordinate& outPlayerROC, float& outMinMapRadius) {
 	Ptr<xfeatures2d::SURF> surf = xfeatures2d::SURF::create(8, 8, 4, true, true);
 	Mat minMapImg = ImageProcessing::CropToMinMapAreaImg(snapshot, rect);
 
-	if ((identifyCoordinate.x == 0 && identifyCoordinate.y == 0) || PlayerCurrentSceneId==0) {
-		
+	if ((identifyCoordinate.x == 0 && identifyCoordinate.y == 0) || PlayerCurrentSceneId == 0) {
+
 		Notification::AddInfo(NotificationDatas("Continuity match failed, trying to identify coordinates.", 3));
 
 		this_thread::sleep_for(std::chrono::milliseconds(120));
@@ -217,12 +254,12 @@ winrt::IAsyncAction App::UpdateItemMinMapScreenCoordinate(const Mat& snapshot) {
 		co_await GetMatSnapshot(true, snapshot_ocr);
 		if (!IdentifyWorldCoordinates::IdentifyCoordinateFromSnapshot(snapshot_ocr, identifyCoordinate, rect)) {
 			identifyCoordinate = { 0,0 };
-			co_return;
+			co_return false;
 		}
 		PlayerCurrentSceneId = GetCurrentSceneId(identifyCoordinate, minMapImg);
 
 		if (PlayerCurrentSceneId == 0) {
-			co_return;
+			co_return false;
 		}
 	}
 
@@ -233,7 +270,7 @@ winrt::IAsyncAction App::UpdateItemMinMapScreenCoordinate(const Mat& snapshot) {
 	ImageFeatureData minMapFeatureData = FeatureMatch::ExtractSurfFeatures(surf, minMapImg);
 
 	if (minMapFeatureData.imgDescriptors.empty())
-		co_return;
+		co_return false;
 
 	vector<DMatch> goodMatch = FeatureMatch::FindGoodMatchesBetweenMapAndMinMap(minMapFeatureData, MapFeatureData);
 
@@ -256,20 +293,16 @@ winrt::IAsyncAction App::UpdateItemMinMapScreenCoordinate(const Mat& snapshot) {
 		if (isExistMinMap) {
 			identifyCoordinate = { 0,0 };//下一个循环进行ocr
 		}
-		co_return;
+		co_return false;
 	}
 
-	Coordinate playerRC = RelativeCoordinates::ImgMapCoordToROC(lastPlayerImgMapCoordinate, PlayerCurrentSceneId);
-	if (enabledMinMapShowItem) {
-		DrawItemOnMinMap::UpdatePlayerNearItemsData(rect, playerRC, minMapImg.rows / 2, PlayerCurrentSceneId);
-	}
-	else {
-		DrawItemOnMinMap::ClearNearItemsData();
-	}
+	outPlayerROC = RelativeCoordinates::ImgMapCoordToROC(lastPlayerImgMapCoordinate, PlayerCurrentSceneId);
+	outMinMapRadius = minMapImg.rows / 2;
 	existMapCenterPointCoordinate = true;
+	co_return true;
 }
 
-void App::UpdateItemMapScreenCoordinateByMatch(const Mat& snapshot) {
+bool App::GetGameMapCenterPointROC(const Mat& snapshot, Coordinate& outGameMapCenterPointROC, Coordinate& outLastGameMapCenterPointROC) {
 	Mat mapCenterAreaImgae = ImageProcessing::CropToMapCenterArea(snapshot, rect);
 	Ptr<xfeatures2d::SURF> surt = xfeatures2d::SURF::create(100, 4, 3, true, true);
 	ImageFeatureData mapCenterAreaFeatureData = FeatureMatch::ExtractSurfFeatures(surt, mapCenterAreaImgae);
@@ -293,28 +326,26 @@ void App::UpdateItemMapScreenCoordinateByMatch(const Mat& snapshot) {
 
 		if (mapCenterPointNearDescriptors.empty()) {
 			existMapCenterPointCoordinate = false;
-			return;
+			return false;
 		}
 
 		ImageFeatureData centerMapNearFeatureData(mapCenterPointNearKeypoints, mapCenterPointNearDescriptors);
 		auto goodMatchs = FeatureMatch::FindGoodMatchesFLANN(mapCenterAreaFeatureData, centerMapNearFeatureData, 0.62f, 0.50f);
 
-		Coordinate centerMapCoordinate;vector<Point2f> captrueCorners_temp;
+		Coordinate centerMapCoordinate; vector<Point2f> captrueCorners_temp;
 		existMapCenterPointCoordinate = MapCoordinate::GetMapCoordinateOfCenterGameMapPos(centerMapNearFeatureData, mapCenterAreaFeatureData, goodMatchs, mapCenterAreaImgae, centerMapCoordinate, captrueCorners_temp);
 
 		if (existMapCenterPointCoordinate) {
-			Coordinate gameMapCenterPointROC = RelativeCoordinates::ImgMapCoordToROC(centerMapCoordinate, PlayerCurrentSceneId);
-			Coordinate lastGameMapCenterPointROC = RelativeCoordinates::ImgMapCoordToROC(App::gameMapCenterPointImgMapCoord, PlayerCurrentSceneId);
+			 outGameMapCenterPointROC = RelativeCoordinates::ImgMapCoordToROC(centerMapCoordinate, PlayerCurrentSceneId);
+			 outLastGameMapCenterPointROC = RelativeCoordinates::ImgMapCoordToROC(App::gameMapCenterPointImgMapCoord, PlayerCurrentSceneId);
+
 			if (abs((captrueCorners[2].x - captrueCorners[0].x) - (captrueCorners_temp[2].x - captrueCorners_temp[0].x)) > 10)
 				captrueCorners = captrueCorners_temp;
-
-			if (mapNotMoving)//mapNotMoved通过鼠标监视判断是不准确的 需要在UpdateCenterPointNearItemsData里进一步处理
-				DrawItemOnGameMap::UpdateCenterPointNearItemsData(gameMapCenterPointROC, lastGameMapCenterPointROC, captrueCorners, rect, PlayerCurrentSceneId);
 
 			App::gameMapCenterCoordinateByMouseMonitoring = App::gameMapCenterPointImgMapCoord = centerMapCoordinate;
 
 			map_ConsecutiveFailuresCount = 0;
-			return;
+			return true;
 		}
 	}
 
@@ -322,6 +353,7 @@ void App::UpdateItemMapScreenCoordinateByMatch(const Mat& snapshot) {
 	if (map_ConsecutiveFailuresCount > 10)
 		Notification::AddInfo(NotificationDatas("Please move the map to an area with obvious features or reopen the map.", 3));
 
+	return false;
 }
 
 void App::Thread_GetItemMapScreenCoordinateByMouseMonitoring() {
@@ -352,6 +384,7 @@ void App::Thread_GetItemMapScreenCoordinateByMouseMonitoring() {
 
 					mapNotMoving = false;
 					DrawItemOnGameMap::ClearNearItemsData();
+					DrawRouteOnMap::ClearRountsData();
 				}
 			}
 			else if (isDragging) {
@@ -369,6 +402,7 @@ void App::Thread_GetItemMapScreenCoordinateByMouseMonitoring() {
 				else {
 					mapNotMoving = false;
 					DrawItemOnGameMap::ClearNearItemsData();
+					DrawRouteOnMap::ClearRountsData();
 				}
 			}
 		}
@@ -392,3 +426,5 @@ void App::Thread_KeyMonitoring_SavePlayerNearItemPoint() {
 		Sleep(50);
 	}
 }
+
+

@@ -82,6 +82,10 @@ public:
 		inertiaStep = setValue;
 	}
 
+	int GetPlayerCurrentSceneId() {
+		return PlayerCurrentSceneId;
+	}
+
 	static void SetUpdateMapDataCycleTime(int setValue) {
 		updateMapDataCycleTime = setValue;
 	}
@@ -150,11 +154,13 @@ private:
 	winrt::IAsyncAction Start();
 	void Thread_DetectGameState();
 	bool Init();
-	winrt::IAsyncAction UpdateItemMinMapScreenCoordinate(const cv::Mat& snapshot);
 	bool IsOpenMap(const cv::Mat& snapshot, int* goodMatchSize);
 	int  GetCurrentSceneId(const Coordinate& identifyCoordinate, const Mat& minMapImg);
 	bool IsExistMinMap(cv::Mat& snapshot, int* goodMatchSize);
-	void UpdateItemMapScreenCoordinateByMatch(const cv::Mat& snapshot);
+	bool IsMapMoving(const Coordinate& gameMapcenterPointROC,const Coordinate& lastGameMapCenterPointROC);
+
+	winrt::IAsyncOperation<bool> GetMinMapPlayerROC(const Mat& snapshot, Coordinate& outPlayerROC, float& outMinMapRadius);
+	bool GetGameMapCenterPointROC(const Mat& snapshot, Coordinate& gameMapCenterPointROC, Coordinate& lastGameMapCenterPointROC);
 	void Thread_GetItemMapScreenCoordinateByMouseMonitoring();
 	void Thread_KeyMonitoring_SavePlayerNearItemPoint();
 };

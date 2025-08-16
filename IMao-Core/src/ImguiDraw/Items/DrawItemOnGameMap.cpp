@@ -2,31 +2,17 @@
 using namespace cv;
 using namespace std;
 vector<ItemDatas> DrawItemOnGameMap::centerPointNearItemsData;
-Coordinate DrawItemOnGameMap::validGameMapcenterPointROC;
 bool DrawItemOnGameMap::visibleSavedPoints = true;
+mutex DrawItemOnGameMap::PointNearItemsDataMutex;
 
 string DrawItemOnGameMap::senceName = "World";
 vector<ItemsDatas>* DrawItemOnGameMap::itemsDatas_StoragePtr = nullptr;
 
-void DrawItemOnGameMap::UpdateCenterPointNearItemsData(const Coordinate& gameMapcenterPointROC, const Coordinate& lastGameMapcenterPointROC, const vector<Point2f>& captureCorners, const RECT& rect, int senceId) {
-	if (!IsMapMoving(gameMapcenterPointROC)) {
-		if(GetBasicDataBySenceId(senceId))
-			centerPointNearItemsData = GetAndFilterItemsData(validGameMapcenterPointROC, captureCorners, rect);
+void DrawItemOnGameMap::UpdateCenterPointNearItemsData(const Coordinate& validGameMapcenterPointROC, const vector<Point2f>& captureCorners, const RECT& rect, int senceId) {
+	if (GetBasicDataBySenceId(senceId)) {
+		lock_guard<mutex> lock(PointNearItemsDataMutex);
+		centerPointNearItemsData = GetAndFilterItemsData(validGameMapcenterPointROC, captureCorners, rect);
 	}
-	else {
-		if (abs(gameMapcenterPointROC.x - lastGameMapcenterPointROC.x) > 15 or abs(gameMapcenterPointROC.y - lastGameMapcenterPointROC.y) > 15) {
-			DrawItemOnGameMap::ClearNearItemsData();
-		}
-	}
-}
-
-bool DrawItemOnGameMap::IsMapMoving(const Coordinate& gameMapcenterPointROC) {
-	//位移小于2视为识别误差，不为此更新Items数据
-	if (abs(validGameMapcenterPointROC.x - gameMapcenterPointROC.x) > 2 or abs(validGameMapcenterPointROC.y - gameMapcenterPointROC.y) > 2) {
-		validGameMapcenterPointROC.x = gameMapcenterPointROC.x; validGameMapcenterPointROC.y = gameMapcenterPointROC.y;
-		return true;
-	}
-	return false;
 }
 
 bool DrawItemOnGameMap::GetBasicDataBySenceId(int senceId) {
@@ -86,7 +72,8 @@ void DrawItemOnGameMap::DrawItemsOnGameMap(const RECT& rect,const HWND& hwnd) {
 	if (centerPointNearItemsData.empty()) {
 		return;
 	}
-	vector<ItemDatas> itemsDatas = centerPointNearItemsData;
+	lock_guard<mutex> lock(PointNearItemsDataMutex);
+	vector<ItemDatas>& itemsDatas = centerPointNearItemsData;
 	for (const auto& itemDatas : itemsDatas) {
 		int image_width1;
 		int image_height1;

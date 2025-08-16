@@ -1,4 +1,5 @@
 ﻿#include "Debug.h"
+#include "../../Coordinate/locationCalculator/RelativeCoordinates.h"
 bool show_demo_window = false;
 float X, Y = 0;
 float scaleFactor = 1.0f;
@@ -34,7 +35,10 @@ void Debug::DebugWindow(const ImGuiIO& io, App& app) {
          app.SetInertiaStep(multiple);
 
          Coordinate mapCoordinatesOfMousePos = app.GetMapCoordinatesOfMousePos();
-         ImGui::Text("Map coordinates of the mouse position:(%.1f,%.1f)", mapCoordinatesOfMousePos.x, mapCoordinatesOfMousePos.y);
+         ImGui::Text("Image Map coordinates of the mouse position:(%.1f,%.1f)", mapCoordinatesOfMousePos.x, mapCoordinatesOfMousePos.y);
+         
+         Coordinate ROC_xxx = RelativeCoordinates::ImgMapCoordToROC(mapCoordinatesOfMousePos, app.GetPlayerCurrentSceneId());
+         ImGui::Text("ROC_xxx:(%.1f,%.1f)", ROC_xxx.x, ROC_xxx.y);
 
          std::vector<cv::Point2f> sceneCorners = app.GetCaptrueCorners();
          if (sceneCorners.empty()) {

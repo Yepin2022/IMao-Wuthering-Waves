@@ -6,6 +6,7 @@
 #include "ImguiDraw/ImGuiOverWindows.h"
 #include "WindowsCapture/BitBltCapture/BitBltCapture.h"
 #include "ImguiDraw/InteractiveInterface/Notification.h"
+#include "ImguiDraw/Routes/LoadEditRouteData.h"
 using namespace std;
 
 int main() {
@@ -54,7 +55,8 @@ int main() {
     bitBltCapture = BitBltCapture(hwnd);
 
     App app(graphicsCapture, bitBltCapture, hwnd);
-
+    App* p_app = &app;
+    LoadEditRouteData::Initi(p_app);
     ImGuiOverWindows imguioverwindows(hwnd, app);
     Notification::Start();
     Notification::AddInfo(NotificationDatas("The resource is loading, please be patient.", 15));
