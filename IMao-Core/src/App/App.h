@@ -128,7 +128,7 @@ private:
 	Coordinate lastPlayerImgMapCoordinate;
 	Coordinate gameMapCenterPointImgMapCoord;
 	bool existMapCenterPointCoordinate;
-	int map_ConsecutiveFailuresCount = 0;
+	int map_ConsecutiveFailuresCount;
 
 	std::optional<CaptureSnapshot> graphicsCapture;
 	std::optional<BitBltCapture> bitBltCapture;

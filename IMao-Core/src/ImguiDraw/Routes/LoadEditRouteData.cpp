@@ -1,6 +1,6 @@
 ﻿#include "LoadEditRouteData.h"
-#include "../../Coordinate/locationCalculator/RelativeCoordinates.h"
 #include "DrawRouteOnMap.h"
+#include "../Items/DrawItemOnGameMap.h"
 using namespace std;
 using namespace cv;
 
@@ -31,6 +31,12 @@ void LoadEditRouteData::Thread_KeyMonitoring_AddRouteDatas_ByMousePos() {
 	while (!threadStopFlag) {
 		if (app == nullptr) return;
 
+		//为空,意味着地图未打开
+		if (DrawItemOnGameMap::centerPointNearItemsData.empty()) {
+			Sleep(60);
+			continue;
+		}
+
 		bool keyIsPressed = isKeyPressed(monitoredKey);
 		if (keyIsPressed && !keyWasPressed) {
 			keyWasPressed = true;
@@ -46,11 +52,10 @@ void LoadEditRouteData::Thread_KeyMonitoring_AddRouteDatas_ByMousePos() {
 				AddRouteDatas("name", a_ROC, b_ROC);
 				state = 0;
 			}
-			cout << "state:" << state;
 		}
 		else if (!keyIsPressed && keyWasPressed) {
 			keyWasPressed = false;
 		}
-		Sleep(50);
+		Sleep(60);
 	}
 }

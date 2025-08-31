@@ -10,6 +10,9 @@
 
     <StackPanel x:Name="ContentArea">
         <InfoBar x:Uid="Function_InfoBar_Statement" CornerRadius="8" IsOpen="True" IsIconVisible="True" IsClosable="False" Margin="{StaticResource InfoBarMargin}" />
+        
+        
+        
         <toolkit:SettingsExpander CornerRadius="8" Margin="{StaticResource ExpanderMargin}" x:Uid="Function_Expander_MinMapShowItem" >
             <toolkit:SettingsExpander.HeaderIcon>
                 <FontIcon Glyph="&#xECAF;" />
@@ -44,6 +47,7 @@
         </toolkit:SettingsExpander>
 
 
+        
         <toolkit:SettingsExpander CornerRadius="8" Margin="{StaticResource ExpanderMargin}" x:Uid="Function_Expander_MapShowItem">
             <toolkit:SettingsExpander.HeaderIcon>
                 <FontIcon Glyph="&#xECAF;" />
@@ -53,7 +57,7 @@
                 <TextBlock x:Uid="Function_Expander_MapShowItem_Description"/>
             </toolkit:SettingsExpander.Description>
 
-            <ToggleSwitch AutomationProperties.Name="ToggleSwitch_MapShowItem" Toggled="ToggleSwitch_MapShowItem"/>
+            <ToggleSwitch AutomationProperties.Name="ToggleSwitch_MapShowItem" IsOn="True" Toggled="ToggleSwitch_MapShowItem"/>
 
             <toolkit:SettingsExpander.Items>
                 <toolkit:SettingsCard
@@ -77,6 +81,28 @@ SmallChange="5" Value="60" Name="UpdateMapItemDataCycle" ValueChanged="UpdateMap
                 </toolkit:SettingsCard>
             </toolkit:SettingsExpander.Items>
         </toolkit:SettingsExpander>
+
+        
+        
+        <toolkit:SettingsExpander CornerRadius="8" Margin="{StaticResource ExpanderMargin}" x:Uid="Function_Expander_DarwRoutes">
+            <toolkit:SettingsExpander.HeaderIcon>
+                <FontIcon Glyph="&#xEBE6;" />
+            </toolkit:SettingsExpander.HeaderIcon>
+
+            <toolkit:SettingsExpander.Description>
+                <TextBlock x:Uid="Function_Expander_DarwRoutes_Description"/>
+            </toolkit:SettingsExpander.Description>
+
+            <toolkit:SettingsExpander.Items>
+                <toolkit:SettingsCard>
+                    <toolkit:SettingsCard.Description>
+                        <TextBlock x:Uid="Function_Card_DrawRoutes_Description"/>
+                    </toolkit:SettingsCard.Description>
+                </toolkit:SettingsCard>
+            </toolkit:SettingsExpander.Items>
+        </toolkit:SettingsExpander>
+        
+        
     </StackPanel>
 </Page>
 

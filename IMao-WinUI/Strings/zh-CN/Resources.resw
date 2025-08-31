@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AppDisplayName" xml:space="preserve">
-    <value>IMao-Wuthering-Waves v0.9.4</value>
+    <value>IMao-Wuthering-Waves v0.9.5</value>
   </data>
   <data name="AppDescription" xml:space="preserve">
     <value>IMao-Wuthering-Waves</value>
@@ -256,5 +256,14 @@
   </data>
   <data name="Function_Card_SavePointKey.Header" xml:space="preserve">
     <value>快捷键</value>
+  </data>
+  <data name="Function_Expander_DarwRoutes.Header" xml:space="preserve">
+    <value>路线导航（实验性）</value>
+  </data>
+  <data name="Function_Expander_DarwRoutes_Description.Text" xml:space="preserve">
+    <value>在小地图和大地图上画出用户编辑的路线（删除、保存等功能暂未实现）。</value>
+  </data>
+  <data name="Function_Card_DrawRoutes_Description.Text" xml:space="preserve">
+    <value>AB两点确定一条直线。在大地图界面中，按下键盘 “Q” 键即可记录当前鼠标所指的地图位置（记为 A 点），再次按下 “Q” 键记录下一个鼠标指向位置（记为 B 点）。</value>
   </data>
 </root>

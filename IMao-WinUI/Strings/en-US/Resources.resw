@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AppDisplayName" xml:space="preserve">
-    <value>IMao-Wuthering-Waves v0.9.4</value>
+    <value>IMao-Wuthering-Waves v0.9.5</value>
   </data>
   <data name="AppDescription" xml:space="preserve">
     <value>IMao-Wuthering-Waves</value>
@@ -256,5 +256,14 @@
   </data>
   <data name="Function_Card_SavePointKey.Header" xml:space="preserve">
     <value>Shortcut key</value>
+  </data>
+  <data name="Function_Expander_DarwRoutes.Header" xml:space="preserve">
+    <value>Route navigation (experimental)</value>
+  </data>
+  <data name="Function_Expander_DarwRoutes_Description.Text" xml:space="preserve">
+    <value>Draw user-edited routes on minimaps and large maps (delete, save, etc. are not yet implemented).</value>
+  </data>
+  <data name="Function_Card_DrawRoutes_Description.Text" xml:space="preserve">
+    <value>AB two points determine a straight line. In the large map interface, press the keyboard "Q" key to record the map position pointed by the current mouse (marked as point A), and press the "Q" key again to record the next mouse pointing position (marked as point B).</value>
   </data>
 </root>

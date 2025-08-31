@@ -314,7 +314,29 @@
     "T_IconTask_Task_144_UI": {
       "en-US": "海浮棘",
       "zh-CN": "海浮棘"
+    },
+
+    "T_IconC_yanhaipo_UI": {
+      "en-US": "盐海珀",
+      "zh-CN": "盐海珀"
+    },
+
+    "T_IconC_056_UI": {
+      "en-US": "石蔷薇",
+      "zh-CN": "石蔷薇"
+    },
+
+    "T_IconC_057_UI": {
+      "en-US": "见月花",
+      "zh-CN": "见月花"
+    },
+
+    "T_IconC_058_UI": {
+      "en-US": "辉光金盏",
+      "zh-CN": "辉光金盏"
     }
+
+
   },
 
   "Enemy": {
@@ -726,6 +748,37 @@
       "en-US": "残星·深海造匠",
       "zh-CN": "残星·深海造匠"
     },
+
+    "SP_IconMonsterHead_32036_UI": {
+      "en-US": "炽冠角斗家",
+      "zh-CN": "炽冠角斗家"
+    },
+
+    "SP_IconMonsterHead_32037_UI": {
+      "en-US": "羽冠角斗家",
+      "zh-CN": "羽冠角斗家"
+    },
+
+    "SP_IconMonsterHead_32038_UI": {
+      "en-US": "耀冠角斗家",
+      "zh-CN": "耀冠角斗家"
+    },
+
+    "SP_IconMonsterHead_32039_UI": {
+      "en-US": "凛冠角斗家",
+      "zh-CN": "凛冠角斗家"
+    },
+
+    "SP_IconMonsterHead_32040_UI": {
+      "en-US": "雷冠角斗家",
+      "zh-CN": "雷冠角斗家"
+    },
+
+    "SP_IconMonsterHead_32041_UI": {
+      "en-US": "冥冠角斗家",
+      "zh-CN": "冥冠角斗家"
+    },
+
     "320000420": {
       "en-US": "裁夺者",
       "zh-CN": "裁夺者"
@@ -742,6 +795,16 @@
     "SP_IconMonsterHead_32033_UI": {
       "en-US": "荣光节使",
       "zh-CN": "荣光节使"
+    },
+
+    "320000440": {
+      "en-US": "蚀脊龙",
+      "zh-CN": "蚀脊龙"
+    },
+
+    "320000450": {
+      "en-US": "梦魇·紫羽鹭",
+      "zh-CN": "梦魇·紫羽鹭"
     }
   }
 }

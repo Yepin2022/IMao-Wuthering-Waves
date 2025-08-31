@@ -7,6 +7,7 @@
 #include "..\WindowsCapture\WindowsGraphicsCapture\SimpleCapture.h"
 #include "..\ImguiDraw\InteractiveInterface\Notification.h"
 #include "../ImguiDraw/Routes/DrawRouteOnMap.h"
+#include "../ImguiDraw/Routes/DrawRouteOnMinMap.h"
 
 using namespace std;
 using namespace cv;
@@ -19,7 +20,7 @@ Coordinate validGameMapcenterPointROC;
 
 bool App::Init() {
 	Notification::AddInfo(NotificationDatas("这是一款免费使用的软件，如果你是付钱买来的，你已经被骗了。", 20));
-	Notification::AddInfo(NotificationDatas("The resource is loading, please be patient.", 10));
+	Notification::AddInfo(NotificationDatas("The resource is loading, please be patient.", 15));
 
 	const string path = GetCurrentPath() + "\\Assets\\FeaturesDatas";
 	const string mapFeatureFilePath = path+"\\Map_features.yml";
@@ -82,15 +83,18 @@ winrt::IAsyncAction App::Start() {
 			if (co_await GetMinMapPlayerROC(gameSnapshot, playerROC, minMapRadius)) {
 				if (enabledMinMapShowItem) {
 					DrawItemOnMinMap::UpdatePlayerNearItemsData(rect, playerROC, minMapRadius, PlayerCurrentSceneId);
+					DrawRouteOnMinMap::GetRoutePointsScreen(rect, playerROC, minMapRadius, PlayerCurrentSceneId);
 				}
 				else {
 					DrawItemOnMinMap::ClearNearItemsData();
+					DrawRouteOnMinMap::ClearRountsData();
 				}
 			}
 
 			cycleTime = App::updateMinMapDataCycleTime;
 		}else{
 			DrawItemOnMinMap::ClearNearItemsData();
+			DrawRouteOnMinMap::ClearRountsData();
 		}
 
 
@@ -125,6 +129,7 @@ winrt::IAsyncAction App::GetMatSnapshot(bool isTaketAsync, Mat& result) {
 	}
 }
 
+//TODO:在特殊场景下 避免OCR 浪费性能
 void App::Thread_DetectGameState() {
 	const int cycleTime = 100;
 	while (!allThreadStopFlag) {
