@@ -8,6 +8,7 @@
 #include "ImguiDraw/InteractiveInterface/Notification.h"
 #include "ImguiDraw/Items/DrawItemOnGameMap.h"
 #include "ImguiDraw/Routes/LoadEditRouteData.h"
+#include "ImguiDraw/Items/DrawItemOnMinMap.h"
 #pragma comment(lib, "dwmapi.lib")
 using namespace std;
 
@@ -89,8 +90,11 @@ void MainThread() {
     Notification::Stop();
 	imguioverwindows.Stop();
 	app->StopTasks();
+    LoadEditRouteData::StopThread();
     app.release();
     app.reset();
+    DrawItemOnGameMap::ClearNearItemsData();
+    DrawItemOnMinMap::ClearNearItemsData();
 	MainThread();
 }
 

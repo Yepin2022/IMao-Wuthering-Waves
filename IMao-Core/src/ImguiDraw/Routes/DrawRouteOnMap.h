@@ -3,17 +3,18 @@
 #include "../ImGuiOverWindows.h"
 #include "../../Coordinate/CoordinateStruct.h"
 #include "../../util.h"
+#include "LoadEditRouteData.h"
 
 class DrawRouteOnMap{
 public:
+
 	static void GetRoutePointsScreen(const Coordinate& validGameMapcenterPointROC, const std::vector<cv::Point2f>& captureCorners, const RECT& rect, int senceId);
 	static void DrawRoute();
 	static void ClearRountsData() {
 		std::lock_guard<std::mutex> lock(routeMutex);
-		routePointsScreenCoord.clear();
+		routesDatas.clear();
 	}
-
 private:
-	static std::vector<Coordinate> routePointsScreenCoord;
+	static std::vector<RouteDatas> routesDatas;
 	static std::mutex routeMutex;
 };

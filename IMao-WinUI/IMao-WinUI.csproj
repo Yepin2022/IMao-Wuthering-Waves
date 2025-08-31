@@ -19,7 +19,7 @@
     <SupportedOSPlatformVersion>10.0.17763.0</SupportedOSPlatformVersion>
     <BaseOutputPath>..\</BaseOutputPath>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <Version>0.9.4</Version>
+    <Version>0.9.5</Version>
   </PropertyGroup>
 
   <ItemGroup>

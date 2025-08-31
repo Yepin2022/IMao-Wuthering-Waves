@@ -312,10 +312,26 @@ constexpr auto IDB_PNG_T_IconC_053_UI = 401;
 constexpr auto IDB_PNG_310000620 = 402;
 constexpr auto IDB_PNG_320000420 = 403;
 //2.2
-constexpr auto SP_IconMonsterHead_32033_UI = 404;
-constexpr auto SP_IconMonsterHead_31053_UI = 405;
-constexpr auto SP_IconMonsterHead_31052_UI = 406;
-constexpr auto T_IconTask_Task_144_UI = 407;
+constexpr auto IDB_PNG_SP_IconMonsterHead_32033_UI = 404;
+constexpr auto IDB_PNG_SP_IconMonsterHead_31053_UI = 405;
+constexpr auto IDB_PNG_SP_IconMonsterHead_31052_UI = 406;
+constexpr auto IDB_PNG_T_IconTask_Task_144_UI = 407;
+
+//2.6
+constexpr auto IDB_PNG_T_IconC_yanhaipo_UI = 408;
+constexpr auto IDB_PNG_T_IconC_056_UI = 409;
+constexpr auto IDB_PNG_T_IconC_057_UI = 410;
+constexpr auto IDB_PNG_T_IconC_058_UI = 411;
+constexpr auto IDB_PNG_320000440 = 412;
+constexpr auto IDB_PNG_320000450 = 413;
+
+//遗漏
+constexpr auto IDB_PNG_SP_IconMonsterHead_32036_UI = 100001;
+constexpr auto IDB_PNG_SP_IconMonsterHead_32037_UI = 100002;
+constexpr auto IDB_PNG_SP_IconMonsterHead_32038_UI = 100003;
+constexpr auto IDB_PNG_SP_IconMonsterHead_32039_UI = 100004;
+constexpr auto IDB_PNG_SP_IconMonsterHead_32040_UI = 100005;
+constexpr auto IDB_PNG_SP_IconMonsterHead_32041_UI = 100006;
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED

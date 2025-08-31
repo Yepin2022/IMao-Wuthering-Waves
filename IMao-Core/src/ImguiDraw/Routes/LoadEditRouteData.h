@@ -10,8 +10,11 @@ struct RouteDatas
 {
 	std::string name;
 	std::vector<Coordinate> routePointsROC;
-	RouteDatas(std::string name, std::vector<Coordinate> routePointsROC) :name(name), routePointsROC(routePointsROC) {};
+	std::vector<Coordinate> routePointsScreenCoord;
+	RouteDatas(std::string name, std::vector<Coordinate> routePointsROC = std::vector<Coordinate>(), std::vector<Coordinate> routePointsScreenCoord = std::vector<Coordinate>()) : name(name), routePointsROC(routePointsROC), routePointsScreenCoord(routePointsScreenCoord){};
 };
+
+
 
 class LoadEditRouteData {
 public:
@@ -19,15 +22,15 @@ public:
 	static void Initi(App* app);
 	static void AddRouteDatas(std::string name, const Coordinate& ROC_a, const Coordinate& ROC_b);
 	static void Thread_KeyMonitoring_AddRouteDatas_ByMousePos();
-private:
-	static void StartThread() {
-		threadStopFlag = false;
-		Thread = std::thread(&LoadEditRouteData::Thread_KeyMonitoring_AddRouteDatas_ByMousePos);
-	}
 
 	static void StopThread() {
 		threadStopFlag = true;
 		Thread.join();
+	}
+private:
+	static void StartThread() {
+		threadStopFlag = false;
+		Thread = std::thread(&LoadEditRouteData::Thread_KeyMonitoring_AddRouteDatas_ByMousePos);
 	}
 
 	static App* app;
