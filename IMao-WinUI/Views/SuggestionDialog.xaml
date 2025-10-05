@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Page
     x:Class="IMao_WinUI.Views.SuggestionDialog"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -8,8 +8,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
     <RichTextBlock>
-        <Paragraph>IMao目前仅支持70%的地图区域，且没有图片/文字引导。若你想有更好的体验，建议与
-            <Hyperlink NavigateUri="https://www.kurobbs.com/mc/map/">库街区</Hyperlink> 一起使用。
+        <Paragraph>IMao无法替代官方地图工具。该工具目前仅支持70%的地图区域，且没有图片/文字引导，极端情况下识别准确率低。建议与官方工具
+            <Hyperlink NavigateUri="https://www.kurobbs.com/mc/map/">库街区</Hyperlink> 一起搭配使用。
         </Paragraph>
     </RichTextBlock>
 </Page>

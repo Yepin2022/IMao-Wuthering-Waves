@@ -11,7 +11,7 @@ using namespace std;
 
 int main() {
     SetConsoleOutputCP(CP_UTF8);
-    DrawItemBase::Init();
+    DrawItemBase::Initi();
     DrawItemBase::AddItemDataFromJson("sx");
     DrawItemBase::AddItemDataFromJson("qzx_01");
     DrawItemBase::AddItemDataFromJson("qzx_02");
@@ -66,7 +66,7 @@ int main() {
     App::SetEnabledMinMapShowItem(true);
 
     app.StartTasks();
-
+    LoadEditRouteData::LoadRoutesDatasFromLocal();
     while (true) {
         std::this_thread::sleep_for(std::chrono::seconds(10));
     }

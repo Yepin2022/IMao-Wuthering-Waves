@@ -16,3 +16,5 @@ extern "C" _declspec(dllexport) void EnabledMapShowItem(bool setValue);
 extern "C" _declspec(dllexport) void AddItem(const char* itemId);
 extern "C" _declspec(dllexport) void ClearItem(const char* itemId);
 extern "C" _declspec(dllexport) void SetVisibleSavedPoints(bool setValue);
+extern "C" _declspec(dllexport) void SetSavedJsonRouteName(const char* itemId);
+extern "C" _declspec(dllexport) void LoadJsonRoute();

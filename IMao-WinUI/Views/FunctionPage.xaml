@@ -12,7 +12,6 @@
         <InfoBar x:Uid="Function_InfoBar_Statement" CornerRadius="8" IsOpen="True" IsIconVisible="True" IsClosable="False" Margin="{StaticResource InfoBarMargin}" />
         
         
-        
         <toolkit:SettingsExpander CornerRadius="8" Margin="{StaticResource ExpanderMargin}" x:Uid="Function_Expander_MinMapShowItem" >
             <toolkit:SettingsExpander.HeaderIcon>
                 <FontIcon Glyph="&#xECAF;" />
@@ -67,8 +66,8 @@
                     <toolkit:SettingsCard.Description>
                         <TextBlock x:Uid="Function_Card_UpdateMapItemDataCycle_Description"/>
                     </toolkit:SettingsCard.Description>
-                    <Slider Width="120" Minimum="10" Maximum="100" StepFrequency="5"
-SmallChange="5" Value="60" Name="UpdateMapItemDataCycle" ValueChanged="UpdateMapItemDataCycle_ValueChanged" />
+                    <Slider Width="120" Minimum="10" Maximum="120" StepFrequency="5"
+SmallChange="5" Value="80" Name="UpdateMapItemDataCycle" ValueChanged="UpdateMapItemDataCycle_ValueChanged" />
                 </toolkit:SettingsCard>
 
                 <toolkit:SettingsCard
@@ -94,11 +93,39 @@ SmallChange="5" Value="60" Name="UpdateMapItemDataCycle" ValueChanged="UpdateMap
             </toolkit:SettingsExpander.Description>
 
             <toolkit:SettingsExpander.Items>
-                <toolkit:SettingsCard>
+                
+                <toolkit:SettingsCard x:Uid="Function_Card_IsEnabledEditRoute" x:Name="Function_Card_IsEnabledEditRoute">
                     <toolkit:SettingsCard.Description>
-                        <TextBlock x:Uid="Function_Card_DrawRoutes_Description"/>
+                        <TextBlock x:Uid="Function_Card_IsEnabledEditRoutes_Description"/>
                     </toolkit:SettingsCard.Description>
+                    <TextBox AutomationProperties.Name="simple TextBox" Text="Q" IsEnabled="False" TextAlignment="Center"/>
                 </toolkit:SettingsCard>
+
+                <toolkit:SettingsCard x:Uid="Function_Card_SetSavedRouteJsonName" x:Name="Function_Card_SetSavedRouteJsonName">
+
+                    <toolkit:SettingsCard.Description>
+                        <TextBlock x:Uid="Function_Card_SetSavedRouteJsonName_Description"/>
+                    </toolkit:SettingsCard.Description>
+
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox AutomationProperties.Name="TextBox_SavedRouteJsonName"  x:Name="TextBox_SavedRouteJsonName" Text="Routes" Margin="0,0,8,0"/>
+                        <Button Click="Button_SavedRouteJsonName_Click">Set</Button>
+                    </StackPanel>
+                </toolkit:SettingsCard>
+
+                <toolkit:SettingsCard x:Uid="Function_Card_LoadRouteData" x:Name="Function_Card_LoadRouteData">
+                    
+                    <toolkit:SettingsCard.Description>
+                        <TextBlock x:Uid="Function_Card_LoadRouteData_Description"/>
+                    </toolkit:SettingsCard.Description>
+
+                    <StackPanel Orientation="Horizontal">
+                        <Button x:Uid="Button_OpenRoutesFolder" Click="Button_OpenRoutesFolder_Click" Margin="0,0,8,0"/>
+                        <Button x:Uid="Button_LoadRoutesData" Click="Button_LoadRoutesData_Click"/>
+                    </StackPanel>
+
+                </toolkit:SettingsCard>
+                
             </toolkit:SettingsExpander.Items>
         </toolkit:SettingsExpander>
         

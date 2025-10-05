@@ -1,6 +1,7 @@
 ﻿using IMao_WinUI.ViewModels;
 
 using Microsoft.UI.Xaml.Controls;
+using System.Diagnostics;
 
 namespace IMao_WinUI.Views;
 
@@ -73,5 +74,56 @@ public sealed partial class FunctionPage : Page
                 IMaoCoreAPI.SetVisibleSavedPoints(false);
             }
         }
+    }
+
+    private void Button_SavedRouteJsonName_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
+    {
+        String content = TextBox_SavedRouteJsonName.Text.ToString();
+        if (content != null && content != "") {
+            IMaoCoreAPI.SetSavedJsonRouteName(content);
+        }
+    }
+
+    private void Button_OpenRoutesFolder_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
+    {
+        try
+        {
+            string appDirectory = AppDomain.CurrentDomain.BaseDirectory;
+
+            string routesPath = Path.Combine(appDirectory, "SavedRoutes");
+
+            if (Directory.Exists(routesPath))
+            {
+                Process.Start(new ProcessStartInfo(routesPath)
+                {
+                    UseShellExecute = true,  
+                    Verb = "open"         
+                });
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("Button_OpenRoutesFolder_Click:" + ex.Message);
+        }
+    }
+
+    private void Button_LoadRoutesData_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
+    {
+        try
+        {
+            string appDirectory = AppDomain.CurrentDomain.BaseDirectory;
+
+            string routesFolderPath = Path.Combine(appDirectory, "SavedRoutes");
+
+            if (Directory.Exists(routesFolderPath))
+            {
+                IMaoCoreAPI.LoadJsonRoute();
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("Button_LoadRoutesData_Click:" + ex.Message);
+        }
+
     }
 }

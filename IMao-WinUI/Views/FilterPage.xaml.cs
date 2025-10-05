@@ -15,6 +15,7 @@ namespace IMao_WinUI.Views;
 public sealed partial class FilterPage : Page
 {
     private readonly StringItem stringItem = new StringItem();
+    private LocalItemFilter localItemFilter = new LocalItemFilter();
     public FilterViewModel ViewModel
     {
         get;
@@ -31,6 +32,7 @@ public sealed partial class FilterPage : Page
 
     private void GenerateCheckBoxes()
     {
+        var filteredItemsDatas = localItemFilter.GetFilteredItemsDatas();
         foreach (var itemsDatas in stringItem.itemsDatas)
         {
             String category = itemsDatas.Category;
@@ -39,17 +41,27 @@ public sealed partial class FilterPage : Page
                 Text = category,
                 FontSize = 14,
                 Margin = new Thickness(10, 0, 0, 0),
-                Width = 9999
+                Width = 6000
             };
             CheckBoxContainer.Children.Add(textBlock);
 
             foreach (var itemDatas in itemsDatas.ItemDatas)
             {
+                bool isChecked = false;
+                foreach(var filteredItemDatas in filteredItemsDatas)
+                {
+                    if (filteredItemDatas.Name == itemDatas.Id && filteredItemDatas.Status == 1)
+                    {
+                        isChecked = true;
+                    }
+                }
+
                 CheckBox checkBox = new CheckBox
                 {
                     Content = itemDatas.Name_SpecifiedLanguage,
                     Margin = new Thickness(20, 0, 0, 0),
                     FontSize = 14,
+                    IsChecked = isChecked,
                     HorizontalAlignment = HorizontalAlignment.Left
                 };
 
@@ -72,10 +84,12 @@ public sealed partial class FilterPage : Page
                 if ((bool)checkBox.IsChecked)
                 {
                     IMaoCoreAPI.AddItem(itemId);
+                    localItemFilter.SetItmeFilterStatus(itemId, 1);
                 }
                 else
                 {
                     IMaoCoreAPI.ClearItem(itemId);
+                    localItemFilter.SetItmeFilterStatus(itemId, 0);
                 }
             }
         }

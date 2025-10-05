@@ -1,9 +1,11 @@
-﻿using System.Diagnostics;
-using IMao_WinUI.Contracts.Services;
+﻿using IMao_WinUI.Contracts.Services;
 using IMao_WinUI.Helpers;
+using IMao_WinUI.StringItems;
 using IMao_WinUI.ViewModels;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using System.Diagnostics;
+using System.Drawing;
 namespace IMao_WinUI.Views;
 
 public sealed partial class StartPage : Page
@@ -21,6 +23,22 @@ public sealed partial class StartPage : Page
         ComboBox_GameServer.SelectedIndex = 0;
         ComboBox_CaptureMethod.SelectedIndex = 0;
         _ = InitializeAsync();
+
+        LocalItemFilter localItemFilter = new LocalItemFilter();
+        var filteredItemsDatas = localItemFilter.GetFilteredItemsDatas();
+
+        IMaoCoreAPI.EnabledMinMapShowItem(true);
+        IMaoCoreAPI.EnabledMapShowItem(true);
+        IMaoCoreAPI.SetMapDataUpdateCycle(80);
+        IMaoCoreAPI.SetMinMapDataUpdateCycle(80);
+
+        foreach (var filteredItemDatas in filteredItemsDatas)
+        {
+            if (filteredItemDatas.Status == 1)
+            {
+                IMaoCoreAPI.AddItem(filteredItemDatas.Name);
+            }
+        }
     }
 
     private async Task InitializeAsync()
@@ -76,6 +94,12 @@ public sealed partial class StartPage : Page
             icon.Glyph = "\uE71A";
             textBlock.Text = "Stop";
             IMaoCoreAPI.SetCaptureWay(ComboBox_CaptureMethod.SelectedIndex);
+
+            if (!GameWindow.CheckGameWindowSize())
+            {
+                Start_InfoBar_IncorrectGameWindowSize.IsOpen = true;
+                Start_InfoBar_IncorrectGameWindowSize.Margin = new Thickness(0, 0, 0, 12);
+            }
         }
         else
         {
@@ -86,9 +110,14 @@ public sealed partial class StartPage : Page
         }
     }
 
+
     private void Start_InfoBar_FindNotTargetProcess_CloseButtonClick(InfoBar sender, object args)
     {
         Start_InfoBar_FindNotTargetProcess.Margin = new Thickness(0, 0, 0, 0);
     }
 
+    private void Start_InfoBar_IncorrectGameWindowSize_CloseButtonClick(InfoBar sender, object args)
+    {
+        Start_InfoBar_IncorrectGameWindowSize.Margin = new Thickness(0, 0, 0, 0);
+    }
 }

@@ -29,19 +29,23 @@ void DrawRouteOnMinMap::GetRoutePointsScreen(const RECT& rect ,const Coordinate&
 		}
 
 		if (routePointsScreen.size() >= 2)
-			DrawRouteOnMinMap::routesDatas.push_back(RouteDatas("name2", vector<Coordinate>(), routePointsScreen));
+			DrawRouteOnMinMap::routesDatas.push_back(RouteDatas("name", routeDatas.senceId, vector<Coordinate>(), routePointsScreen));
 	}
 }
 
 
 
-void DrawRouteOnMinMap::DrawRoute() {
+void DrawRouteOnMinMap::DrawRoute(App& app) {
 	lock_guard<mutex> lock(routeMutex);
 
 	if (DrawRouteOnMinMap::routesDatas.empty())
 		return;
 
 	for (const auto& routeDatas : routesDatas) {
+
+		if (routeDatas.senceId != app.GetPlayerCurrentSceneId())
+			continue;
+
 		const auto screenPoints = routeDatas.routePointsScreenCoord;
 
 		auto draw = ImGui::GetBackgroundDrawList();

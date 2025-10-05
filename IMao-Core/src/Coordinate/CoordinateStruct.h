@@ -1,6 +1,7 @@
 ﻿#pragma once
 #include <iostream>
 #include<vector>
+#include <string>
 struct Coordinate {
     double x;
     double y;
@@ -8,9 +9,9 @@ struct Coordinate {
 
     bool IsValid() {
         if (x == 0 and y == 0) {
-            return true;
+            return false;
         }
-        return false;
+        return true;
     }
 };
 
@@ -41,6 +42,25 @@ struct AvinoleumOriginCoordinates {
 //TODO:需要适配更多地图
 struct Scene {
     inline static std::vector<int> sceneIds = { 1,2 ,3,4};
+    inline static std::vector<std::string> sceneNames = { "World","Tethys","Fabricatorium","Avinoleum" };
+    
+    static std::string SceneIdToName(int sceneId) {
+        for (size_t i = 0; i < sceneIds.size(); i++) {
+            if (sceneIds[i] == sceneId) {
+                return sceneNames[i];
+            }
+        }
+        return std::string();
+    }
+
+    static int SceneNameToId(std::string sceneName) {
+        for (size_t i = 0; i < sceneNames.size(); i++) {
+            if (sceneNames[i] == sceneName) {
+                return sceneIds[i];
+            }
+        }
+        return -1;
+    }
 };
 
 struct GameWindowsScreenData {

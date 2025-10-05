@@ -259,8 +259,8 @@ int ImGuiOverWindows::start()
         {
             DrawItemOnMinMap::DrawItemsOnMinMap(GameRect);
             DrawItemOnGameMap::DrawItemsOnGameMap(GameRect, h_window);
-            DrawRouteOnMap::DrawRoute();
-            DrawRouteOnMinMap::DrawRoute();
+            DrawRouteOnMap::DrawRoute(app);
+            DrawRouteOnMinMap::DrawRoute(app);
             Notification::DrawInfo();
             // Debug::DebugWindow(io,app);
             LONG exStyle = GetWindowLong(overWindowsHwnd, GWL_EXSTYLE);
