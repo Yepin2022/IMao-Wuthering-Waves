@@ -14,7 +14,7 @@ public:
 		routesDatas.clear();
 	}
 
-	static void DrawRoute();
+	static void DrawRoute(App& app);
 private:
 	static std::vector<RouteDatas> routesDatas;
 	static std::mutex routeMutex;

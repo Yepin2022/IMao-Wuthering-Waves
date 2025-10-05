@@ -101,7 +101,7 @@ void MainThread() {
 void Initi()
 {
     SetConsoleOutputCP(CP_UTF8);
-    DrawItemBase::Init();
+    DrawItemBase::Initi();
     std::thread mainThread(MainThread);
     mainThread.detach();
 }
@@ -154,4 +154,13 @@ void SetCaptureWay(int setValue) {
 
 void SetVisibleSavedPoints(bool setValue) {
     DrawItemOnGameMap::SetVisibleSavedPoints(setValue);
+}
+
+void SetSavedJsonRouteName(const char* itemId) {
+    LoadEditRouteData::SetRouteJsonName(itemId);
+}
+
+void LoadJsonRoute() {
+    LoadEditRouteData::ClearRoutesDatas();
+    LoadEditRouteData::LoadRoutesDatasFromLocal();
 }

@@ -10,6 +10,9 @@
     NavigationCacheMode="Enabled" >
 
     <StackPanel>
+        <InfoBar x:Name="Start_InfoBar_IncorrectGameWindowSize" x:Uid="Start_InfoBar_IncorrectGameWindowSize" CornerRadius="8" IsOpen="False" Severity="Warning"  
+                 IsClosable="True" CloseButtonClick="Start_InfoBar_IncorrectGameWindowSize_CloseButtonClick"/>
+        
         <InfoBar x:Name="Start_InfoBar_FindNotTargetProcess" x:Uid="Start_InfoBar_FindNotTargetProcess" CornerRadius="8" IsOpen="False" Severity="Error"  
                  IsClosable="True" CloseButtonClick="Start_InfoBar_FindNotTargetProcess_CloseButtonClick"/>
 

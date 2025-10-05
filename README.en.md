@@ -14,8 +14,14 @@ An interactive map overlaying the game window that uses image matching technolog
   <img src="https://github.com/user-attachments/assets/22ba7107-3640-4fc3-9a25-f030ab5106ef"/>
 </details>
 
+<details>
+  <summary>Route Guidance</summary>
+  <img src="https://github.com/user-attachments/assets/765c7e9b-bb05-46a7-8ece-64e5ba67ce27"/>
+  <img src="https://github.com/user-attachments/assets/b49999de-c616-4c09-921b-7658eed0085a"/>
+</details>
+
 #### Usage Instructions
-1. Prepare the operating environment: [NET 8.0](https://dotnet.microsoft.com/en-us/download/dotnet/8.0) and [Microsoft Visual C++ 2015-2022 Redistributable](https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist?view=msvc-170).
+1. Prepare the operating environment: [.NET 8.0](https://dotnet.microsoft.com/en-us/download/dotnet/8.0) and [Microsoft Visual C++ 2015-2022 Redistributable](https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist?view=msvc-170).
 2. Go to [Releases](https://github.com/Yepin2022/IMao-Wuthering-Waves/releases) to download the latest version. Extract the files and run IMao-WinUI.exe.
 3. Open the game and adjust its resolution to 16:9.
 4. After ensuring that the coordinates in the lower-left corner of the game are clearly displayed, click the start button. Wait for the information in the lower-right corner to disappear, which means the correct coordinates have been successfully recognized. Then, enable the required functions on the function page.

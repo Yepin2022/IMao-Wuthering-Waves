@@ -83,7 +83,7 @@ public:
 	}
 
 	int GetPlayerCurrentSceneId() {
-		return PlayerCurrentSceneId;
+		return playerCurrentSceneId;
 	}
 
 	static void SetUpdateMapDataCycleTime(int setValue) {
@@ -112,7 +112,7 @@ private:
 	static bool enabledMinMapShowItem;
 
 	Coordinate identifyCoordinate = { 0,0 };
-	int PlayerCurrentSceneId = 0;
+	int playerCurrentSceneId = 0;
 
 	Mat gameSnapshot;
 

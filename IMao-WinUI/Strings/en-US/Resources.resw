@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AppDisplayName" xml:space="preserve">
-    <value>IMao-Wuthering-Waves v0.9.5</value>
+    <value>IMao-Wuthering-Waves v0.9.6 Beta</value>
   </data>
   <data name="AppDescription" xml:space="preserve">
     <value>IMao-Wuthering-Waves</value>
@@ -258,12 +258,36 @@
     <value>Shortcut key</value>
   </data>
   <data name="Function_Expander_DarwRoutes.Header" xml:space="preserve">
-    <value>Route navigation (experimental)</value>
+    <value>Route Guidance (experimental)</value>
   </data>
   <data name="Function_Expander_DarwRoutes_Description.Text" xml:space="preserve">
-    <value>Draw user-edited routes on minimaps and large maps (delete, save, etc. are not yet implemented).</value>
+    <value>Draw user-edited routes on minimaps and large maps (Some features have not been implemented yet).</value>
   </data>
-  <data name="Function_Card_DrawRoutes_Description.Text" xml:space="preserve">
-    <value>AB two points determine a straight line. In the large map interface, press the keyboard "Q" key to record the map position pointed by the current mouse (marked as point A), and press the "Q" key again to record the next mouse pointing position (marked as point B).</value>
+  <data name="Function_Card_IsEnabledEditRoutes_Description.Text" xml:space="preserve">
+    <value>Two points A and B determine a straight line. In the large map interface, press 'Q' to record the current mouse position (point A), and press 'Q' again to record the next position (point B).</value>
+  </data>
+  <data name="Function_Card_IsEnabledEditRoute.Header" xml:space="preserve">
+    <value>Route Editing</value>
+  </data>
+  <data name="Function_Card_SetSavedRouteJsonName.Header" xml:space="preserve">
+    <value>Filename of the file storing path data</value>
+  </data>
+  <data name="Function_Card_SetSavedRouteJsonName_Description.Text" xml:space="preserve">
+    <value>Convenient for classification.</value>
+  </data>
+  <data name="Function_Card_LoadRouteData.Header" xml:space="preserve">
+    <value>Load routes data</value>
+  </data>
+  <data name="Function_Card_LoadRouteData_Description.Text" xml:space="preserve">
+    <value>Load stored routes data from local storage.</value>
+  </data>
+  <data name="Button_OpenRoutesFolder.Content" xml:space="preserve">
+    <value>Open folder</value>
+  </data>
+  <data name="Button_LoadRoutesData.Content" xml:space="preserve">
+    <value>Reload</value>
+  </data>
+  <data name="Start_InfoBar_IncorrectGameWindowSize.Message" xml:space="preserve">
+    <value>Your game resolution is not 16:9, which will cause all map functions to malfunction.</value>
   </data>
 </root>

@@ -9,7 +9,7 @@ class DrawRouteOnMap{
 public:
 
 	static void GetRoutePointsScreen(const Coordinate& validGameMapcenterPointROC, const std::vector<cv::Point2f>& captureCorners, const RECT& rect, int senceId);
-	static void DrawRoute();
+	static void DrawRoute(App& app);
 	static void ClearRountsData() {
 		std::lock_guard<std::mutex> lock(routeMutex);
 		routesDatas.clear();

@@ -20,12 +20,12 @@ void DrawRouteOnMap::GetRoutePointsScreen(const Coordinate& validGameMapcenterPo
 		}
 
 		if (routePointsScreen.size() >= 2) {
-			DrawRouteOnMap::routesDatas.push_back(RouteDatas("name1", vector<Coordinate>(), routePointsScreen));
+			DrawRouteOnMap::routesDatas.push_back(RouteDatas("name", routeDatas.senceId, vector<Coordinate>(), routePointsScreen));
 		}
 	}
 }
 
-void DrawRouteOnMap::DrawRoute() {
+void DrawRouteOnMap::DrawRoute(App& app) {
 	lock_guard<mutex> lock(routeMutex);
 
 	if (DrawRouteOnMap::routesDatas.empty())
@@ -34,6 +34,10 @@ void DrawRouteOnMap::DrawRoute() {
 	for (const auto& routeDatas : routesDatas) {
 		const auto screenPoints = routeDatas.routePointsScreenCoord;
 
+		if (routeDatas.senceId != app.GetPlayerCurrentSceneId()) {
+			continue;
+		}
+			
 		auto draw = ImGui::GetBackgroundDrawList();
 		for (int i = 0; i < screenPoints.size() - 1; i++) {
 			ImVec2 p1 = ImVec2(screenPoints[i].x, screenPoints[i].y);

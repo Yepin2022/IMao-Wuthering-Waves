@@ -1,6 +1,7 @@
 ﻿#include "util.h"
 #include "Coordinate/CoordinateStruct.h"
 #include <tlhelp32.h>
+
 using namespace std;
 
 
@@ -231,4 +232,36 @@ vector<Coordinate> GenerateEquidistantPoints(const Coordinate& start,const Coord
     }
 
     return points;
+}
+
+
+vector<fs::path> findFilesByExtensions(const string& folderPath,const unordered_set<string>& targetExtensions) {
+
+    vector<fs::path> resultFiles;
+
+    try {
+        if (!fs::exists(folderPath) || !fs::is_directory(folderPath)) {
+            cerr << "错误: 路径不存在或不是文件夹 - " << folderPath << endl;
+            return resultFiles;
+        }
+
+        for (const auto& entry : fs::directory_iterator(folderPath)) {
+            if (entry.is_regular_file()) {
+                string ext = entry.path().extension().string();
+
+                // 不区分大小写
+                if (targetExtensions.count(ext)) {
+                    resultFiles.push_back(entry.path());
+                }
+            }
+        }
+    }
+    catch (const fs::filesystem_error& e) {
+        cerr << "文件系统错误: " << e.what() << endl;
+    }
+    catch (const exception& e) {
+        cerr << "错误: " << e.what() << endl;
+    }
+
+    return resultFiles;
 }

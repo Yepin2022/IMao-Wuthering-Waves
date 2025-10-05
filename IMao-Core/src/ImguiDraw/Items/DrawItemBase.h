@@ -33,11 +33,7 @@ struct ItemTextureData {
 
 class DrawItemBase {
 public:
-	static void Init() {
-		DrawItemBase::LoadItemsjson();
-		savedJosnPath = GetCurrentPath() + "\\SavedPoints\\account_1.json";
-		thread_ReadSavedPointsJson = std::thread(&DrawItemBase::Thread_ReadSavedPointsJson);
-	}
+	static void Initi();
 	static void RenderPointCircle(ImTextureID texture, ImVec2 position, float radius, float transparency, ImColor circleColor);
 	static void AddItemDataFromJson(std::string itemId);
 	static void ClearItemData(std::string itemId);
@@ -56,12 +52,12 @@ public:
 	static json itemsJsonData_Fabricatorium;
 	static json itemsJsonData_Avinoleum;
 private:
-	static json& SavedItemPoints();
+	static json& GetSavedItemPoints();
 	static void LoadItemsjson();
 	static void Thread_ReadSavedPointsJson();
 	static bool FindItemJsonData(int sceneId, json*& itemJsonData, std::vector<ItemsDatas>*& itemsDatas_Storage);
 	//static json savedItemPoints;
 	static std::thread thread_ReadSavedPointsJson;
-    static std::string savedJosnPath;
+    static std::string savedJsonPath;
 };
 

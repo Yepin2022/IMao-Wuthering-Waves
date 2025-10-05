@@ -43,6 +43,11 @@ public static class IMaoCoreAPI
     [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
     private static extern void GetMyMessage([Out] StringBuilder buffer, int bufferSize);
 
+    [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
+    public static extern void SetSavedJsonRouteName(String routeName);
+
+    [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
+    public static extern void LoadJsonRoute();
     public static string GetDllMessage()
     {
         StringBuilder buffer = new StringBuilder(256);

@@ -8,6 +8,10 @@
 #include <opencv2/features2d.hpp> 
 #include <Windows.h>
 #include "Coordinate\CoordinateStruct.h"
+#include <filesystem>
+#include <unordered_set>
+
+namespace fs = std::filesystem;
 
 struct NonClientRegion {
 	int non_client_height_total;
@@ -58,3 +62,5 @@ bool isKeyPressed(int keyCode);
 double DistanceBetweenPoints(const Coordinate& p1, const Coordinate& p2);
 
 std::vector<Coordinate> GenerateEquidistantPoints(const Coordinate& start, const Coordinate& end, double step);
+
+std::vector<fs::path> findFilesByExtensions(const std::string& folderPath, const std::unordered_set<std::string>& targetExtensions);

@@ -9,7 +9,7 @@ namespace IMao_WinUI.Helpers;
 
 class CheckVersion
 {
-    private static readonly String CurrentVersion = "0.9.5";
+    private static readonly String CurrentVersion = "0.9.6";
     public static async Task<bool> IsLatest()
     {
         String tagName = await GetLatestTagName();
@@ -31,7 +31,7 @@ class CheckVersion
     {
         String apiUrl = "https://api.github.com/repos/Yepin2022/IMao-Wuthering-Waves/releases/latest";
 
-        using (var httpClient = new HttpClient { Timeout = TimeSpan.FromSeconds(5) })
+        using (var httpClient = new HttpClient { Timeout = TimeSpan.FromSeconds(8) })
         {
             try
             {

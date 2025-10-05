@@ -21,14 +21,32 @@ vector<ItemsDatas> DrawItemBase::itemsDatas_Tethys_Storage;
 vector<ItemsDatas> DrawItemBase::itemsDatas_Fabricatorium_Storage;
 vector<ItemsDatas> DrawItemBase::itemsDatas_Avinoleum_Storage;
 thread DrawItemBase::thread_ReadSavedPointsJson;
-string DrawItemBase::savedJosnPath;
+string DrawItemBase::savedJsonPath;
 
 static std::shared_mutex g_jsonMutex;          // 读写锁 
 static std::filesystem::file_time_type g_lastTime; // 上一次修改时间 
 
-json& DrawItemBase::SavedItemPoints() {
+json& DrawItemBase::GetSavedItemPoints() {
     static json j;
     return j;
+}
+
+void DrawItemBase::Initi() {
+    DrawItemBase::LoadItemsjson();
+    savedJsonPath = GetCurrentPath() + "\\SavedPoints\\account_1.json";
+
+    try {
+        fs::path folderPath(GetCurrentPath() + "\\SavedPoints");
+
+        if (!fs::exists(folderPath)) {
+            fs::create_directories(folderPath);
+        }
+    }
+    catch (const exception& e) {
+        cerr << "  DrawItemBase::Initi:" << e.what() << endl;
+    }
+
+    thread_ReadSavedPointsJson = std::thread(&DrawItemBase::Thread_ReadSavedPointsJson);
 }
 
 bool LoadJson(json& JsonData, const wchar_t* resourceName) {
@@ -194,26 +212,26 @@ void DrawItemBase::RenderPointCircle(ImTextureID texture, ImVec2 position,float 
 void DrawItemBase::SaveItemPoint(string scene, ItemDatas itemDatas) {
     try {
         unique_lock lock(g_jsonMutex);
-        auto& j = SavedItemPoints();
+        auto& j = GetSavedItemPoints();
 
         j[scene][itemDatas.nameId].push_back({ {"id", itemDatas.itemId} });
 
         {   
-            ofstream out_file(savedJosnPath);
+            ofstream out_file(savedJsonPath);
             out_file << j.dump(4);
         }
 
-        g_lastTime = filesystem::last_write_time(savedJosnPath);
+        g_lastTime = filesystem::last_write_time(savedJsonPath);
     }
-    catch (const exception&) {
-        Notification::AddInfo(NotificationDatas("Save JSON failed.", 5));
+    catch (const exception& e) {
+        Notification::AddInfo(NotificationDatas("DrawItemBase::SaveItemPoint: " + string(e.what()), 5));
     }
 }
 
 void DrawItemBase::RemoveSavedItemPoint(string scene, ItemDatas itemDatas) {
     try {
         unique_lock lock(g_jsonMutex);// 独占写 
-        auto& j = SavedItemPoints(); 
+        auto& j = GetSavedItemPoints();
 
         auto& item_array = j[scene][itemDatas.nameId];
         for (auto it = item_array.begin(); it != item_array.end(); ++it) {
@@ -222,12 +240,12 @@ void DrawItemBase::RemoveSavedItemPoint(string scene, ItemDatas itemDatas) {
                 break;
             }
         }
-        ofstream out_file(savedJosnPath);
+        ofstream out_file(savedJsonPath);
 
         out_file << j.dump(4);
-        g_lastTime = filesystem::last_write_time(savedJosnPath);
+        g_lastTime = filesystem::last_write_time(savedJsonPath);
     }catch (const exception& e) {
-        Notification::AddInfo(NotificationDatas("Remove JSON failed.", 5));
+        Notification::AddInfo(NotificationDatas("DrawItemBase::RemoveSavedItemPoint: " + string(e.what()), 5));
     }
 }
 
@@ -235,7 +253,7 @@ vector<string> DrawItemBase::GetFilteredPoints(string scene,string nameId) {
     vector<string> out;
     try {
         shared_lock lock(g_jsonMutex);
-        const auto& j = SavedItemPoints(); 
+        const auto& j = GetSavedItemPoints();
 
         if (!j.contains(scene) ||
             !j[scene].is_object() ||
@@ -259,12 +277,12 @@ vector<string> DrawItemBase::GetFilteredPoints(string scene,string nameId) {
 void DrawItemBase::Thread_ReadSavedPointsJson() {
     while (true) {
         try {
-            if (fs::exists(savedJosnPath)) {
-                auto t = fs::last_write_time(savedJosnPath);
+            if (fs::exists(savedJsonPath)) {
+                auto t = fs::last_write_time(savedJsonPath);
                 if (t != g_lastTime) {  // 只有变化才读 
                     unique_lock lock(g_jsonMutex);
-                    ifstream file(savedJosnPath);
-                    file >> SavedItemPoints();
+                    ifstream file(savedJsonPath);
+                    file >> GetSavedItemPoints();
                     g_lastTime = t;
                 }
             }

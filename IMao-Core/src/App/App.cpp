@@ -12,8 +12,8 @@
 using namespace std;
 using namespace cv;
 
-int	App::updateMapDataCycleTime;
-int App::updateMinMapDataCycleTime;
+int	App::updateMapDataCycleTime = 80;
+int App::updateMinMapDataCycleTime = 80;
 bool App::enabledMapShowItem;
 bool App::enabledMinMapShowItem;
 Coordinate validGameMapcenterPointROC;
@@ -64,8 +64,8 @@ winrt::IAsyncAction App::Start() {
 
 			if (GetGameMapCenterPointROC(gameSnapshot, gameMapCenterPointROC, lastGameMapCenterPointROC) and mapNotMoving) {
 				if (!IsMapMoving(gameMapCenterPointROC, lastGameMapCenterPointROC)) {
-					DrawItemOnGameMap::UpdateCenterPointNearItemsData(validGameMapcenterPointROC,captrueCorners,rect,PlayerCurrentSceneId);
-					DrawRouteOnMap::GetRoutePointsScreen(validGameMapcenterPointROC, captrueCorners, rect, PlayerCurrentSceneId);
+					DrawItemOnGameMap::UpdateCenterPointNearItemsData(validGameMapcenterPointROC,captrueCorners,rect,playerCurrentSceneId);
+					DrawRouteOnMap::GetRoutePointsScreen(validGameMapcenterPointROC, captrueCorners, rect, playerCurrentSceneId);
 				}
 			}
 
@@ -82,8 +82,8 @@ winrt::IAsyncAction App::Start() {
 			float minMapRadius;
 			if (co_await GetMinMapPlayerROC(gameSnapshot, playerROC, minMapRadius)) {
 				if (enabledMinMapShowItem) {
-					DrawItemOnMinMap::UpdatePlayerNearItemsData(rect, playerROC, minMapRadius, PlayerCurrentSceneId);
-					DrawRouteOnMinMap::GetRoutePointsScreen(rect, playerROC, minMapRadius, PlayerCurrentSceneId);
+					DrawItemOnMinMap::UpdatePlayerNearItemsData(rect, playerROC, minMapRadius, playerCurrentSceneId);
+					DrawRouteOnMinMap::GetRoutePointsScreen(rect, playerROC, minMapRadius, playerCurrentSceneId);
 				}
 				else {
 					DrawItemOnMinMap::ClearNearItemsData();
@@ -250,7 +250,7 @@ winrt::IAsyncOperation<bool> App::GetMinMapPlayerROC(const Mat& snapshot,Coordin
 	Ptr<xfeatures2d::SURF> surf = xfeatures2d::SURF::create(8, 8, 4, true, true);
 	Mat minMapImg = ImageProcessing::CropToMinMapAreaImg(snapshot, rect);
 
-	if ((identifyCoordinate.x == 0 && identifyCoordinate.y == 0) || PlayerCurrentSceneId == 0) {
+	if ((identifyCoordinate.x == 0 && identifyCoordinate.y == 0) || playerCurrentSceneId == 0) {
 
 		Notification::AddInfo(NotificationDatas("Continuity match failed, trying to identify coordinates.", 3));
 
@@ -261,9 +261,9 @@ winrt::IAsyncOperation<bool> App::GetMinMapPlayerROC(const Mat& snapshot,Coordin
 			identifyCoordinate = { 0,0 };
 			co_return false;
 		}
-		PlayerCurrentSceneId = GetCurrentSceneId(identifyCoordinate, minMapImg);
+		playerCurrentSceneId = GetCurrentSceneId(identifyCoordinate, minMapImg);
 
-		if (PlayerCurrentSceneId == 0) {
+		if (playerCurrentSceneId == 0) {
 			co_return false;
 		}
 	}
@@ -301,7 +301,7 @@ winrt::IAsyncOperation<bool> App::GetMinMapPlayerROC(const Mat& snapshot,Coordin
 		co_return false;
 	}
 
-	outPlayerROC = RelativeCoordinates::ImgMapCoordToROC(lastPlayerImgMapCoordinate, PlayerCurrentSceneId);
+	outPlayerROC = RelativeCoordinates::ImgMapCoordToROC(lastPlayerImgMapCoordinate, playerCurrentSceneId);
 	outMinMapRadius = minMapImg.rows / 2;
 	existMapCenterPointCoordinate = true;
 	co_return true;
@@ -341,8 +341,8 @@ bool App::GetGameMapCenterPointROC(const Mat& snapshot, Coordinate& outGameMapCe
 		existMapCenterPointCoordinate = MapCoordinate::GetMapCoordinateOfCenterGameMapPos(centerMapNearFeatureData, mapCenterAreaFeatureData, goodMatchs, mapCenterAreaImgae, centerMapCoordinate, captrueCorners_temp);
 
 		if (existMapCenterPointCoordinate) {
-			 outGameMapCenterPointROC = RelativeCoordinates::ImgMapCoordToROC(centerMapCoordinate, PlayerCurrentSceneId);
-			 outLastGameMapCenterPointROC = RelativeCoordinates::ImgMapCoordToROC(App::gameMapCenterPointImgMapCoord, PlayerCurrentSceneId);
+			 outGameMapCenterPointROC = RelativeCoordinates::ImgMapCoordToROC(centerMapCoordinate, playerCurrentSceneId);
+			 outLastGameMapCenterPointROC = RelativeCoordinates::ImgMapCoordToROC(App::gameMapCenterPointImgMapCoord, playerCurrentSceneId);
 
 			if (abs((captrueCorners[2].x - captrueCorners[0].x) - (captrueCorners_temp[2].x - captrueCorners_temp[0].x)) > 10)
 				captrueCorners = captrueCorners_temp;
