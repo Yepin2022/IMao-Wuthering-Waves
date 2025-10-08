@@ -26,6 +26,7 @@ void CleanupDeviceD3D();
 void CreateRenderTarget();
 void CleanupRenderTarget();
 LRESULT WINAPI WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
+const float TARGET_FRAME_TIME = 1000.0f / 30.0f;// 33.3 FPS（ms）
 
 bool  ImGuiOverWindows::LoadTextureFromPath(const char* filePath, ID3D11ShaderResourceView** out_srv, int* out_width, int* out_height) {
     int image_width = 0;
@@ -218,6 +219,9 @@ int ImGuiOverWindows::start()
     // Main loop
     while (!stopFlag)
     {
+        // 记录帧开始时间
+        auto frameStart = std::chrono::high_resolution_clock::now();
+
         RECT GameRect;
         GetClientRect(h_window, &GameRect);
         // Poll and handle messages (inputs, window resize, etc.)
@@ -283,6 +287,18 @@ int ImGuiOverWindows::start()
         POINT ClientD2D = { GameRect.left,GameRect.top };
         ClientToScreen(h_window, &ClientD2D);
         MoveWindow(overWindowsHwnd, ClientD2D.x, ClientD2D.y, GameRect.right, GameRect.bottom, true);
+
+        // 计算已用时间
+        auto frameEnd = std::chrono::high_resolution_clock::now();
+        std::chrono::duration<float, std::milli> frameDuration = frameEnd - frameStart;
+
+        if (frameDuration.count() < TARGET_FRAME_TIME)
+        {
+            auto sleepTime = std::chrono::milliseconds(
+                (int)(TARGET_FRAME_TIME - frameDuration.count())
+            );
+            std::this_thread::sleep_for(sleepTime);
+        }
 
         // 在渲染周期结束后释放纹理
        //for (auto texture : texturesToRelease) {
