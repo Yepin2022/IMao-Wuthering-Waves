@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AppDisplayName" xml:space="preserve">
-    <value>IMao-Wuthering-Waves v0.9.6 Beta</value>
+    <value>IMao-Wuthering-Waves v0.9.8 Beta</value>
   </data>
   <data name="AppDescription" xml:space="preserve">
     <value>IMao-Wuthering-Waves</value>
@@ -279,7 +279,7 @@
     <value>加载路径数据</value>
   </data>
   <data name="Function_Card_LoadRouteData_Description.Text" xml:space="preserve">
-    <value>从本地加载储存的路径数据。</value>
+    <value>从本地加载储存的路径数据(删除文件即可重置路径)。</value>
   </data>
   <data name="Button_OpenRoutesFolder.Content" xml:space="preserve">
     <value>打开文件夹</value>

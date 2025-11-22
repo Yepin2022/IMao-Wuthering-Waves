@@ -17,26 +17,28 @@ struct Coordinate {
 
 //大世界坐标(0,0)在图片地图上对应的坐标
 struct WorldOriginCoordinates {
-    inline static double x = 2545;
-    inline static double y = 2487;
+    inline static double x = 2474;
+    inline static double y = 1957;
 };
 
 //泰缇斯之底坐标(0，0)在图片地图上对应的坐标
+//TODO:游戏内大小地图有偏差bug，需在原来的基础上，x-10，y+20
 struct TethysOriginCoordinates {
-    inline static double x = 10495;
-    inline static double y = 1747;
+    inline static double x = 8593;
+    inline static double y = 1382;
 };
 
 //隐海试验厂
+//TODO:游戏内大小地图有偏差bug，需在原来的基础上，x+6
 struct FabricatoriumOriginCoordinates {
-    inline static double x = 7875;
-    inline static double y = 14449;
+    inline static double x = 7437;
+    inline static double y = 13783;
 };
 
 //阿维纽林
 struct AvinoleumOriginCoordinates {
-    inline static double x = 2960;
-    inline static double y = 10263;
+    inline static double x = 2433;
+    inline static double y = 9030;
 };
 
 //TODO:需要适配更多地图
@@ -90,10 +92,10 @@ struct GameWindowsScreenData {
     inline static Coordinate IconTask_Right = { 39,195 };
     inline static std::vector<Coordinate> IconTask_ScreenData = {IconTask_Top ,IconTask_Bottom ,IconTask_Left ,IconTask_Right };
 
-    inline static Coordinate IconWavePlateCrystal_Top = { 1084,37};
-    inline static Coordinate IconWavePlateCrystal_Bottom = { 1084,66 };
-    inline static Coordinate IconWavePlateCrystal_Left = { 1070,52 };
-    inline static Coordinate IconWavePlateCrystal_Right= { 1102,52 };
+    inline static Coordinate IconWavePlateCrystal_Top = { 989,37};
+    inline static Coordinate IconWavePlateCrystal_Bottom = { 989,66 };
+    inline static Coordinate IconWavePlateCrystal_Left = { 978,52 };
+    inline static Coordinate IconWavePlateCrystal_Right= { 1008,52 };
     inline static std::vector<Coordinate> IconWavePlateCrystal_ScreenData = { IconWavePlateCrystal_Top ,IconWavePlateCrystal_Bottom ,IconWavePlateCrystal_Left ,IconWavePlateCrystal_Right };
 
     //350*350

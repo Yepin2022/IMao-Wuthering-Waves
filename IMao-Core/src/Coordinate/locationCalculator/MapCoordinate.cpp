@@ -8,9 +8,8 @@ using namespace std;
 //通过原图和测试图匹配点计算玩家在地图的坐标---测试图(不同分辨率有不同的缩放)的中心点在原图的坐标
 Coordinate CalculatePlayerImgMapCoordinate(Mat minMapImage,const Point2f& mapPoint,const Point2f& minMapPoint) {
 
-    double plyerImgMap_x = mapPoint.x - ( GameWindowsScreenData::minMapOnMap_width / minMapImage.cols) * (minMapPoint.x - minMapImage.cols / 2);
+    double plyerImgMap_x = mapPoint.x - (GameWindowsScreenData::minMapOnMap_width / minMapImage.cols) * (minMapPoint.x - minMapImage.cols / 2);
     double plyerImgMap_y = mapPoint.y - (GameWindowsScreenData::minMapOnMap_height / minMapImage.rows) * (minMapPoint.y - minMapImage.rows / 2);
-
     return Coordinate(plyerImgMap_x, plyerImgMap_y);
 }
 
@@ -62,10 +61,13 @@ bool MapCoordinate::GetGoodPlayerImgMapCoordinateFromMatches(const Mat& minMapIm
     for (const auto& match : matches) {
         Point2f sourcePoint = mapKeypoints[match.queryIdx].pt;
         Point2f destinationPoint = minMapKeypoints[match.trainIdx].pt;
+        auto a = CalculatePlayerImgMapCoordinate(minMapImage, sourcePoint, destinationPoint);
+
+
         playerMapCoordinates.push_back(CalculatePlayerImgMapCoordinate(minMapImage,sourcePoint, destinationPoint));
     }
     playerMapCoordinates = FilterPlaerImgMapCoordinates(playerMapCoordinates, lastCoordinate,maxDistance);
-    
+
     if (playerMapCoordinates.size() == 0)
         return false;
 

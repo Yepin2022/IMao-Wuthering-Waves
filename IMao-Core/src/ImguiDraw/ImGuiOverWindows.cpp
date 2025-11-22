@@ -266,7 +266,7 @@ int ImGuiOverWindows::start()
             DrawRouteOnMap::DrawRoute(app);
             DrawRouteOnMinMap::DrawRoute(app);
             Notification::DrawInfo();
-            // Debug::DebugWindow(io,app);
+            //Debug::DebugWindow(io,app);
             LONG exStyle = GetWindowLong(overWindowsHwnd, GWL_EXSTYLE);
             SetWindowLong(overWindowsHwnd, GWL_EXSTYLE, exStyle | WS_EX_TRANSPARENT);
         }
