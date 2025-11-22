@@ -332,6 +332,13 @@ constexpr auto IDB_PNG_SP_IconMonsterHead_32038_UI = 100003;
 constexpr auto IDB_PNG_SP_IconMonsterHead_32039_UI = 100004;
 constexpr auto IDB_PNG_SP_IconMonsterHead_32040_UI = 100005;
 constexpr auto IDB_PNG_SP_IconMonsterHead_32041_UI = 100006;
+
+constexpr auto IDB_FCRK = 100007;
+constexpr auto IDB_YHYC = 100008;
+constexpr auto IDB_fsc = 100009;
+constexpr auto IDB_gjd = 100010;
+
+
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED

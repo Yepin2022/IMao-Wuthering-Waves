@@ -220,6 +220,7 @@ int App::GetCurrentSceneId(const Coordinate& identifyCoordinate, const Mat& minM
 
 	for (const auto sceneId : Scene::sceneIds) {
 		Coordinate mapCoord = MapCoordinate::IdentifyCoorToImgMapCoord(identifyCoordinate, sceneId);
+
 		FeatureFilter::FilterNearKeypoints(App::FeatureData_map.imgKeypoints, App::FeatureData_map.imgDescriptors, Point2f(mapCoord.x, mapCoord.y), 100, playerMapKeypoints, playerMapDescriptors);
 
 		ImageFeatureData MapFeatureData(playerMapKeypoints, playerMapDescriptors);
@@ -238,6 +239,8 @@ int App::GetCurrentSceneId(const Coordinate& identifyCoordinate, const Mat& minM
 			mapCoord,
 			PlayerImgMapCoordinate
 		);
+
+
 		if (isExistGoodCoordinate) {
 			App::gameMapCenterPointImgMapCoord = lastPlayerImgMapCoordinate = PlayerImgMapCoordinate;
 			return sceneId;
@@ -261,6 +264,7 @@ winrt::IAsyncOperation<bool> App::GetMinMapPlayerROC(const Mat& snapshot,Coordin
 			identifyCoordinate = { 0,0 };
 			co_return false;
 		}
+
 		playerCurrentSceneId = GetCurrentSceneId(identifyCoordinate, minMapImg);
 
 		if (playerCurrentSceneId == 0) {
