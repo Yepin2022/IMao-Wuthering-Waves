@@ -26,7 +26,7 @@ void CleanupDeviceD3D();
 void CreateRenderTarget();
 void CleanupRenderTarget();
 LRESULT WINAPI WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
-const float TARGET_FRAME_TIME = 1000.0f / 30.0f;// 33.3 FPS（ms）
+const float TARGET_FRAME_TIME = 1000.0f / 60.0f;// 33.3 FPS（ms）
 
 bool  ImGuiOverWindows::LoadTextureFromPath(const char* filePath, ID3D11ShaderResourceView** out_srv, int* out_width, int* out_height) {
     int image_width = 0;

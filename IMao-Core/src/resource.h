@@ -6,6 +6,7 @@ constexpr auto ITEMSJSON_World = 1;
 constexpr auto ITEMSJSON_Tethys = 2;
 constexpr auto ITEMSJSON_Fabricatorium = 3;
 constexpr auto ITEMSJSON_Avinoleum = 4;
+constexpr auto ITEMSJSON_Lahai = 5;
 
 constexpr auto IDB_PNG_5021 = 102;
 constexpr auto IDB_PNG_5022 = 103;
@@ -324,6 +325,23 @@ constexpr auto IDB_PNG_T_IconC_057_UI = 410;
 constexpr auto IDB_PNG_T_IconC_058_UI = 411;
 constexpr auto IDB_PNG_320000440 = 412;
 constexpr auto IDB_PNG_320000450 = 413;
+
+//3.x
+constexpr auto IDB_PNG_zscj = 414;
+constexpr auto IDB_PNG_42601350 = 415;
+constexpr auto IDB_PNG_310000820 = 416;
+constexpr auto IDB_PNG_42601380 = 417;
+constexpr auto IDB_PNG_320000490 = 418;
+constexpr auto IDB_PNG_320000500 = 419;
+constexpr auto IDB_PNG_320000510 = 420;
+constexpr auto IDB_PNG_320000520 = 421;
+constexpr auto IDB_PNG_320000530 = 422;
+constexpr auto IDB_PNG_320000540 = 423;
+constexpr auto IDB_PNG_320000550 = 424;
+constexpr auto IDB_PNG_320000560 = 425;
+constexpr auto IDB_PNG_320000570 = 426;
+constexpr auto IDB_PNG_320000580 = 427;
+constexpr auto IDB_PNG_42601390 = 427;
 
 //遗漏
 constexpr auto IDB_PNG_SP_IconMonsterHead_32036_UI = 100001;

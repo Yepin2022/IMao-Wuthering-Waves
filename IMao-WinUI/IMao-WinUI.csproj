@@ -8,21 +8,22 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <Platforms>x86;x64;arm64</Platforms>
     <RuntimeIdentifiers>win-x86;win-x64;win-arm64</RuntimeIdentifiers>
-	  <ImplicitUsings>enable</ImplicitUsings>
-	  <Nullable>enable</Nullable>
-    <EnableDefaultPriItems>false</EnableDefaultPriItems> 
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <EnableDefaultPriItems>true</EnableDefaultPriItems>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
-	  <UseWinUI>true</UseWinUI>
+    <UseWinUI>true</UseWinUI>
     <EnableMsixTooling>true</EnableMsixTooling>
     <WindowsAppSDKSelfContained>true</WindowsAppSDKSelfContained>
     <SupportedOSPlatformVersion>10.0.17763.0</SupportedOSPlatformVersion>
     <BaseOutputPath>..\</BaseOutputPath>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <Version>0.9.8</Version>
-    <DefaultLanguage>zh-CN</DefaultLanguage>
-    <SupportedCultures>zh-CN;en-US</SupportedCultures>
-    <SupportedUICultures>zh-CN;en-US</SupportedUICultures>
+    <Version>0.9.9</Version>
+    <DefaultLanguage>en-US</DefaultLanguage>
+    <SupportedLanguages>en-US;zh-CN</SupportedLanguages>
+    <GenerateAllLanguageResourcePacks>false</GenerateAllLanguageResourcePacks>
+    <GenerateResourceResourcePacks>false</GenerateResourceResourcePacks>
   </PropertyGroup>
 
   <ItemGroup>
@@ -45,6 +46,7 @@
   <ItemGroup>
     <ProjectReference Include="..\IMao-WinUI.Core\IMao-WinUI.Core.csproj" />
   </ItemGroup>
+
   <ItemGroup>
     <None Update="appsettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -53,10 +55,6 @@
 
   <ItemGroup Condition="'$(DisableMsixProjectCapabilityAddedByProject)'!='true' and '$(EnableMsixTooling)'=='true'">
     <ProjectCapability Include="Msix" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PRIResource Include="Strings\**\*" />
   </ItemGroup>
 
   <ItemGroup>
@@ -74,5 +72,36 @@
   <PropertyGroup Condition="'$(DisableHasPackageAndPublishMenuAddedByProject)'!='true' and '$(EnableMsixTooling)'=='true'">
     <HasPackageAndPublishMenu>true</HasPackageAndPublishMenu>
   </PropertyGroup>
-  
+ 
+<!-- 删除其他语言文件夹 -->
+<Target Name="CleanUnsupportedLanguages" 
+        AfterTargets="CopyFilesToOutputDirectory;Publish" 
+        Condition="'$(Platform)'!='' and '$(Configuration)'!=''">
+  <PropertyGroup>
+    <RootOutputDir>$([System.IO.Path]::GetFullPath('$(BaseOutputPath)$(Platform)\$(Configuration)'))</RootOutputDir>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- 保留根目录的 en-us/zh-CN -->
+    <KeepFolders Include="$(RootOutputDir)\en-us" />
+    <KeepFolders Include="$(RootOutputDir)\zh-CN" />
+    <!-- 保留子目录中的 en-us/zh-CN（如 runtimes\win-x64\native\en-us） -->
+    <KeepFolders Include="$(RootOutputDir)\**\en-us" />
+    <KeepFolders Include="$(RootOutputDir)\**\zh-CN" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TargetMuiFiles Include="$(RootOutputDir)\**\Microsoft.ui.xaml.dll.mui;$(RootOutputDir)\**\Microsoft.UI.Xaml.Phone.dll.mui" />
+    <LanguageFoldersWithMui Include="$([System.IO.Path]::GetDirectoryName(%(TargetMuiFiles.FullPath)))" />
+    <UniqueLanguageFolders Include="@(LanguageFoldersWithMui)" Distinct="true" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UnsupportedFolders Include="@(UniqueLanguageFolders)" Exclude="@(KeepFolders)" />
+  </ItemGroup>
+
+  <RemoveDir Directories="@(UnsupportedFolders)" 
+             Condition="Exists('%(FullPath)')" 
+             ContinueOnError="true" />
+</Target>
 </Project>

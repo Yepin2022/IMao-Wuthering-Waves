@@ -1,5 +1,4 @@
-﻿using System.ComponentModel;
-using IMao_WinUI.Activation;
+﻿using IMao_WinUI.Activation;
 using IMao_WinUI.Contracts.Services;
 using IMao_WinUI.Core.Contracts.Services;
 using IMao_WinUI.Core.Services;
@@ -9,10 +8,12 @@ using IMao_WinUI.Notifications;
 using IMao_WinUI.Services;
 using IMao_WinUI.ViewModels;
 using IMao_WinUI.Views;
-
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
+using Microsoft.Windows.Globalization;
+using System.ComponentModel;
 
 namespace IMao_WinUI;
 
@@ -101,6 +102,16 @@ public partial class App : Application
 
     protected async override void OnLaunched(LaunchActivatedEventArgs args)
     {
+        // 强制语言匹配：仅中英，无匹配则用英语
+        var excludedLanguagePrefixes = new[] { "en", "zh" };
+
+        var matched = ApplicationLanguages.Languages
+            .FirstOrDefault(lang =>
+                !excludedLanguagePrefixes.Any(prefix =>
+                    lang.StartsWith(prefix, StringComparison.OrdinalIgnoreCase)
+                )
+            ) ?? "en-us"; // 没有匹配项时默认使用en-us
+
         base.OnLaunched(args);
 
         //App.GetService<IAppNotificationService>().Show(string.Format("AppNotificationSamplePayload".GetLocalized(), AppContext.BaseDirectory));

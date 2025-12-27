@@ -23,6 +23,10 @@ Coordinate RelativeCoordinates::ImgMapCoordToROC(const Coordinate& imgMapCoordin
 		return ImgMapCoordToROC_Avinoleum(imgMapCoordinate);
 	}
 
+	if (SceneId == 5) {
+		return ImgMapCoordToROC_Lahai(imgMapCoordinate);
+	}
+
 	return Coordinate(0, 0);
 }
 
@@ -41,6 +45,10 @@ Coordinate RelativeCoordinates::IdentifyCoordToROC(const Coordinate& identifyCoo
 
 	if (SceneId == 4) {
 		return AvinoleumCoordToROC_Avinoleum(identifyCoordinate);
+	}
+
+	if (SceneId == 5) {
+		return LahaiCoordToROC_Lahai(identifyCoordinate);
 	}
 
 	return Coordinate(0, 0);
@@ -95,5 +103,17 @@ Coordinate RelativeCoordinates::ImgMapCoordToROC_Avinoleum(const Coordinate& img
 Coordinate RelativeCoordinates::AvinoleumCoordToROC_Avinoleum(const Coordinate& AvinoleumCoordinate) {
 	Coordinate mapCoord = MapCoordinate::PlayerAvinoleumCoordToImgMapCoord(AvinoleumCoordinate);
 	Coordinate relativeCoordinates = ImgMapCoordToROC_Avinoleum(mapCoord);
+	return relativeCoordinates;
+}
+
+
+Coordinate RelativeCoordinates::ImgMapCoordToROC_Lahai(const Coordinate& imgMapCoordinate) {
+	Coordinate relativeCoordinates(imgMapCoordinate.x - LahaiOriginCoordinates::x,LahaiOriginCoordinates::y - imgMapCoordinate.y);
+	return relativeCoordinates;
+}
+
+Coordinate RelativeCoordinates::LahaiCoordToROC_Lahai(const Coordinate& LahaiCoordinate) {
+	Coordinate mapCoord = MapCoordinate::PlayerLahaiCoordToImgMapCoord(LahaiCoordinate);
+	Coordinate relativeCoordinates = ImgMapCoordToROC_Lahai(mapCoord);
 	return relativeCoordinates;
 }

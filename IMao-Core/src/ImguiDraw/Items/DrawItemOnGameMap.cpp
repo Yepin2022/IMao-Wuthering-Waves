@@ -40,6 +40,12 @@ bool DrawItemOnGameMap::GetBasicDataBySenceId(int senceId) {
 		return true;
 	}
 
+	if (senceId == 5) {
+		senceName = "Lahai";
+		itemsDatas_StoragePtr = &DrawItemBase::itemsDatas_Lahai_Storage;
+		return true;
+	}
+
 	return false;
 }
 
@@ -99,7 +105,7 @@ void DrawItemOnGameMap::DrawItemsOnGameMap(const RECT& rect,const HWND& hwnd) {
 			}
 		}
 		if (ret) {
-			float radius = (rect.right * 0.012f) / 2;
+			float radius = (rect.right * 0.0135f) / 2;
 			ImVec2 screenPosition(itemDatas.screenCoordiante.x, itemDatas.screenCoordiante.y);
 			//ImVec2 mousePos = ImGui::GetMousePos();
 			POINT mousePos;

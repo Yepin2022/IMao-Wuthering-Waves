@@ -14,5 +14,7 @@ public:
 	static Coordinate FabricatoriumCoordToROC_Fabricatorium(const Coordinate& TethysCoordinate);
 	static Coordinate ImgMapCoordToROC_Avinoleum(const Coordinate& imgMapCoordinate);
 	static Coordinate AvinoleumCoordToROC_Avinoleum(const Coordinate& AvinoleumCoordinate);
+	static Coordinate ImgMapCoordToROC_Lahai(const Coordinate& imgMapCoordinate);
+	static Coordinate LahaiCoordToROC_Lahai(const Coordinate& LahaiCoordinate);
 };
 

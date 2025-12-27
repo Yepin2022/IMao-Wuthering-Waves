@@ -43,6 +43,12 @@ bool DrawItemOnMinMap::GetBasicDataBySenceId(int senceId) {
         return true;
     }
 
+    if (senceId == 5) {
+        senceName = "Lahai";
+        itemsDatas_StoragePtr = &DrawItemBase::itemsDatas_Lahai_Storage;
+        return true;
+    }
+
     return false;
 }
 
