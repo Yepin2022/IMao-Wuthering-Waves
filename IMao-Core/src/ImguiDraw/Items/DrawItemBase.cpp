@@ -14,12 +14,14 @@ json DrawItemBase::itemsJsonData_World;
 json DrawItemBase::itemsJsonData_Tethys;
 json DrawItemBase::itemsJsonData_Fabricatorium;
 json DrawItemBase::itemsJsonData_Avinoleum;
+json DrawItemBase::itemsJsonData_Lahai;
 
 vector<ItemTextureData> DrawItemBase::itemsTextureData;
 vector<ItemsDatas> DrawItemBase::itemsDatas_World_Storage;
 vector<ItemsDatas> DrawItemBase::itemsDatas_Tethys_Storage;
 vector<ItemsDatas> DrawItemBase::itemsDatas_Fabricatorium_Storage;
 vector<ItemsDatas> DrawItemBase::itemsDatas_Avinoleum_Storage;
+vector<ItemsDatas> DrawItemBase::itemsDatas_Lahai_Storage;
 thread DrawItemBase::thread_ReadSavedPointsJson;
 string DrawItemBase::savedJsonPath;
 
@@ -85,6 +87,7 @@ void DrawItemBase::LoadItemsjson() {
     LoadJson(itemsJsonData_World, L"ITEMSJSON_World");
     LoadJson(itemsJsonData_Fabricatorium, L"ITEMSJSON_Fabricatorium");
     LoadJson(itemsJsonData_Avinoleum, L"ITEMSJSON_Avinoleum");
+    LoadJson(itemsJsonData_Lahai, L"ITEMSJSON_Lahai");
 }
 
 bool DrawItemBase::IsValidItemNameId(string itemNameId) {
@@ -111,6 +114,13 @@ bool DrawItemBase::IsValidItemNameId(string itemNameId) {
             return true;
         }
     }
+
+    for (const auto& itemsDatas : itemsDatas_Lahai_Storage) {
+        if (itemsDatas.nameId == itemNameId) {
+            return true;
+        }
+    }
+
     return false;
 }
 
@@ -138,6 +148,13 @@ bool DrawItemBase::FindItemJsonData(int sceneId, json*& itemJsonData, vector<Ite
         itemsDatas_Storage = &itemsDatas_Avinoleum_Storage;
         return true;
     }
+
+    if (sceneId == 5) {
+        itemJsonData = &itemsJsonData_Lahai;
+        itemsDatas_Storage = &itemsDatas_Lahai_Storage;
+        return true;
+    }
+
     return false;
 }
 
@@ -194,6 +211,13 @@ void DrawItemBase::ClearItemData(string itemId) {
     for (int i = 0; i < itemsDatas_Avinoleum_Storage.size(); i++) {
         if (itemsDatas_Avinoleum_Storage[i].nameId == itemId) {
             itemsDatas_Avinoleum_Storage.erase(itemsDatas_Avinoleum_Storage.begin() + i);
+            break;
+        }
+    }
+
+    for (int i = 0; i < itemsDatas_Lahai_Storage.size(); i++) {
+        if (itemsDatas_Lahai_Storage[i].nameId == itemId) {
+            itemsDatas_Lahai_Storage.erase(itemsDatas_Lahai_Storage.begin() + i);
             break;
         }
     }

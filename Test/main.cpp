@@ -12,12 +12,31 @@ using namespace cv::xfeatures2d;
 using namespace cv;
 using namespace std;
 
-void saveFeatures(const string& filename, const vector<KeyPoint>& keypoints, const Mat& descriptors) {
+void saveFeatures_YML(const string& filename, const vector<KeyPoint>& keypoints, const Mat& descriptors) {
     FileStorage fs(filename, FileStorage::WRITE);
     if (fs.isOpened()) {
         fs << "keypoints" << keypoints;
         fs << "descriptors" << descriptors;
         fs.release();
+    }
+}
+
+void saveFeatures_XML(const string& filePath,const vector<KeyPoint>& keypoints,const Mat& descriptors) {
+    try {
+        // 指定格式为XML（二进制存储更紧凑），默认是YAML
+        cv::FileStorage fs(filePath, cv::FileStorage::WRITE | cv::FileStorage::FORMAT_XML);
+        if (fs.isOpened()) {
+            fs << "num_keypoints" << static_cast<int>(keypoints.size());
+            fs << "keypoints" << keypoints;
+            fs << "descriptors" << descriptors;
+            fs.release();
+        }
+
+     
+    }
+    catch (const cv::Exception& e) {
+        std::cerr << "保存特征失败: " << e.what() << std::endl;
+        return false;
     }
 }
 
@@ -74,7 +93,7 @@ int main_1() {
     }
 
     std::string featureFilePath = "C:\\Map_features.yml";
-    saveFeatures(featureFilePath, selectedKeypoints, selectedDescriptors);
+    saveFeatures_XML(featureFilePath, selectedKeypoints, selectedDescriptors);
 
     std::vector<cv::KeyPoint> loadedKeypoints;
     cv::Mat loadedDescriptors;

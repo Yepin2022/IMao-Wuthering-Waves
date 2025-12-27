@@ -97,6 +97,11 @@ Coordinate MapCoordinate::PlayerAvinoleumCoordToImgMapCoord(Coordinate Avinoleum
     return PlayerMapCoor;
 }
 
+Coordinate MapCoordinate::PlayerLahaiCoordToImgMapCoord(Coordinate LahaiCoordinate) {
+    Coordinate PlayerMapCoor(LahaiCoordinate.x * 1.205 + LahaiOriginCoordinates::x, LahaiCoordinate.y * 1.205 + LahaiOriginCoordinates::y);
+    return PlayerMapCoor;
+}
+
 
 Coordinate MapCoordinate::IdentifyCoorToImgMapCoord(Coordinate identifyCoordinate,int sceneId) {
     if (sceneId == 1) {
@@ -113,6 +118,10 @@ Coordinate MapCoordinate::IdentifyCoorToImgMapCoord(Coordinate identifyCoordinat
 
     if (sceneId == 4) {
         return PlayerAvinoleumCoordToImgMapCoord(identifyCoordinate);
+    }
+
+    if (sceneId == 5) {
+        return PlayerLahaiCoordToImgMapCoord(identifyCoordinate);
     }
 
     return Coordinate(0, 0);

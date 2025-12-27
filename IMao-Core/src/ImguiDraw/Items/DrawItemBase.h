@@ -47,10 +47,13 @@ public:
 	static std::vector<ItemsDatas> itemsDatas_Tethys_Storage;
 	static std::vector<ItemsDatas> itemsDatas_Fabricatorium_Storage;
 	static std::vector<ItemsDatas> itemsDatas_Avinoleum_Storage;
+	static std::vector<ItemsDatas> itemsDatas_Lahai_Storage;
 	static json itemsJsonData_World;
 	static json itemsJsonData_Tethys;
 	static json itemsJsonData_Fabricatorium;
 	static json itemsJsonData_Avinoleum;
+	static json itemsJsonData_Lahai;
+
 private:
 	static json& GetSavedItemPoints();
 	static void LoadItemsjson();

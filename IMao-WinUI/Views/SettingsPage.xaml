@@ -24,7 +24,7 @@
                 <TextBlock x:Uid="SettingsPage_Expander_About_Description"/>
             </toolkit:SettingsExpander.Description>
 
-            <TextBlock>0.9.8</TextBlock>
+            <TextBlock>0.9.9</TextBlock>
 
             <toolkit:SettingsExpander.Items>
                 <toolkit:SettingsCard>

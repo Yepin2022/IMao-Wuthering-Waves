@@ -7,7 +7,7 @@
 class FeatureLoader
 {
 	public:
-		static bool loadFeatures(const std::string& filename, std::vector<cv::KeyPoint>& keypoints, cv::Mat& descriptors);
+		static bool loadFeaturesFromXML(const std::string& filename, ImageFeatureData& imageFeatureData);
 		static bool loadFeatures(const std::string& filename, ImageFeatureData& imageFeatureData);
 };
 

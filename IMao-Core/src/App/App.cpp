@@ -27,7 +27,7 @@ bool App::Init() {
 	const string IconTask_FeatureFilePath = path + "\\IconTask_Features.yml";
 	const string IconWavePlateCrystal_FeatureFilePath = path +"\\IconWavePlateCrystal_Features.yml";
 
-	if (!FeatureLoader::loadFeatures(mapFeatureFilePath, FeatureData_map) or
+	if (!FeatureLoader::loadFeaturesFromXML(mapFeatureFilePath, FeatureData_map) or
 		!FeatureLoader::loadFeatures(IconTask_FeatureFilePath, FeatureData_IconTask) or
 		!FeatureLoader::loadFeatures(IconWavePlateCrystal_FeatureFilePath, FeatureData_wavePlateCrystal)) {
 		Notification::AddInfo(NotificationDatas("Resource loading failed.", 30));
@@ -129,7 +129,7 @@ winrt::IAsyncAction App::GetMatSnapshot(bool isTaketAsync, Mat& result) {
 	}
 }
 
-//TODO:在特殊场景下 避免OCR 浪费性能
+
 void App::Thread_DetectGameState() {
 	const int cycleTime = 100;
 	while (!allThreadStopFlag) {

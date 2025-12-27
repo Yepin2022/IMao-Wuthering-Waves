@@ -17,34 +17,40 @@ struct Coordinate {
 
 //大世界坐标(0,0)在图片地图上对应的坐标
 struct WorldOriginCoordinates {
-    inline static double x = 2474;
-    inline static double y = 1957;
+    inline static double x = 2278;
+    inline static double y = 1955;
 };
 
 //泰缇斯之底坐标(0，0)在图片地图上对应的坐标
 //TODO:游戏内大小地图有偏差bug，需在原来的基础上，x-10，y+20
 struct TethysOriginCoordinates {
-    inline static double x = 8593;
+    inline static double x = 8394;
     inline static double y = 1382;
 };
 
-//隐海试验厂
+//隐海试验厂 3
 //TODO:游戏内大小地图有偏差bug，需在原来的基础上，x+6
 struct FabricatoriumOriginCoordinates {
-    inline static double x = 7437;
+    inline static double x = 7252;
     inline static double y = 13783;
 };
 
-//阿维纽林
+//阿维纽林 4
 struct AvinoleumOriginCoordinates {
-    inline static double x = 2433;
-    inline static double y = 9030;
+    inline static double x = 2233;
+    inline static double y = 9029;
+};
+
+//罗伊冰原 5
+struct LahaiOriginCoordinates {
+    inline static double x = 21647;
+    inline static double y = 14274;
 };
 
 //TODO:需要适配更多地图
 struct Scene {
-    inline static std::vector<int> sceneIds = { 1,2 ,3,4};
-    inline static std::vector<std::string> sceneNames = { "World","Tethys","Fabricatorium","Avinoleum" };
+    inline static std::vector<int> sceneIds = {1,2,3,4,5};
+    inline static std::vector<std::string> sceneNames = { "World","Tethys","Fabricatorium","Avinoleum","Lahai"};
     
     static std::string SceneIdToName(int sceneId) {
         for (size_t i = 0; i < sceneIds.size(); i++) {

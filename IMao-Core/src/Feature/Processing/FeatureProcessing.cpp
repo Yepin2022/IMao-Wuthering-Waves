@@ -2,16 +2,6 @@
 using namespace cv;
 using namespace std;
 
-bool FeatureLoader::loadFeatures(const string& filename, vector<KeyPoint>& keypoints, Mat& descriptors) {
-    FileStorage fs(filename, FileStorage::READ);
-    if (fs.isOpened()) {
-        fs["keypoints"] >> keypoints;
-        fs["descriptors"] >> descriptors;
-        fs.release();
-        return true;
-    }
-    return false;
-}
 
 bool FeatureLoader::loadFeatures(const string& filename, ImageFeatureData& imageFeatureData) {
     FileStorage fs(filename, FileStorage::READ);
@@ -24,6 +14,16 @@ bool FeatureLoader::loadFeatures(const string& filename, ImageFeatureData& image
     return false;
 }
 
+bool FeatureLoader::loadFeaturesFromXML(const string& filename, ImageFeatureData& imageFeatureData) {
+    FileStorage fs(filename, cv::FileStorage::READ | cv::FileStorage::FORMAT_XML);
+    if (fs.isOpened()) {
+        fs["keypoints"] >> imageFeatureData.imgKeypoints;
+        fs["descriptors"] >> imageFeatureData.imgDescriptors;
+        fs.release();
+        return true;
+    }
+    return false;
+}
 
 // 筛选当前位置附近的特征点
 void FeatureFilter::FilterNearKeypoints(const std::vector<cv::KeyPoint> inputKeypoints, const cv::Mat inputDescriptors,
