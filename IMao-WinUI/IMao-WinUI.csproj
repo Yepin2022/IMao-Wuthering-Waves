@@ -4,8 +4,6 @@
     <TargetFramework>net8.0-windows10.0.26100.0</TargetFramework>
     <TargetPlatformMinVersion>10.0.17763.0</TargetPlatformMinVersion>
     <RootNamespace>IMao_WinUI</RootNamespace>
-    <ApplicationIcon>Assets/WindowIcon.ico</ApplicationIcon>
-    <ApplicationManifest>app.manifest</ApplicationManifest>
     <Platforms>x86;x64;arm64</Platforms>
     <RuntimeIdentifiers>win-x86;win-x64;win-arm64</RuntimeIdentifiers>
     <ImplicitUsings>enable</ImplicitUsings>
@@ -19,11 +17,13 @@
     <SupportedOSPlatformVersion>10.0.17763.0</SupportedOSPlatformVersion>
     <BaseOutputPath>..\</BaseOutputPath>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <Version>0.9.9</Version>
+    <Version>1.0.0</Version>
     <DefaultLanguage>en-US</DefaultLanguage>
     <SupportedLanguages>en-US;zh-CN</SupportedLanguages>
     <GenerateAllLanguageResourcePacks>false</GenerateAllLanguageResourcePacks>
     <GenerateResourceResourcePacks>false</GenerateResourceResourcePacks>
+    <ApplicationIcon>Assets/WindowIcon.ico</ApplicationIcon>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
 
   <ItemGroup>
@@ -74,9 +74,7 @@
   </PropertyGroup>
  
 <!-- 删除其他语言文件夹 -->
-<Target Name="CleanUnsupportedLanguages" 
-        AfterTargets="CopyFilesToOutputDirectory;Publish" 
-        Condition="'$(Platform)'!='' and '$(Configuration)'!=''">
+<Target Name="CleanUnsupportedLanguages" AfterTargets="CopyFilesToOutputDirectory;Publish" Condition="'$(Platform)'!='' and '$(Configuration)'!=''">
   <PropertyGroup>
     <RootOutputDir>$([System.IO.Path]::GetFullPath('$(BaseOutputPath)$(Platform)\$(Configuration)'))</RootOutputDir>
   </PropertyGroup>
@@ -100,8 +98,6 @@
     <UnsupportedFolders Include="@(UniqueLanguageFolders)" Exclude="@(KeepFolders)" />
   </ItemGroup>
 
-  <RemoveDir Directories="@(UnsupportedFolders)" 
-             Condition="Exists('%(FullPath)')" 
-             ContinueOnError="true" />
+  <RemoveDir Directories="@(UnsupportedFolders)" Condition="Exists('%(FullPath)')" ContinueOnError="true" />
 </Target>
 </Project>

@@ -109,8 +109,42 @@ vector<json> LoadEditRouteData::ReadRoutesJson() {
 	}
 }
 
-void LoadEditRouteData::LoadRoutesDatasFromLocal() {
-	vector<json> RoutesJson = ReadRoutesJson();
+vector<json> LoadEditRouteData::ReadRoutesJson(string routeName) {
+	json j;
+	vector<json> routesJson;
+
+	if (!routeName.empty()) {
+		string jsonRoutePath = RouteFolderPath + "\\" + routeName + ".json";
+		//cout << jsonRoutePath << endl;
+		if (fs::exists(jsonRoutePath) and !fs::is_directory(jsonRoutePath)) {
+			try{
+				ifstream jsonRouteFile(jsonRoutePath);
+				jsonRouteFile >> j;
+				routesJson.push_back(j);
+				jsonRouteFile.close();
+
+				return routesJson;
+			}
+			catch (const exception& ex) {
+				return routesJson;
+			}
+		}
+	}
+	return routesJson;
+}
+
+void LoadEditRouteData::LoadRoutesDatasFromLocal(bool isLoadAll,string routeName) {
+	vector<json> RoutesJson;
+	if (isLoadAll) {
+		RoutesJson = ReadRoutesJson();
+	}else {
+		if (routeName.empty()) {
+			return;
+		}
+
+		RoutesJson = ReadRoutesJson(routeName);
+	}
+
 	for (const auto& RouteJson : RoutesJson) {
 
 		for (const auto& [scene, routesData] : RouteJson.items()) {

@@ -40,7 +40,7 @@ public:
         CaptureInit(hwnd);
     }
 
-    Mat getCaptureResult() {
+    Mat getTakeSnapshotAsyncResult() {
         return captureResult;
     }
 

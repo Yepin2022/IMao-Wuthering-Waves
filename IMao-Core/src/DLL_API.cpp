@@ -160,7 +160,11 @@ void SetSavedJsonRouteName(const char* itemId) {
     LoadEditRouteData::SetRouteJsonName(itemId);
 }
 
+void LoadOneJsonRoute(const char* routeName) {
+    LoadEditRouteData::LoadRoutesDatasFromLocal(false, routeName);
+}
+
 void LoadJsonRoute() {
     LoadEditRouteData::ClearRoutesDatas();
-    LoadEditRouteData::LoadRoutesDatasFromLocal();
+    LoadEditRouteData::LoadRoutesDatasFromLocal(true,"");
 }

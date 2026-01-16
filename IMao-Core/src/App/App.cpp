@@ -110,17 +110,17 @@ winrt::IAsyncAction App::Start() {
 winrt::IAsyncAction App::GetMatSnapshot(bool isTaketAsync, Mat& result) {
 	Mat temp;
 	if (bitBltCapture.has_value()) {
-		bitBltCapture->GetSnapshot(temp);
+		bitBltCapture->GetSnapshot_PrintWindow(temp);
 		temp.copyTo(result);
 		co_return;
 	}
 	else if (graphicsCapture.has_value()) {
 		if (isTaketAsync) {
 			co_await graphicsCapture->TakeSnapshotAsync();
-			temp = graphicsCapture->getCaptureResult();
+			temp = graphicsCapture->getTakeSnapshotAsyncResult();
 		}
 		else {
-			graphicsCapture->Getcapture()->GetLatestFrame(temp);
+			graphicsCapture->Getcapture()->GetLatestFrame_Mat(temp);
 		}
 		NonClientRegion nonClientRegion;
 		CalculateNonClientAreaSize(hwnd, nonClientRegion);
@@ -250,16 +250,22 @@ int App::GetCurrentSceneId(const Coordinate& identifyCoordinate, const Mat& minM
 }
 
 winrt::IAsyncOperation<bool> App::GetMinMapPlayerROC(const Mat& snapshot,Coordinate& outPlayerROC, float& outMinMapRadius) {
-	Ptr<xfeatures2d::SURF> surf = xfeatures2d::SURF::create(8, 8, 4, true, true);
+	Ptr<xfeatures2d::SURF> surf = xfeatures2d::SURF::create(60, 8, 4, true, true);
 	Mat minMapImg = ImageProcessing::CropToMinMapAreaImg(snapshot, rect);
 
 	if ((identifyCoordinate.x == 0 && identifyCoordinate.y == 0) || playerCurrentSceneId == 0) {
 
 		Notification::AddInfo(NotificationDatas("Continuity match failed, trying to identify coordinates.", 3));
 
-		this_thread::sleep_for(std::chrono::milliseconds(120));
 		Mat snapshot_ocr;
-		co_await GetMatSnapshot(true, snapshot_ocr);
+		if (graphicsCapture.has_value()) {
+			this_thread::sleep_for(std::chrono::milliseconds(50));
+		    co_await GetMatSnapshot(true, snapshot_ocr);
+		}
+		else {
+			snapshot_ocr = snapshot;
+		}
+
 		if (!IdentifyWorldCoordinates::IdentifyCoordinateFromSnapshot(snapshot_ocr, identifyCoordinate, rect)) {
 			identifyCoordinate = { 0,0 };
 			co_return false;
@@ -273,7 +279,7 @@ winrt::IAsyncOperation<bool> App::GetMinMapPlayerROC(const Mat& snapshot,Coordin
 	}
 
 	const Point2f playerImgMapPoint(lastPlayerImgMapCoordinate.x, lastPlayerImgMapCoordinate.y);
-	FeatureFilter::FilterNearKeypoints(App::FeatureData_map.imgKeypoints, App::FeatureData_map.imgDescriptors, playerImgMapPoint, 130, nearPlayerMapKeypoints, nearPlayerMapDescriptors);
+	FeatureFilter::FilterNearKeypoints(App::FeatureData_map.imgKeypoints, App::FeatureData_map.imgDescriptors, playerImgMapPoint, 120, nearPlayerMapKeypoints, nearPlayerMapDescriptors);
 
 	ImageFeatureData MapFeatureData(nearPlayerMapKeypoints, nearPlayerMapDescriptors);
 	ImageFeatureData minMapFeatureData = FeatureMatch::ExtractSurfFeatures(surf, minMapImg);
@@ -289,7 +295,7 @@ winrt::IAsyncOperation<bool> App::GetMinMapPlayerROC(const Mat& snapshot,Coordin
 		goodMatch,
 		nearPlayerMapKeypoints,
 		minMapFeatureData.imgKeypoints,
-		8.0f,
+		15.0f,
 		lastPlayerImgMapCoordinate,
 		PlayerImageMapCoordinate
 	);
@@ -313,6 +319,7 @@ winrt::IAsyncOperation<bool> App::GetMinMapPlayerROC(const Mat& snapshot,Coordin
 
 bool App::GetGameMapCenterPointROC(const Mat& snapshot, Coordinate& outGameMapCenterPointROC, Coordinate& outLastGameMapCenterPointROC) {
 	Mat mapCenterAreaImgae = ImageProcessing::CropToMapCenterArea(snapshot, rect);
+
 	Ptr<xfeatures2d::SURF> surt = xfeatures2d::SURF::create(100, 4, 3, true, true);
 	ImageFeatureData mapCenterAreaFeatureData = FeatureMatch::ExtractSurfFeatures(surt, mapCenterAreaImgae);
 

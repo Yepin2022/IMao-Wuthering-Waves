@@ -66,7 +66,7 @@ int main() {
     App::SetEnabledMinMapShowItem(true);
 
     app.StartTasks();
-    LoadEditRouteData::LoadRoutesDatasFromLocal();
+    LoadEditRouteData::LoadRoutesDatasFromLocal(true,"");
     while (true) {
         std::this_thread::sleep_for(std::chrono::seconds(10));
     }

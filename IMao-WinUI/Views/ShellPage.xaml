@@ -17,8 +17,8 @@
               VerticalAlignment="Top">
             <Image Source="/Assets/WindowIcon.ico"
                    HorizontalAlignment="Left"
-                   Width="22"
-                   Height="22" />
+                   Width="23"
+                   Height="23" />
             <TextBlock x:Name="AppTitleBarText"
                        VerticalAlignment="Center"
                        TextWrapping="NoWrap"
