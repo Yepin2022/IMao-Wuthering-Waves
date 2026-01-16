@@ -28,7 +28,8 @@ public:
 	static void SetRouteJsonName(const std::string& setName);
 	static void Thread_KeyMonitoring_AddRouteDatas_ByMousePos();
 	static std::vector<json> ReadRoutesJson();
-	static void LoadRoutesDatasFromLocal();
+	static std::vector<json> ReadRoutesJson(std::string routeName);
+	static void LoadRoutesDatasFromLocal(bool isLoadAll, std::string routeName);
 	static void WriteRoutesDatas(const std::string& routeFileName,const std::string& senceName, const Coordinate& ROC_a, const Coordinate& ROC_b);
 
 	static void StopThread() {

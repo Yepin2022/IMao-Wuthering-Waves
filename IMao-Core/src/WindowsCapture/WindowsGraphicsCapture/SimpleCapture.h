@@ -3,6 +3,9 @@
 #include <d3d11.h>
 #include <opencv2/opencv.hpp>
 #include "..\..\pch.h"
+#include "..\..\Base\imgui_dx11\imgui.h"
+#include <wrl/client.h> 
+#include <d3d11.h> 
 class SimpleCapture
 {
 public:
@@ -42,7 +45,7 @@ public:
 
     void Close();
 
-    bool GetLatestFrame(cv::Mat& outputFrame) {
+    bool GetLatestFrame_Mat(cv::Mat& outputFrame) {
         std::lock_guard<std::mutex> lock(m_frameMutex);
         if (m_latestFrame.empty()) {
             return false;
@@ -51,10 +54,33 @@ public:
         return true;
     }
 
+    ImTextureID GetCapture_ImTextureID() {
+        std::lock_guard<std::mutex> lock(m_frameMutex);
+        if (m_latestFrame.empty()) {
+            return NULL;
+        }
+        
+        return  GetImTextureFromMat(m_latestFrame);
+    }
+
+    ImTextureID GetCapture_MatandImTextureID(cv::Mat& outputFrame) {
+        std::lock_guard<std::mutex> lock(m_frameMutex);
+        if (m_latestFrame.empty()) {
+            return NULL;
+        }
+
+        m_latestFrame.copyTo(outputFrame);
+        return m_imguiImTextureID;
+    }
+
+    bool isChnageWinSize = true;
+
 private:
     void OnFrameArrived(
         winrt::Windows::Graphics::Capture::Direct3D11CaptureFramePool const& sender,
         winrt::Windows::Foundation::IInspectable const& args);
+
+    ImTextureID GetImTextureFromMat(const cv::Mat& inputMat);
 
     inline void CheckClosed()
     {
@@ -87,6 +113,13 @@ private:
 
     std::shared_ptr<DirtyRegionVisualizer> m_dirtyRegionVisualizer;
     std::atomic<bool> m_visualizeDirtyRegions = false;
+
+    winrt::com_ptr<ID3D11Texture2D>             m_imguiTexture;
+    winrt::com_ptr<ID3D11ShaderResourceView>    m_imguiSRV;
+    int                                         m_imguiTexWidth = 0;
+    int                                         m_imguiTexHeight = 0;
+    std::mutex                                  m_imguiTexMutex;
+    ImTextureID                                 m_imguiImTextureID;
 
     cv::Mat m_latestFrame; 
     std::mutex m_frameMutex; 

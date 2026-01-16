@@ -85,7 +85,7 @@
                     <toolkit:SettingsCard.Description>
                         <TextBlock x:Uid="Start_Card_SwitchAccount_Description" />
                     </toolkit:SettingsCard.Description>
-                    <ToggleSwitch AutomationProperties.Name="ToggleSwitch_SwitchAccount" IsEnabled="false"/>
+                    <Button x:Uid="Button_OpenPointsFolder" Click="Button_OpenPointsFolder_Click" />
                 </toolkit:SettingsCard>
 
                 <toolkit:SettingsCard

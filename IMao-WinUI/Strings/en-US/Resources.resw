@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AppDisplayName" xml:space="preserve">
-    <value>IMao-Wuthering-Waves v0.9.9 Beta</value>
+    <value>IMao-Wuthering-Waves v1.0.0</value>
   </data>
   <data name="AppDescription" xml:space="preserve">
     <value>IMao-Wuthering-Waves</value>
@@ -258,10 +258,10 @@
     <value>Shortcut key</value>
   </data>
   <data name="Function_Expander_DarwRoutes.Header" xml:space="preserve">
-    <value>Route Guidance (experimental)</value>
+    <value>Route Guidance</value>
   </data>
   <data name="Function_Expander_DarwRoutes_Description.Text" xml:space="preserve">
-    <value>Draw user-edited routes on minimaps and large maps (Some features have not been implemented yet).</value>
+    <value>Draw user-edited routes on minimaps and large maps.</value>
   </data>
   <data name="Function_Card_IsEnabledEditRoutes_Description.Text" xml:space="preserve">
     <value>Two points A and B determine a straight line. In the large map interface, press 'Q' to record the current mouse position (point A), and press 'Q' again to record the next position (point B).</value>
@@ -273,21 +273,33 @@
     <value>Filename of the file storing path data</value>
   </data>
   <data name="Function_Card_SetSavedRouteJsonName_Description.Text" xml:space="preserve">
-    <value>Convenient for classification.</value>
+    <value>After generating a line by pressing "Q", the position data of the line will be stored in the file.</value>
   </data>
-  <data name="Function_Card_LoadRouteData.Header" xml:space="preserve">
-    <value>Load routes data</value>
+  <data name="Function_Card_LoadAllRoutesData.Header" xml:space="preserve">
+    <value>Load all routes data</value>
   </data>
-  <data name="Function_Card_LoadRouteData_Description.Text" xml:space="preserve">
-    <value>Load stored routes data from local storage.</value>
+  <data name="Function_Card_LoadAllRoutesData_Description.Text" xml:space="preserve">
+    <value>Load stored all routes data from local storage.</value>
   </data>
   <data name="Button_OpenRoutesFolder.Content" xml:space="preserve">
     <value>Open folder</value>
   </data>
+  <data name="Start_InfoBar_IncorrectGameWindowSize.Message" xml:space="preserve">
+    <value>Your game resolution is not 16:9, which will cause all map functions to malfunction.</value>
+  </data>
   <data name="Button_LoadRoutesData.Content" xml:space="preserve">
     <value>Reload</value>
   </data>
-  <data name="Start_InfoBar_IncorrectGameWindowSize.Message" xml:space="preserve">
-    <value>Your game resolution is not 16:9, which will cause all map functions to malfunction.</value>
+  <data name="Functions_Card_LoadOneRouteData.Header" xml:space="preserve">
+    <value>Load a route data</value>
+  </data>
+  <data name="Function_Card_LoadOneRoutesData_Description.Text" xml:space="preserve">
+    <value>Selectively load individual path data</value>
+  </data>
+  <data name="Button_LoadOneRouteData.Content" xml:space="preserve">
+    <value>Load</value>
+  </data>
+  <data name="Button_OpenPointsFolder.Content" xml:space="preserve">
+    <value>Open folder</value>
   </data>
 </root>

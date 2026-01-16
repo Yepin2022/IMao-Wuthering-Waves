@@ -8,6 +8,7 @@
     NavigationCacheMode="Enabled"
     mc:Ignorable="d">
 
+
     <StackPanel x:Name="ContentArea">
         <InfoBar x:Uid="Function_InfoBar_Statement" CornerRadius="8" IsOpen="True" IsIconVisible="True" IsClosable="False" Margin="{StaticResource InfoBarMargin}" />
         
@@ -113,10 +114,23 @@ SmallChange="5" Value="80" Name="UpdateMapItemDataCycle" ValueChanged="UpdateMap
                     </StackPanel>
                 </toolkit:SettingsCard>
 
-                <toolkit:SettingsCard x:Uid="Function_Card_LoadRouteData" x:Name="Function_Card_LoadRouteData">
-                    
+                <toolkit:SettingsCard x:Uid="Functions_Card_LoadOneRouteData" x:Name="Functions_Card_LoadOneRouteData">
                     <toolkit:SettingsCard.Description>
-                        <TextBlock x:Uid="Function_Card_LoadRouteData_Description"/>
+                        <TextBlock x:Uid="Function_Card_LoadOneRoutesData_Description"/>
+                    </toolkit:SettingsCard.Description>
+
+                    <StackPanel Orientation="Horizontal">
+                        <Button x:Uid="Button_LoadOneRouteData"  Click="Button_LoadOneRouteData" Margin="0,0,8,0"/>
+                        <ComboBox x:Name="ComboBox_RouteDataName" DropDownOpened="ComboBox_RouteDataName_DropDownOpened" PlaceholderText="Pick a route" Width="130">
+                        </ComboBox>
+                    </StackPanel>
+                    
+                </toolkit:SettingsCard>
+
+                <toolkit:SettingsCard x:Uid="Function_Card_LoadAllRoutesData" x:Name="Function_Card_LoadAllRoutesData">
+
+                    <toolkit:SettingsCard.Description>
+                        <TextBlock x:Uid="Function_Card_LoadAllRoutesData_Description"/>
                     </toolkit:SettingsCard.Description>
 
                     <StackPanel Orientation="Horizontal">

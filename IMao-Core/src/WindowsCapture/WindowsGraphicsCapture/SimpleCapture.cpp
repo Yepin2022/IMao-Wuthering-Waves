@@ -3,7 +3,7 @@
 #include <iostream>
 #include <vector>
 #include "include/paddleocr.h"
-
+#include <exception>
 using namespace PaddleOCR;
 
 namespace winrt
@@ -137,6 +137,7 @@ void SimpleCapture::OnFrameArrived(winrt::Direct3D11CaptureFramePool const& send
 
         auto surfaceTexture = GetDXGIInterfaceFromObject<ID3D11Texture2D>(frame.Surface());
 
+
         // If we have a dirty region visualizer, then we're running on a build
         // of Windows that supports dirty regions.
         bool renderRects = m_dirtyRegionVisualizer && frame.DirtyRegionMode() == winrt::GraphicsCaptureDirtyRegionMode::ReportAndRender;
@@ -206,7 +207,7 @@ void SimpleCapture::OnFrameArrived(winrt::Direct3D11CaptureFramePool const& send
         {
             m_dirtyRegionVisualizer->Render(backBuffer, frame);
         }
-        
+
         {
             D3D11_TEXTURE2D_DESC backBufferDesc;
             backBuffer->GetDesc(&backBufferDesc);
@@ -231,6 +232,8 @@ void SimpleCapture::OnFrameArrived(winrt::Direct3D11CaptureFramePool const& send
 
             std::lock_guard<std::mutex> lock(m_frameMutex);
             frameMat.copyTo(m_latestFrame);
+
+           // m_imguiImTextureID = GetImTextureFromMat(m_latestFrame);
         }
     }
     DXGI_PRESENT_PARAMETERS presentParameters{};
@@ -241,6 +244,102 @@ void SimpleCapture::OnFrameArrived(winrt::Direct3D11CaptureFramePool const& send
     if (swapChainResizedToFrame)
     {
         m_framePool.Recreate(m_device, m_pixelFormat, 2, m_lastSize);
+    }
+}
+
+ImTextureID SimpleCapture::GetImTextureFromMat(const cv::Mat& inputMat)
+{
+    try {
+        if (inputMat.empty())
+            return NULL;
+
+        // 确保是 4 通道
+        cv::Mat matBGRA;
+        if (inputMat.type() == CV_8UC4) {
+            matBGRA = inputMat; 
+        }
+        else if (inputMat.type() == CV_8UC3) {
+            cv::cvtColor(inputMat, matBGRA, cv::COLOR_BGR2BGRA); // BGR -> BGRA
+        }
+        else if (inputMat.type() == CV_8UC1) {
+            cv::cvtColor(inputMat, matBGRA, cv::COLOR_GRAY2BGRA);
+        }
+        else {
+            return NULL;
+        }
+
+        int width = inputMat.size().width;
+        int height = inputMat.size().height;
+
+        std::lock_guard<std::mutex> lock(m_imguiTexMutex);
+
+        // 如果尺寸不匹配，则创建新的纹理 & SRV
+        if (!m_imguiTexture || width != m_imguiTexWidth || height != m_imguiTexHeight)
+        {
+            if (width != m_imguiTexWidth or height != m_imguiTexHeight) {
+                isChnageWinSize = true;
+            }
+            else {
+                isChnageWinSize = false;
+            }
+
+            m_imguiSRV = nullptr;
+            m_imguiTexture = nullptr;
+
+            D3D11_TEXTURE2D_DESC desc{};
+            desc.Width = static_cast<UINT>(width);
+            desc.Height = static_cast<UINT>(height);
+            desc.MipLevels = 1;
+            desc.ArraySize = 1;
+            // OpenCV CV_8UC4 is BGRA -> use B8G8R8A8_UNORM
+            desc.Format = DXGI_FORMAT_B8G8R8A8_UNORM;
+            desc.SampleDesc.Count = 1;
+            desc.Usage = D3D11_USAGE_DEFAULT; // so we can UpdateSubresource
+            desc.BindFlags = D3D11_BIND_SHADER_RESOURCE;
+            desc.CPUAccessFlags = 0;
+            desc.MiscFlags = 0;
+
+            D3D11_SUBRESOURCE_DATA initData{};
+            initData.pSysMem = matBGRA.data;
+            initData.SysMemPitch = static_cast<UINT>(matBGRA.step);
+
+            ID3D11Texture2D* tex = nullptr;
+            HRESULT hr = m_d3dDevice->CreateTexture2D(&desc, &initData, &tex);
+            if (FAILED(hr) || !tex) {
+                return NULL;
+            }
+            m_imguiTexture.copy_from(tex); // winrt::com_ptr takes ownership
+
+            D3D11_SHADER_RESOURCE_VIEW_DESC srvDesc{};
+            srvDesc.Format = desc.Format;
+            srvDesc.ViewDimension = D3D11_SRV_DIMENSION_TEXTURE2D;
+            srvDesc.Texture2D.MipLevels = 1;
+            srvDesc.Texture2D.MostDetailedMip = 0;
+
+            ID3D11ShaderResourceView* srv = nullptr;
+            hr = m_d3dDevice->CreateShaderResourceView(m_imguiTexture.get(), &srvDesc, &srv);
+            if (FAILED(hr) || !srv) {
+                m_imguiTexture = nullptr;
+                return NULL;
+            }
+            m_imguiSRV.copy_from(srv);
+
+            m_imguiTexWidth = width;
+            m_imguiTexHeight = height;
+           
+        }
+        else
+        {
+            // 尺寸匹配：更新纹理内存
+            m_d3dContext->UpdateSubresource(m_imguiTexture.get(), 0, nullptr, matBGRA.data, static_cast<UINT>(matBGRA.step), 0);
+            isChnageWinSize = false;
+        }
+
+        // ImGui DX11 backend treats ImTextureID as void* 指向 ID3D11ShaderResourceView*
+        return reinterpret_cast<ImTextureID>(m_imguiSRV.get());
+    }
+    catch (const std::exception& e) {
+        std::cout << "SimpleCapture::GetImTextureFromMat: " << e.what() << std::endl;
     }
 
 }

@@ -120,4 +120,27 @@ public sealed partial class StartPage : Page
     {
         Start_InfoBar_IncorrectGameWindowSize.Margin = new Thickness(0, 0, 0, 0);
     }
+
+    private void Button_OpenPointsFolder_Click(object sender, RoutedEventArgs e)
+    {
+        try
+        {
+            string appDirectory = AppDomain.CurrentDomain.BaseDirectory;
+
+            string routesPath = Path.Combine(appDirectory, "SavedPoints");
+
+            if (Directory.Exists(routesPath))
+            {
+                Process.Start(new ProcessStartInfo(routesPath)
+                {
+                    UseShellExecute = true,
+                    Verb = "open"
+                });
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("Button_OpenPointsFolder_Click:" + ex.Message);
+        }
+    }
 }

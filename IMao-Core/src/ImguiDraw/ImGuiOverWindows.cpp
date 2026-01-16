@@ -26,7 +26,10 @@ void CleanupDeviceD3D();
 void CreateRenderTarget();
 void CleanupRenderTarget();
 LRESULT WINAPI WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
-const float TARGET_FRAME_TIME = 1000.0f / 60.0f;// 33.3 FPS（ms）
+const float TARGET_FRAME_TIME = 1000.0f /40.0f;// 33.3 FPS（ms）
+static RECT g_LastGameRect = { 0, 0, 0, 0 };
+static POINT g_LastGamePos = { 0, 0 };
+
 
 bool  ImGuiOverWindows::LoadTextureFromPath(const char* filePath, ID3D11ShaderResourceView** out_srv, int* out_width, int* out_height) {
     int image_width = 0;
@@ -162,7 +165,7 @@ int ImGuiOverWindows::start()
     //ImGui_ImplWin32_EnableDpiAwareness();
     WNDCLASSEXW wc = { sizeof(wc), CS_CLASSDC, WndProc, 0L, 0L, GetModuleHandle(nullptr), nullptr, nullptr, nullptr, nullptr, L"ImGui Example", nullptr };
     ::RegisterClassExW(&wc);
-     overWindowsHwnd = ::CreateWindowExW(WS_EX_TOPMOST | WS_EX_LAYERED, wc.lpszClassName, L"Dear ImGui DirectX11 Example", WS_POPUP, 100, 100, 1280, 800, nullptr, nullptr, wc.hInstance, nullptr);
+     overWindowsHwnd = ::CreateWindowExW(WS_EX_TOPMOST | WS_EX_LAYERED | WS_EX_TRANSPARENT, wc.lpszClassName, L"Dear ImGui DirectX11 Example", WS_POPUP, 100, 100, 1280, 800, nullptr, nullptr, wc.hInstance, nullptr);
 
     // Initialize Direct3D
     if (!CreateDeviceD3D(overWindowsHwnd))
@@ -185,7 +188,7 @@ int ImGuiOverWindows::start()
 
     // Setup Dear ImGui style
     ImGui::StyleColorsDark();
-    //ImGui::StyleColorsLight();
+    
 
     // Setup Platform/Renderer backends
     ImGui_ImplWin32_Init(overWindowsHwnd);
@@ -214,7 +217,7 @@ int ImGuiOverWindows::start()
     //设置透明窗口
     ImVec4 clear_color = ImVec4(0, 0, 0, 0);
     SetLayeredWindowAttributes(overWindowsHwnd, ImColor(0, 0, 0, 0), 0, LWA_COLORKEY);
-
+    //DrawPiPWindows::Initi();
     //std::vector<ID3D11ShaderResourceView*> texturesToRelease; // 用于存储需要释放的纹理
     // Main loop
     while (!stopFlag)
@@ -265,10 +268,9 @@ int ImGuiOverWindows::start()
             DrawItemOnGameMap::DrawItemsOnGameMap(GameRect, h_window);
             DrawRouteOnMap::DrawRoute(app);
             DrawRouteOnMinMap::DrawRoute(app);
+            //DrawPiPWindows::DrawImgui();
             Notification::DrawInfo();
             //Debug::DebugWindow(io,app);
-            LONG exStyle = GetWindowLong(overWindowsHwnd, GWL_EXSTYLE);
-            SetWindowLong(overWindowsHwnd, GWL_EXSTYLE, exStyle | WS_EX_TRANSPARENT);
         }
 
         // Rendering
@@ -279,14 +281,21 @@ int ImGuiOverWindows::start()
         ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
 
         // Present
-        HRESULT hr = g_pSwapChain->Present(1, 0);   // Present with vsync
-        //HRESULT hr = g_pSwapChain->Present(0, 0); // Present without vsync
+        HRESULT hr = g_pSwapChain->Present(0, DXGI_PRESENT_DO_NOT_WAIT);
         g_SwapChainOccluded = (hr == DXGI_STATUS_OCCLUDED);
 
         //刷新窗口
-        POINT ClientD2D = { GameRect.left,GameRect.top };
+        GetClientRect(h_window, &GameRect);
+        POINT ClientD2D = { GameRect.left, GameRect.top };
         ClientToScreen(h_window, &ClientD2D);
-        MoveWindow(overWindowsHwnd, ClientD2D.x, ClientD2D.y, GameRect.right, GameRect.bottom, true);
+
+        if (ClientD2D.x != g_LastGamePos.x || ClientD2D.y != g_LastGamePos.y ||
+            GameRect.right != g_LastGameRect.right || GameRect.bottom != g_LastGameRect.bottom)
+        {
+            MoveWindow(overWindowsHwnd, ClientD2D.x, ClientD2D.y, GameRect.right, GameRect.bottom, FALSE);
+            g_LastGamePos = ClientD2D;
+            g_LastGameRect = GameRect;
+        }
 
         // 计算已用时间
         auto frameEnd = std::chrono::high_resolution_clock::now();

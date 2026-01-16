@@ -1,12 +1,63 @@
 ﻿using IMao_WinUI.ViewModels;
-
 using Microsoft.UI.Xaml.Controls;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Diagnostics;
 
 namespace IMao_WinUI.Views;
 
+
+class RouteName {
+
+    private String routesFolderPath;
+    public RouteName()
+    {
+        String appDirectory = AppDomain.CurrentDomain.BaseDirectory;
+        routesFolderPath = Path.Combine(appDirectory, "SavedRoutes");
+    }
+
+    public ObservableCollection<String> GetAllRouteFilesName()
+    {
+        String[] jsonStringPaths = GetJsonStringPaths();
+        if(jsonStringPaths != null && jsonStringPaths.Length != 0)
+        {
+            ObservableCollection <String> routes = new ObservableCollection<String>();
+            foreach (String jsonStringPath in jsonStringPaths){
+
+                String RouteName = Path.GetFileNameWithoutExtension(jsonStringPath);
+                routes.Add(RouteName);
+
+            }
+            return routes;
+        }
+
+        return new ObservableCollection<string> {"Empty"};
+    }
+
+    private String[] GetJsonStringPaths()
+    {
+        try
+        {
+            String[] jsonFilePaths = Directory.GetFiles(routesFolderPath, "*.json");
+
+            return jsonFilePaths;
+        }
+        catch(Exception ex)
+        {
+            Console.WriteLine($"错误：{ex.Message}");
+            return new String[0];
+        }
+       
+    }
+}
+
+
+
 public sealed partial class FunctionPage : Page
 {
+    private ObservableCollection<String> RouteNameCollection;
+    private RouteName routeName = new RouteName();
+
     public FunctionViewModel ViewModel
     {
         get;
@@ -16,6 +67,8 @@ public sealed partial class FunctionPage : Page
     {
         ViewModel = App.GetService<FunctionViewModel>();
         InitializeComponent();
+
+        ComboBox_RouteDataName.ItemsSource = routeName.GetAllRouteFilesName();
     }
 
     private void UpdateMinMapItemDataCycle_ValueChanged(object sender, Microsoft.UI.Xaml.Controls.Primitives.RangeBaseValueChangedEventArgs e)
@@ -125,5 +178,19 @@ public sealed partial class FunctionPage : Page
             Console.WriteLine("Button_LoadRoutesData_Click:" + ex.Message);
         }
 
+    }
+
+    private void Button_LoadOneRouteData(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
+    {
+        string? routeName = ComboBox_RouteDataName.SelectedItem as string;
+        if(routeName != null && routeName != "Empty")
+        {
+            IMaoCoreAPI.LoadOneJsonRoute(routeName);
+        }
+    }
+
+    private void ComboBox_RouteDataName_DropDownOpened(object sender, object e)
+    {
+        ComboBox_RouteDataName.ItemsSource = routeName.GetAllRouteFilesName();
     }
 }
