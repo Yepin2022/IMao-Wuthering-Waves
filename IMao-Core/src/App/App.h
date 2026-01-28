@@ -86,6 +86,14 @@ public:
 		return playerCurrentSceneId;
 	}
 
+	float GetImguiWindowsHeight() {
+		return imguiWindowsHeight;
+	 }
+
+	float GetImguiWindowsWidth() {
+		return imguiWindowsWidth;
+	}
+
 	static void SetUpdateMapDataCycleTime(int setValue) {
 		updateMapDataCycleTime = setValue;
 	}
@@ -134,7 +142,7 @@ private:
 	std::optional<BitBltCapture> bitBltCapture;
 
 	HWND hwnd;
-	RECT rect = {0,0,0,0};
+	RECT rect = { 0,0,0,0 };
 
 	bool isWindowFocused = false;
 	bool isOpenMap = false;
@@ -150,6 +158,11 @@ private:
 
 	std::thread keyMonitoringThread;
 
+	Coordinate minMapBottomPoint;
+	float imguiWindowsHeight;
+	float imguiWindowsWidth;
+
+private:
 	winrt::IAsyncAction GetMatSnapshot(bool isTaketAsync, cv::Mat& result);
 	winrt::IAsyncAction Start();
 	void Thread_DetectGameState();

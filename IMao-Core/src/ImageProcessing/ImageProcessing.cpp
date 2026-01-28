@@ -96,7 +96,7 @@ Mat ImageProcessing::CropToShowWorldCoordinateAreaImg(const Mat& snapshot, const
 }
 
 
-Mat ImageProcessing::CropToMinMapAreaImg(const Mat& snapshot, const RECT& w_Rect) {
+Mat ImageProcessing::CropToMinMapAreaImg(const Mat& snapshot, const RECT& w_Rect, Coordinate& minMapBottomPoint) {
 	Mat circularRegionImg;
 
 	auto minMapLocationData = ScreenCoordinate::SpecifyScreenCoordinate(w_Rect, GameWindowsScreenData::MinMapScreenData);
@@ -109,18 +109,19 @@ Mat ImageProcessing::CropToMinMapAreaImg(const Mat& snapshot, const RECT& w_Rect
 	Point center(croppedImage.rows / 2, croppedImage.cols / 2); int radius = croppedImage.cols / 2 - 3;
 	circularRegionImg = ImageProcessing::extractCircularRegionFromImage(croppedImage, center, radius);
 
+	minMapBottomPoint = minMapLocationData.bottomPoint;
 	return circularRegionImg;
 }
 
 
-Mat ImageProcessing::CropToMinMapAreaImg(const Mat& snapshot, HWND& hwnd) {
-	Mat circularRegionImg;
-	RECT w_Rect;
-	GetClientRect(hwnd, &w_Rect);
-
-	circularRegionImg = CropToMinMapAreaImg(snapshot, w_Rect);
-	return circularRegionImg;
-}
+//Mat ImageProcessing::CropToMinMapAreaImg(const Mat& snapshot, HWND& hwnd) {
+//	Mat circularRegionImg;
+//	RECT w_Rect;
+//	GetClientRect(hwnd, &w_Rect);
+//
+//	circularRegionImg = CropToMinMapAreaImg(snapshot, w_Rect);
+//	return circularRegionImg;
+//}
 
 
 Mat ImageProcessing::CropToRegion_IconTask(const Mat& snapshot,const RECT& w_Rect) {

@@ -26,7 +26,7 @@ void CleanupDeviceD3D();
 void CreateRenderTarget();
 void CleanupRenderTarget();
 LRESULT WINAPI WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
-const float TARGET_FRAME_TIME = 1000.0f /40.0f;// 33.3 FPS（ms）
+const float TARGET_FRAME_TIME = 1000.0f /20.0f;// 20 FPS（ms）
 static RECT g_LastGameRect = { 0, 0, 0, 0 };
 static POINT g_LastGamePos = { 0, 0 };
 
@@ -165,7 +165,7 @@ int ImGuiOverWindows::start()
     //ImGui_ImplWin32_EnableDpiAwareness();
     WNDCLASSEXW wc = { sizeof(wc), CS_CLASSDC, WndProc, 0L, 0L, GetModuleHandle(nullptr), nullptr, nullptr, nullptr, nullptr, L"ImGui Example", nullptr };
     ::RegisterClassExW(&wc);
-     overWindowsHwnd = ::CreateWindowExW(WS_EX_TOPMOST | WS_EX_LAYERED | WS_EX_TRANSPARENT, wc.lpszClassName, L"Dear ImGui DirectX11 Example", WS_POPUP, 100, 100, 1280, 800, nullptr, nullptr, wc.hInstance, nullptr);
+     overWindowsHwnd = ::CreateWindowExW(WS_EX_TOPMOST | WS_EX_LAYERED | WS_EX_TRANSPARENT| WS_EX_TOOLWINDOW, wc.lpszClassName, L"Dear ImGui DirectX11 Example", WS_POPUP, 100, 100, 1280, 800, nullptr, nullptr, wc.hInstance, nullptr);
 
     // Initialize Direct3D
     if (!CreateDeviceD3D(overWindowsHwnd))
@@ -281,13 +281,15 @@ int ImGuiOverWindows::start()
         ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
 
         // Present
-        HRESULT hr = g_pSwapChain->Present(0, DXGI_PRESENT_DO_NOT_WAIT);
+        HRESULT hr = g_pSwapChain->Present(0, 0);
         g_SwapChainOccluded = (hr == DXGI_STATUS_OCCLUDED);
 
         //刷新窗口
         GetClientRect(h_window, &GameRect);
         POINT ClientD2D = { GameRect.left, GameRect.top };
         ClientToScreen(h_window, &ClientD2D);
+        GameRect.bottom = app.GetImguiWindowsHeight();
+        GameRect.right = app.GetImguiWindowsWidth();
 
         if (ClientD2D.x != g_LastGamePos.x || ClientD2D.y != g_LastGamePos.y ||
             GameRect.right != g_LastGameRect.right || GameRect.bottom != g_LastGameRect.bottom)

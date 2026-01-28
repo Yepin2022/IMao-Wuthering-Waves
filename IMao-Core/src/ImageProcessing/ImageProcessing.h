@@ -18,8 +18,8 @@ class ImageProcessing {
 		static cv::Mat CropToShowWorldCoordinateAreaImg(const cv::Mat& snapshot, const RECT& w_Rect);
 		static cv::Mat CropToShowWorldCoordinateAreaImg(const cv::Mat& snapshot, const HWND hwnd);
 
-		static cv::Mat CropToMinMapAreaImg(const cv::Mat& snapshot, const RECT& w_Rect);
-		static cv::Mat CropToMinMapAreaImg(const cv::Mat& snapshot, HWND& hwnd);
+		static cv::Mat CropToMinMapAreaImg(const cv::Mat& snapshot, const RECT& w_Rect, Coordinate& minMapBottomPoint);
+		//static cv::Mat CropToMinMapAreaImg(const cv::Mat& snapshot, HWND& hwnd);
 
 		static cv::Mat CropToRegion_IconTask(const cv::Mat& snapshot, const RECT& w_Rect);
 		static cv::Mat CropToRegion_IconWavePlateCrystal(const cv::Mat& snapshot, const RECT& w_Rect);

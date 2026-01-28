@@ -38,7 +38,7 @@ struct FabricatoriumOriginCoordinates {
 //阿维纽林 4
 struct AvinoleumOriginCoordinates {
     inline static double x = 2433;
-    inline static double y = 9009;
+    inline static double y = 9030;
 };
 
 //罗伊冰原 5
