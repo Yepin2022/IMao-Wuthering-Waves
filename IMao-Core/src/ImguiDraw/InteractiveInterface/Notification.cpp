@@ -5,7 +5,7 @@
  std::thread Notification::timerThread;
  bool Notification::timerStopFlag;
 
-static int location = 3;
+static int location = 0;
 bool p_open;
 ImGuiIO& io = ImGui::GetIO();
 ImGuiWindowFlags window_flags = ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoFocusOnAppearing | ImGuiWindowFlags_NoNav;
@@ -17,7 +17,7 @@ void Notification::DrawInfo() {
     
     if (location >= 0)
     {
-        const float PAD = 10.0f;
+        const float PAD = 5.0f;
         const ImGuiViewport* viewport = ImGui::GetMainViewport();
         ImVec2 work_pos = viewport->WorkPos; // Use work area to avoid menu-bar/task-bar, if any!
         ImVec2 work_size = viewport->WorkSize;

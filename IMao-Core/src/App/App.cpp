@@ -19,6 +19,10 @@ bool App::enabledMinMapShowItem;
 Coordinate validGameMapcenterPointROC;
 
 bool App::Init() {
+	GetClientRect(hwnd, &rect);
+	imguiWindowsHeight = rect.bottom * 0.15;
+	imguiWindowsWidth = rect.right * 0.3;
+
 	Notification::AddInfo(NotificationDatas("这是一款免费使用的软件，如果你是付钱买来的，你已经被骗了。", 20));
 	Notification::AddInfo(NotificationDatas("The resource is loading, please be patient.", 15));
 
@@ -38,7 +42,6 @@ bool App::Init() {
 		IdentifyWorldCoordinates::Init(GetCurrentPath() + "\\Assets\\models\\PP-OCRv5_mobile_det_infer", GetCurrentPath() + "\\Assets\\models\\PP-OCRv5_mobile_rec_infer",string(), GetCurrentPath() + "\\Assets\\models\\ch_ppocr_mobile_v2.0_cls_infer");
 
 	Mat snapshot;
-	GetClientRect(hwnd, &rect);
 	GetMatSnapshot(true, snapshot);
 	std::this_thread::sleep_for(std::chrono::seconds(2));
 
@@ -62,6 +65,10 @@ winrt::IAsyncAction App::Start() {
 		if (isOpenMap and enabledMapShowItem and !gameSnapshot.empty() and isWindowFocused) {
 			Coordinate gameMapCenterPointROC; Coordinate lastGameMapCenterPointROC;
 
+			//在绘制大地图区域 imgui透明窗口大小保持游戏窗口一样
+			imguiWindowsHeight = rect.bottom;
+			imguiWindowsWidth = rect.right;
+
 			if (GetGameMapCenterPointROC(gameSnapshot, gameMapCenterPointROC, lastGameMapCenterPointROC) and mapNotMoving) {
 				if (!IsMapMoving(gameMapCenterPointROC, lastGameMapCenterPointROC)) {
 					DrawItemOnGameMap::UpdateCenterPointNearItemsData(validGameMapcenterPointROC,captrueCorners,rect,playerCurrentSceneId);
@@ -80,6 +87,10 @@ winrt::IAsyncAction App::Start() {
 		if (isExistMinMap and !gameSnapshot.empty()) {
 			Coordinate playerROC;
 			float minMapRadius;
+
+			imguiWindowsHeight = minMapBottomPoint.y + 10;//在绘制小地图区域 缩写imgui透明窗口范围
+			imguiWindowsWidth = rect.right * 0.3;
+
 			if (co_await GetMinMapPlayerROC(gameSnapshot, playerROC, minMapRadius)) {
 				if (enabledMinMapShowItem) {
 					DrawItemOnMinMap::UpdatePlayerNearItemsData(rect, playerROC, minMapRadius, playerCurrentSceneId);
@@ -96,7 +107,6 @@ winrt::IAsyncAction App::Start() {
 			DrawItemOnMinMap::ClearNearItemsData();
 			DrawRouteOnMinMap::ClearRountsData();
 		}
-
 
 		auto endTime = std::chrono::high_resolution_clock::now();
 		auto elapsedTime = std::chrono::duration_cast<std::chrono::milliseconds>(endTime - startTime).count();
@@ -167,7 +177,7 @@ bool App::IsExistMinMap(Mat& snapshot,int* goodMatchSize) {
 	ImageFeatureData test_FeatureData_IconTask = FeatureMatch::ExtractSurfFeatures(surt, IconTask);
 
 	if (!test_FeatureData_IconTask.imgDescriptors.empty()) {
-		auto goodMatchs = FeatureMatch::FindGoodMatches(FeatureData_IconTask, test_FeatureData_IconTask, 0.5f, 0.5f, DescriptorMatcher::BRUTEFORCE_SL2);
+		auto goodMatchs = FeatureMatch::FindGoodMatches(FeatureData_IconTask, test_FeatureData_IconTask, 0.7f, 0.6f, DescriptorMatcher::BRUTEFORCE_SL2);
 		*goodMatchSize = goodMatchs.size();
 		if (*goodMatchSize >= 4) {
 			return true;
@@ -251,7 +261,7 @@ int App::GetCurrentSceneId(const Coordinate& identifyCoordinate, const Mat& minM
 
 winrt::IAsyncOperation<bool> App::GetMinMapPlayerROC(const Mat& snapshot,Coordinate& outPlayerROC, float& outMinMapRadius) {
 	Ptr<xfeatures2d::SURF> surf = xfeatures2d::SURF::create(60, 8, 4, true, true);
-	Mat minMapImg = ImageProcessing::CropToMinMapAreaImg(snapshot, rect);
+	Mat minMapImg = ImageProcessing::CropToMinMapAreaImg(snapshot, rect, minMapBottomPoint);
 
 	if ((identifyCoordinate.x == 0 && identifyCoordinate.y == 0) || playerCurrentSceneId == 0) {
 
