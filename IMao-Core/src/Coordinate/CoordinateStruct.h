@@ -98,10 +98,10 @@ struct GameWindowsScreenData {
     inline static Coordinate IconTask_Right = { 39,195 };
     inline static std::vector<Coordinate> IconTask_ScreenData = {IconTask_Top ,IconTask_Bottom ,IconTask_Left ,IconTask_Right };
 
-    inline static Coordinate IconWavePlateCrystal_Top = { 989,37};
+    inline static Coordinate IconWavePlateCrystal_Top = { 978,37};
     inline static Coordinate IconWavePlateCrystal_Bottom = { 989,66 };
-    inline static Coordinate IconWavePlateCrystal_Left = { 978,52 };
-    inline static Coordinate IconWavePlateCrystal_Right= { 1008,52 };
+    inline static Coordinate IconWavePlateCrystal_Left = { 969,52 };
+    inline static Coordinate IconWavePlateCrystal_Right= { 999,52 };
     inline static std::vector<Coordinate> IconWavePlateCrystal_ScreenData = { IconWavePlateCrystal_Top ,IconWavePlateCrystal_Bottom ,IconWavePlateCrystal_Left ,IconWavePlateCrystal_Right };
 
     //350*350

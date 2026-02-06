@@ -199,7 +199,7 @@ bool App::IsOpenMap(const Mat& snapshot, int* goodMatchSize) {
 	if (!IconWavePlateCrystalFeatureData.imgDescriptors.empty()) {
 		auto goodMatchs = FeatureMatch::FindGoodMatches(FeatureData_wavePlateCrystal, IconWavePlateCrystalFeatureData, 0.5f, 0.5f, DescriptorMatcher::BRUTEFORCE_SL2);
 		*goodMatchSize = goodMatchs.size();
-		if (*goodMatchSize >= 16) {
+		if (*goodMatchSize >= 12) {
 			return true;
 		}
 	}
